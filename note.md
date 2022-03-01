@@ -13,6 +13,7 @@
     - x is called instead....x(param)
     - 2+3...an expression cus produces a result
 5. Object value access
-    - ```x = {y: 2}```
+    - ```x = {y: 2}``` <= means object _literal_
     - `x.y`
     - or `x['y']`
+    - object is mutable...ie, can change their prop values
