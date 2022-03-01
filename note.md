@@ -12,3 +12,7 @@
     - stored in variable, say x = function(y)
     - x is called instead....x(param)
     - 2+3...an expression cus produces a result
+5. Object value access
+    - ```x = {y: 2}```
+    - `x.y`
+    - or `x['y']`
