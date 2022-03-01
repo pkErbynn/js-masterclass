@@ -1,1 +1,1 @@
-# js-masterclass
+# javaScript-masterclass
