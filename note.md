@@ -5,11 +5,26 @@
 2. Data types
     - Undefined: datatype assigned to a variable w/ 'no value yet'
     - Null: means 'no-existent'
-4. Concepts
+        - Undefined: datatype of variable w/ no value yet
+    - Null: means 'no-existent'
+3. Falsy
+    - values evaluated to false...eg; undefined, null, 0, '', NaN
+4. Function expression
+    - always returns a value
+    - stored in variable, say x = function(y)
+    - x is called instead....x(param)
+    - 2+3...an expression cus produces a result
+5. Object value access
+    - ```x = {y: 2}``` <= means object _literal_
+    - `x.y`
+    - or `x['y']`
+    - object is mutable...ie, can change their prop values
+
+6. Concepts
     - Variable mutation: changin' var value
     - Type coercion: converting from one type to another automatically
-5. Ternary operator: can store return value
-6. Brief History
+7. Ternary operator: can store return value
+8. Brief History
     - Js was initially called LiveScript
     - In 1996, changed to JavaScript to 'attract Java developers'.
         - meanwhile, *has nothing to do with Java* - marketing strategy
