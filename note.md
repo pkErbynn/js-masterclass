@@ -1,4 +1,4 @@
-### Basics
+## Basics
 1. <script></script> tag adds js to html page. two ways:
     - inline or
     - external script file
@@ -43,4 +43,38 @@
         - not all features supported in all modern browsers
         - Can use most features in production by *transpilling and polyfilling* :)
 
-### How Js works behind the scenes
+## How Js works behind the scenes
+This is an overview of what happens to our code hosted in the browser
+- The host has a Js Engine: program that takes the code and execute
+    - This is what happens inside the engine;
+    - *Parser* read our code and validate the syntax
+    - If valid, a data structure called *Abstract Syntax Tree* is produced by the Parser
+    - *Abstract Syntax Tree* is then translated into *matchine code*
+    - Now, code is run by the *processor* and does its work 
+
+- The execution contexts (EC) and the execution stack (ES)
+Code run in an env called execution context. A box/container/wrapper that stores vars and in which our code is evaluated and executed 
+    - by default is the Global Execution Context
+        - code *not inside any function*
+        - it's the window object in browser
+    - runtime stacking
+        - global execution context > execution context (on top) > execution context (on top)
+        - then pops each exe context off the stack after completion
+
+- The EC in detail
+    - the EC Object. Has 3  ff props;
+        - Variable Object (VO)
+        - Scope chain
+        - "This" variable
+    - Goes through 2 phases in the ES
+        1. Creation phase.
+            1. Creation of the VO
+                - Arg object created to store all args passed into the fxn
+                - Var declarations are scanned: a property is created in the Variable Object for each variable, and set to *undefine*
+                - Function declarations are scanned: a property is created in the Variable Object for each fxn, *pointing to the function* 
+                - *NB*: Var + Function declarations = *Hoisting*
+                    - Means: they're available before the execution phase starts
+            2. Creation of the scope chain#
+            2. Determine value of 'this' var
+        2. Execution phase
+            - Funtion's code d@ generated the current EC is ran line-by-line
