@@ -38,9 +38,30 @@ document.querySelector('.btn--roll').addEventListener('click', function() {
     diceElement.style.display = 'block';    // display finally
 
     // show and update in current score
-    document.getElementById('current--' + activePlayer).textContent = diceNumber;
-    roundScore = diceNumber;
-    console.log(roundScore);
+    if (diceNumber > 1) {
+        roundScore += diceNumber;
+        document.getElementById('current--' + activePlayer).textContent = roundScore;
+    }   
+    else {
+        // switch active player
+        if (activePlayer === 0) { 
+            activePlayer = 1;
+        } else {
+            activePlayer = 0;
+        }
+
+        // reset current round scores on both sides
+        roundScore = 0;
+        document.getElementById('current--0').textContent = 0;
+        document.getElementById('current--1').textContent = 0; 
+        
+        // active player focus by removing and adding class
+        document.querySelector('.player--0').classList.toggle('player--active');
+        document.querySelector('.player--1').classList.toggle('player--active');
+        
+        // hide dice on player switch
+        document.querySelector('.dice').style.display = 'none';
+    }
 })
 
 
