@@ -88,3 +88,8 @@ Code run in an env called execution context. A box/container/wrapper that stores
             
     - Js _Hoisting_
         - applies more on regular functions not function expressions
+
+
+## DOM Manipulation
+DOM: structured rep of an html doc, used to conn webpages to script like Js
+    - Js helps to access and manipulate the dom
