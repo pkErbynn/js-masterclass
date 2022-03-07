@@ -44,28 +44,50 @@ document.querySelector('.btn--roll').addEventListener('click', function() {
     }   
     else {
         // switch active player
-        if (activePlayer === 0) { 
-            activePlayer = 1;
-        } else {
-            activePlayer = 0;
-        }
-
-        // reset current round scores on both sides
-        roundScore = 0;
-        document.getElementById('current--0').textContent = 0;
-        document.getElementById('current--1').textContent = 0; 
-        
-        // active player focus by removing and adding class
-        document.querySelector('.player--0').classList.toggle('player--active');
-        document.querySelector('.player--1').classList.toggle('player--active');
-        
-        // hide dice on player switch
-        document.querySelector('.dice').style.display = 'none';
+        nextPlayer();
     }
 })
 
+function nextPlayer() {
+    // switch active player
+    if (activePlayer === 0) { 
+        activePlayer = 1;
+    } else {
+        activePlayer = 0;
+    }
 
+     // reset current round scores on both sides
+     roundScore = 0;
+     document.getElementById('current--0').textContent = 0;
+     document.getElementById('current--1').textContent = 0; 
+     
+     // active player focus by removing and adding class
+     document.querySelector('.player--0').classList.toggle('player--active');
+     document.querySelector('.player--1').classList.toggle('player--active');
+     // document.querySelector('.player--0').classList.remove('player--active');
+     // document.querySelector('.player--1').classList.add('player--active');
+     
+     // hide dice on player switch
+     document.querySelector('.dice').style.display = 'none';
+}
 
+document.querySelector('.btn--hold').addEventListener('click', function() {
+    // update global score
+    globalScores[activePlayer] += roundScore;
+    document.getElementById('score--' + activePlayer).textContent = globalScores[activePlayer];
+
+    // check if player won
+    if(globalScores[activePlayer] >= 100){
+        document.querySelector('#name--' + activePlayer).textContent = 'Winner';
+        document.querySelector('.dice').style.display = 'none';
+        document.querySelector('.player--' + activePlayer).classList.add('player--winner');
+        document.querySelector('.player--' + activePlayer).classList.remove('player--active');
+    } else {
+        // switch player
+        nextPlayer();
+    }
+
+});
 
 
 // ==== NB ====
