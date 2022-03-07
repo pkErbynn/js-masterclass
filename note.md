@@ -93,3 +93,9 @@ Code run in an env called execution context. A box/container/wrapper that stores
 ## DOM Manipulation
 DOM: structured rep of an html doc, used to conn webpages to script like Js
     - Js helps to access and manipulate the dom
+Events
+    - notifications sent to notify a code that sth happened on the webpage
+    - unlike regulare fxns that are *called*, *event listeners* are also fxns but perform action based on event. They wait for specific event to happen, like click a btn, scroll, key press, etc
+    - how are events processed
+        - events can only be handles/processed as soon as the Execution Stack is empty. 
+        - events are stored in a *message queue* waiting to be processed 

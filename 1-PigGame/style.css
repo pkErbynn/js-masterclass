@@ -67,7 +67,8 @@ main {
   background-color: rgba(255, 255, 255, 0.4);
 }
 .player--active .name {
-  font-weight: 700;
+  font-weight: 900;
+  text-decoration: underline;
 }
 .player--active .score {
   font-weight: 400;
