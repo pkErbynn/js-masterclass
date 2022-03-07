@@ -74,7 +74,17 @@ Code run in an env called execution context. A box/container/wrapper that stores
                 - Function declarations are scanned: a property is created in the Variable Object for each fxn, *pointing to the function* 
                 - *NB*: Var + Function declarations = *Hoisting*
                     - Means: they're available before the execution phase starts
-            2. Creation of the scope chain#
-            2. Determine value of 'this' var
+            2. Creation of the scope chain
+                - Each new fxn creates a scope: the env/space in which the vars if defined and accessible
+                - *Lexical scope* means that in a lexically nested *implemented* function, the inner functions (*not function declarations*) have access to the (scope) variables and other resources of their parent scope.
+                - But it doesn't work backward to its parents, meaning the child scopes not available to its parents.
+                - This means that the child's functions are lexically bound to the execution context of their parents.
+            3. Determine value of *'this'* var
+                - In a* *regular function*, the *this* points to the global object (ie, window object in the browser)
+                - In a *method call*, the *this* points to the object that's (*defined*) calling the method
+                    - points the custom object within which it is defined, otherwhise the global
         2. Execution phase
             - Funtion's code d@ generated the current EC is ran line-by-line
+            
+    - Js _Hoisting_
+        - applies more on regular functions not function expressions
