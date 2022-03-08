@@ -11,21 +11,12 @@ Game Rules:
 
 */
 
-var globalScores = [0, 0];
-var roundScore = 0;
-var activePlayer = 0; // player 1
 
-// dice random number generation 
-// var diceNumber = Math.floor(Math.random() * 6) + 1; 
+var globalScores;
+var roundScore;
+var activePlayer; // player 1
 
-// remove dice via css style 
-document.querySelector('.dice').style.display = 'none';
-
-// set all scores to zero 
-document.getElementById('score--0').textContent = 0; 
-document.getElementById('current--0').textContent = 0; 
-document.getElementById('score--1').textContent = 0; 
-document.getElementById('current--1').textContent = 0;
+initializeGame();
 
 // click event handlers, w/ callback fnx
 document.querySelector('.btn--roll').addEventListener('click', function() {
@@ -77,7 +68,7 @@ document.querySelector('.btn--hold').addEventListener('click', function() {
     document.getElementById('score--' + activePlayer).textContent = globalScores[activePlayer];
 
     // check if player won
-    if(globalScores[activePlayer] >= 100){
+    if(globalScores[activePlayer] >= 10){
         document.querySelector('#name--' + activePlayer).textContent = 'Winner';
         document.querySelector('.dice').style.display = 'none';
         document.querySelector('.player--' + activePlayer).classList.add('player--winner');
@@ -88,6 +79,43 @@ document.querySelector('.btn--hold').addEventListener('click', function() {
     }
 
 });
+
+
+document.querySelector('.btn--new').addEventListener('click', initializeGame);
+
+function initializeGame() {
+    globalScores = [0, 0];
+    roundScore = 0;
+    activePlayer = 0; // player 1
+
+    // remove dice via css style 
+    document.querySelector('.dice').style.display = 'none';
+    
+    // set all scores to zero 
+    document.getElementById('score--0').textContent = 0; 
+    document.getElementById('current--0').textContent = 0; 
+    document.getElementById('score--1').textContent = 0; 
+    document.getElementById('current--1').textContent = 0;
+
+    // reset player names (removes 'winner')
+    document.getElementById('name--0').textContent = 'Player 1';
+    document.getElementById('name--1').textContent = 'Player 2';
+
+    // remove player winner focus
+    document.querySelector('.player--0').classList.remove('player--winner');
+    document.querySelector('.player--1').classList.remove('player--winner');
+
+    // reset player 1 as active
+    document.querySelector('.player--0').classList.remove('player--active');
+    document.querySelector('.player--1').classList.remove('player--active');
+    document.querySelector('.player--0').classList.add('player--active');
+}
+
+
+
+
+
+
 
 
 // ==== NB ====
