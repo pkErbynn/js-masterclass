@@ -99,3 +99,9 @@ Events
     - how are events processed
         - events can only be handles/processed as soon as the Execution Stack is empty. 
         - events are stored in a *message queue* waiting to be processed 
+
+## Object Inheritance and the Prototype Chain
+- Every Js obj has a *prototype property*, which makes inheritance possible in Js
+- The prototype property is where methods and properties that will be *inherited by other objects* are put
+- The Constructor/Class's prototype property is *NOT* the prototype of the Class *itself*, it's the prototype of *all* instances that are created through it.
+- When certain meth is called, that meth is being searched for in the obj itself, and it cannot be found, the search moves to the mother Object's prototype. This search continues until meth is found. This is called *Prototype Chain*
