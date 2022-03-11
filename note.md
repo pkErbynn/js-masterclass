@@ -3,30 +3,38 @@
     - inline or
     - external script file
 2. Data types
-    - Undefined: datatype assigned to a variable w/ 'no value yet'
+    - Undefined: datatype assigned to a variable w/ 'no value yet'...ie, empty value
     - Null: means 'no-existent'
         - Undefined: datatype of variable w/ no value yet
-    - Null: means 'no-existent'
+    - Null: means variable 'no-existent'
 3. Falsy
-    - values evaluated to false...eg; undefined, null, 0, '', NaN
-4. Function expression
-    - always returns a value
-    - stored in variable, say x = function(y)
+    - values evaluated to false...the 5 falsy values; undefined, null, 0, '', NaN
+4. Function
+    - function expression returns a value
+    - *stored in variable, say x = function(y)*
     - x is called instead....x(param)
-    - 2+3...an expression cus produces a result
-5. Object value access
+    - expressions = anything that returns/produces a value
+    - statement = just actions, ends in ';'
+    - 2+3...an expression cus produces a value/result
+    - *user fxn expressions over fxn declarations*
+    - arrows: declare, `const x = y => y + 1`...use, `const z = x(y)`
+        - used when function has just one line of code
+5. Object
     - ```x = {y: 2}``` <= means object _literal_
-    - `x.y`
-    - or `x['y']`
+    - _dotNotation_ `x.y` or 
+    - _bracketNotation_ `x['y']`...this's _computable/dynamic_
+    - can have function property...*function expression as key/value property*
+        - access as `obj.function(arg)` / `obj["function"](arg)`
     - object is mutable...ie, can change their prop values
-
 6. Concepts
-    - Variable mutation: changin' var value
+    - Variable mutation: *changin' var value
     - Type coercion: converting from one type to another automatically
-7. Ternary operator: can store return value
+7. Ternary operator: can store their return value
+    - *ternary computed in string template*
 8. Brief History
-    - Js was initially called LiveScript
-    - In 1996, changed to JavaScript to 'attract Java developers'.
+    - Brendan Eich created 1st version of Js in 10 days, called *Mocha* 
+    - Was changed to LiveScript
+    - In 1996, was changed to JavaScript to 'attract Java developers'.
         - meanwhile, *has nothing to do with Java* - marketing strategy
     - 1997: ES1 (ECMAScript 1) became the 1st version of JavaScript languade standard
     - 2009: ES5 (ECMAScript 5) released
@@ -42,7 +50,8 @@
         - called *ESNext*, including future versions
         - not all features supported in all modern browsers
         - Can use most features in production by *transpilling and polyfilling* :)
-
+9. Function xpression vs fxn declaration
+    - use *fxn expressions over declarations*
 ## How Js works behind the scenes
 This is an overview of what happens to our code hosted in the browser
 - The host has a Js Engine: program that takes the code and execute
