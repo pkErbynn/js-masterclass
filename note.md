@@ -27,7 +27,7 @@
         - access as `obj.function(arg)` / `obj["function"](arg)`
     - object is mutable...ie, can change their prop values
 6. Concepts
-    - Variable mutation: *changin' var value
+    - Variable mutation: changin' var value
     - Type coercion: converting from one type to another automatically
 7. Ternary operator: can store their return value
     - *ternary computed in string template*
