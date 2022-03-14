@@ -29,6 +29,11 @@
 6. Concepts
     - Variable mutation: changin' var value
     - Type coercion: converting from one type to another automatically
+    - Tackling any problem (4 steps)
+        - *Understand* 100% by asking the right questions for clear picture
+        - *Divide and conquer* by subtasking
+        - *Research*
+        - Devise a *plan*. For bigger problems, write a psuedo-code b4 actual code
 7. Ternary operator: can store their return value
     - *ternary computed in string template*
 8. Brief History
@@ -114,3 +119,7 @@ Events
 - The prototype property is where methods and properties that will be *inherited by other objects* are put
 - The Constructor/Class's prototype property is *NOT* the prototype of the Class *itself*, it's the prototype of *all* instances that are created through it.
 - When certain meth is called, that meth is being searched for in the obj itself, and it cannot be found, the search moves to the mother Object's prototype. This search continues until meth is found. This is called *Prototype Chain*
+- Useful instance fxns
+    - `hasOwnProperty`
+    - `instanceOf`
+    - `_proto_`
