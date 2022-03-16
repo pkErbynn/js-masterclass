@@ -58,6 +58,43 @@
 9. Function xpression vs fxn declaration
     - use *fxn expressions over declarations*
 ## How Js works behind the scenes
+- Definition w/ the 9 monter terms: Js is a 
+    - *high-level*, 
+    - *prototype-based object-oriented*
+    - *multi-paradigm*
+    - *interpreted/Just-in-time compiled*
+    - *dynamic*
+    - *single-threaded*
+    - *garbage-collected* lang with 
+    - *first-class functions* and
+    - a non-blocking *event loop concurrency model*
+### JS Runtime in the browser
+- Overview::The Js Engine - program d@ execute js code, 
+    - contains the *heap* & *call stack*
+    - *call stack*: uses the *execution context* to execute code
+    - *heap*: memory pool storing all objects
+- How execution happens::Compilation vs Interpretation
+    - Compilation: convert entire source code to machine at once, and write to portable binary file, to be executed by any computer
+        - file can be executed way after compilation
+    - Interpretor: runs through source code, convert to machine code and execute line by line, all at same time
+        - *js used to be intepreted* but now NOT true
+    - *Just-in-time (JIT)*: convert entire code to machine at once, then execute immediately line by line
+        - no portable file generated to be executed later
+        - mix b/n the two.
+        - *how modern JIT compilation works in JS?*
+            1. parse the source code
+            2. creates an AST tree
+            3. takes the AST and compile into machine code, JIT
+            4. machine code executed right-away, in the *Call Stack*
+            5. during execution, background optimization happens on special thread (outside the call) but inside the engine
+- Outside the Engine is the *callback queue* thats queues waiting events
+- Events are moved *from the queue to the call stack* when the call stack is empty, by the Event loops
+- *Web-APIs* like the DOM, Console.log, Fetch API is provided to the engine for access to browser objects
+#### The JS Runtime's picture box
+- The Js Engine
+- The Web APIs
+- The Callback Queue
+
 This is an overview of what happens to our code hosted in the browser
 - The host has a Js Engine: program that takes the code and execute
     - This is what happens inside the engine;
