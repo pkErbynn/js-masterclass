@@ -103,42 +103,48 @@ This is an overview of what happens to our code hosted in the browser
     - *Abstract Syntax Tree* is then translated into *matchine code*
     - Now, code is run by the *processor* and does its work 
 
-- The execution contexts (EC) and the execution stack (ES)
+### The execution contexts (EC) and the execution stack (ES)
 Code run in an env called execution context. A box/container/wrapper that stores vars and in which our code is evaluated and executed 
     - by default is the Global Execution Context
         - code *not inside any function*
         - it's the window object in browser
+        - only one GEC
     - runtime stacking
         - global execution context > execution context (on top) > execution context (on top)
         - then pops each exe context off the stack after completion
+        - one execution context per fxn call
 
-- The EC in detail
-    - the EC Object. Has 3  ff props;
-        - Variable Object (VO)
-        - Scope chain
-        - "This" variable
-    - Goes through 2 phases in the ES
-        1. Creation phase.
-            1. Creation of the VO
-                - Arg object created to store all args passed into the fxn
-                - Var declarations are scanned: a property is created in the Variable Object for each variable, and set to *undefine*
-                - Function declarations are scanned: a property is created in the Variable Object for each fxn, *pointing to the function* 
-                - *NB*: Var + Function declarations = *Hoisting*
-                    - Means: they're available before the execution phase starts
-            2. Creation of the scope chain
-                - Each new fxn creates a scope: the env/space in which the vars if defined and accessible
-                - *Lexical scope* means that in a lexically nested *implemented* function, the inner functions (*not function declarations*) have access to the (scope) variables and other resources of their parent scope.
-                - But it doesn't work backward to its parents, meaning the child scopes not available to its parents.
-                - This means that the child's functions are lexically bound to the execution context of their parents.
-            3. Determine value of *'this'* var
-                - In a* *regular function*, the *this* points to the global object (ie, window object in the browser)
-                - In a *method call*, the *this* points to the object that's (*defined*) calling the method
-                    - points the custom object within which it is defined, otherwhise the global
-        2. Execution phase
-            - Funtion's code d@ generated the current EC is ran line-by-line
-            
-    - Js _Hoisting_
-        - applies more on regular functions not function expressions
+#### The EC in detail
+- the EC Object. Has 3  ff props;
+    - Variable Object (VO)
+    - Scope chain
+    - "This" variable
+- Goes through 2 phases in the ES
+    1. Creation phase.
+        1. Creation of the VO
+            - Arg object created to store all args passed into the fxn
+            - Var declarations are scanned: a property is created in the Variable Object for each variable, and set to *undefine*
+            - Function declarations are scanned: a property is created in the Variable Object for each fxn, *pointing to the function* 
+            - *NB*: Var + Function declarations = *Hoisting*
+                - Means: they're available before the execution phase starts
+        2. Creation of the scope chain
+            - Each new fxn creates a scope: the env/space in which the vars if defined and accessible
+            - *Lexical scope* means that in a lexically nested *implemented* function, the inner functions (*not function declarations*) have access to the (scope) variables and other resources of their parent scope.
+            - But it doesn't work backward to its parents, meaning the child scopes not available to its parents.
+            - This means that the child's functions are lexically bound to the execution context of their parents.
+            - Scope chain *doesn't relate to the order in which method called* but rather *where it is written* 
+        3. Determine value of *'this'* var
+            - In a* *regular function*, the *this* points to the global object (ie, window object in the browser)
+            - In a *method call*, the *this* points to the object that's (*defined*) calling the method
+                - points the custom object within which it is defined, otherwhise the global
+    2. Execution phase
+        - Funtion's code d@ generated the current EC is ran line-by-line
+
+* NB:
+    - scope => 'where do variables live?'
+    - 3 types of scopes: global scope, function scope, block scopes (let, const)  
+### Js _Hoisting_
+    - applies more on regular functions not function expressions
 
 
 ## DOM Manipulation
