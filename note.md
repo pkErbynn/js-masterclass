@@ -138,9 +138,14 @@ Code run in an env called execution context. A box/container/wrapper that stores
                 - *that is the reason to always use const/let* unless in legacy code
                 - declarable functions *can be block or function scoped* depending wether in strict mode or not
         3. Determine value of *'this'* var
-            - In a* *regular function*, the *this* points to the global object (ie, window object in the browser)
-            - In a *method call*, the *this* points to the object that's (*defined*) calling the method
+            - In a *regular function*, the *this* points to the global object (ie, window object in the browser)
+            - In a *method call*, the *this* points to the object that (*defined*) called the method, ie, the owner of the method
                 - points the custom object within which it is defined, otherwhise the global
+                - *method borrowing*: `x.a = y.b`
+                - this is *not static*   
+            - In *arrow function*, 'this' is the *'this' of the surrounding/parent function* (ie, lexical 'this')
+            - In *event listener*: 'this' is the *DOM element that the handler is attached to*, ie. the dom element owning the handler
+            - The 'this' will *NOT* point to the function itself or the variable environment
     2. Execution phase
         - Funtion's code d@ generated the current EC is ran line-by-line
 
@@ -148,9 +153,9 @@ Code run in an env called execution context. A box/container/wrapper that stores
     - scope => 'where do variables live?'
     - 3 types of scopes: global scope, function scope, block scopes (let, const)  
 ### Js _Hoisting_
-- means some variables can be used/access in the code before they're actually declared
+- means some variables can be used/accessed in the code before they're actually declared/defined/body-written
     - in short "variables lifted to the top of their scope"
-    - eg. var variables are 'hoisted' before even being asigned a value
+    - eg. var type variables are 'hoisted' before even being asigned a value
         - initial value: *undefined*
     - eg. functions declarations are declared on top before actually being defined
         - initial value: actual funtion
@@ -169,6 +174,16 @@ Code run in an env called execution context. A box/container/wrapper that stores
     }
     ```
 - applies more on regular functions not function expressions
+- examples
+```js
+console.log(a)  // undefined
+console.log(b)  // uninitialized, TDZ
+console.log(c)  // uninitialized, TDZ
+
+var a = 'a';
+const b = 'b';
+let c = 'c';
+```
 
 
 ## DOM Manipulation
