@@ -133,6 +133,10 @@ Code run in an env called execution context. A box/container/wrapper that stores
             - But it doesn't work backward to its parents, meaning the child scopes not available to its parents.
             - This means that the child's functions are lexically bound to the execution context of their parents.
             - Scope chain *doesn't relate to the order in which method called* but rather *where it is written* 
+                - const varibles are *block(eg, if-else) scoped* 
+                - var variables are *function scoped* even when defined in *block scope*
+                - *that is the reason to always use const/let* unless in legacy code
+                - declarable functions *can be block or function scoped* depending wether in strict mode or not
         3. Determine value of *'this'* var
             - In a* *regular function*, the *this* points to the global object (ie, window object in the browser)
             - In a *method call*, the *this* points to the object that's (*defined*) calling the method
@@ -144,7 +148,27 @@ Code run in an env called execution context. A box/container/wrapper that stores
     - scope => 'where do variables live?'
     - 3 types of scopes: global scope, function scope, block scopes (let, const)  
 ### Js _Hoisting_
-    - applies more on regular functions not function expressions
+- means some variables can be used/access in the code before they're actually declared
+    - in short "variables lifted to the top of their scope"
+    - eg. var variables are 'hoisted' before even being asigned a value
+        - initial value: *undefined*
+    - eg. functions declarations are declared on top before actually being defined
+        - initial value: actual funtion
+    - eg. function expressions are not hoisted
+        - intial value: unintialized, Temporal Dead Zone (*TDZ*) - defined but can't be used unless has value
+- how hosting really happens?
+    - before execution (in the context execution inside the call stack), code in scanned for variable declarations, and for each variable, a new property is created in the *variable environment object*.
+        - if it knows that variables are declared beforehand, it will be set to undefined when you want to use
+            - *var* type is undefined cus hoisted
+            - *const and let* type is uninitialized cus *not hoisted*... in TDZ mode
+        - if you want to use a function before being declared, it will point to that
+    ```js
+    variableObj = {
+        x: undefined,
+        y: z()
+    }
+    ```
+- applies more on regular functions not function expressions
 
 
 ## DOM Manipulation
