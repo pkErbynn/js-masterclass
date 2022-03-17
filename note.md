@@ -123,7 +123,7 @@ Code run in an env called execution context. A box/container/wrapper that stores
     1. Creation phase.
         1. Creation of the VO
             - Arg object created to store all args passed into the fxn
-            - Var declarations are scanned: a property is created in the Variable Object for each variable, and set to *undefine*
+            - Var declarations are scanned: a property is created in the Variable Object for each variable, and set to *undefined*
             - Function declarations are scanned: a property is created in the Variable Object for each fxn, *pointing to the function* 
             - *NB*: Var + Function declarations = *Hoisting*
                 - Means: they're available before the execution phase starts
@@ -135,17 +135,21 @@ Code run in an env called execution context. A box/container/wrapper that stores
             - Scope chain *doesn't relate to the order in which method called* but rather *where it is written* 
                 - const varibles are *block(eg, if-else) scoped* 
                 - var variables are *function scoped* even when defined in *block scope*
+                    - var type *create a property on the global window object*
                 - *that is the reason to always use const/let* unless in legacy code
                 - declarable functions *can be block or function scoped* depending wether in strict mode or not
         3. Determine value of *'this'* var
             - In a *regular function*, the *this* points to the global object (ie, window object in the browser)
-            - In a *method call*, the *this* points to the object that (*defined*) called the method, ie, the owner of the method
-                - points the custom object within which it is defined, otherwhise the global
-                - *method borrowing*: `x.a = y.b`
-                - this is *not static*   
-            - In *arrow function*, 'this' is the *'this' of the surrounding/parent function* (ie, lexical 'this')
+                - In a *method*, the *this* points to the object that (*defined*) called the method, ie, the owner of the method
+                    - points the custom object within which it is defined, otherwhise the global
+                    - *method borrowing*: `x.a = y.b`
+                    - this is *not static*  
+                - In regular method *call*, the 'this' is *undefined*/window global obj, because not called by object
+            - In *arrow function*, 'this' is the *'this' of the surrounding/parent function* (ie, lexical 'this'). Arrow fxns *does not get their own 'this' keyword*...
+                - nb: *don't use* 'this' ins arrow fxns
             - In *event listener*: 'this' is the *DOM element that the handler is attached to*, ie. the dom element owning the handler
             - The 'this' will *NOT* point to the function itself or the variable environment
+                - use a *regular function declaration/expresion* over *arrow function* to avoid the 
     2. Execution phase
         - Funtion's code d@ generated the current EC is ran line-by-line
 
@@ -185,6 +189,34 @@ const b = 'b';
 let c = 'c';
 ```
 
+### Premitive values vs Reference values
+Premitive values: values string, numbers, etc
+- stored in *call stack*
+- new address is created in stack when copied to another
+```js
+let a = 'a';
+let b = a
+b = 'b'
+
+// a = 'a'
+// b = 'b'
+
+```
+Reference values: values of objects
+- stored in *heap*
+- obj can't be stored in stack cus it's huge so only it's memory address is reference in the stack
+```js
+let me = {
+    sn: 'erb',
+    age: 25
+}
+let friend = me;
+friend.age = 26;
+
+// me = { sn = 'erb', age = 26 }
+// friend = { sn = 'erb', age = 26 }
+```
+- new variable, not created w/ new address but rather points to the same object address in the call stack (referenced from the heap)...thus affecting existing value
 
 ## DOM Manipulation
 DOM: structured rep of an html doc, used to conn webpages to script like Js
