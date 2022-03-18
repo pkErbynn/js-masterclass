@@ -237,3 +237,18 @@ Events
     - `hasOwnProperty`
     - `instanceOf`
     - `_proto_`
+
+## Data Structures, Modern Operaters and Strings
+- Array distructuring: unpacking var data
+    - switching vars
+    - nexted distructuring
+    - setting default values
+- spread operator: used whenever need elements from array individually  
+    - `...x`...`n, n1, n2`
+    - mostly used on _iterables_: array, set, map
+    - used on objects as well
+    - useful to join arrays
+    - useful in place that expect items separated by comma
+        - ...in array or
+        - ...as param to function
+
