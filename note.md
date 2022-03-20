@@ -239,11 +239,13 @@ Events
     - `_proto_`
 
 ## Data Structures, Modern Operaters and Strings
-- Array distructuring: unpacking var data
+- Array destructuring: unpacking var data
     - switching vars
     - nexted distructuring
     - setting default values
-- Spread operator: used whenever need to expand elements from array individually  
+- **Object destructuring**
+    - always set default values
+- **Spread operator**: used whenever need to expand elements from array individually  
     - `...x`...`n, n1, n2`
     - mostly used on _iterables_: array, set, map
         - used on objects as well
@@ -251,7 +253,7 @@ Events
     - 2 useful case
         - ...to build/join arrays
         - ...as param to function
-- Rest pattern: packs element of array
+- **Rest pattern**: packs element of array
     - lookup :)
 - Short circuiting with or and &&
     - can be used for if-else like the ternary
