@@ -181,3 +181,44 @@ printGoals(...game.scored);
 // const winner = team1 < team2 ? {team1: team1} : {team2: team2};
 // console.log('winner', winner);
 team1 < team2 && console.log('team1 more likely to win');   //nb: no else part considered
+
+///////////////////////////////////////
+///////// For-of loop
+// regular way
+for (const player of players1.entries() ) {
+  // const [i, n] = player;
+  console.log(`${player[0] + 1}: ${player[1]}`);
+}
+
+// destructuring from the source spot
+for (const [i, el] of players1.entries() ) {  
+  console.log({index: i+1, player: el} );
+  console.log(`${i + 1}: ${el}`);
+}
+
+///////// Object literal
+// old syntax
+let restaurant2 = {
+  name: 'hatchland',
+  ingredients: ['ginger', 'pepper'],
+  menu: ['pizza', 'ice-cream', 'burgar'],
+  openingHours: openingHours,
+  order: function(orderIndex = 0){  // function expression
+    return `You ordered ${this.menu[orderIndex]}`
+  }
+}
+console.log(restaurant2);
+console.log(restaurant2.order());
+
+// ehanced obj literal
+restaurant2 = {
+  name: 'hatchland',
+  ingredients: ['ginger', 'pepper'],
+  menu: ['pizza', 'ice-cream', 'burgar'],
+  openingHours, // encapsulated kvp
+  order(orderIndex = 0){  // just the function expression
+    return `You ordered ${this.menu[orderIndex]}`
+  }
+}
+console.log(restaurant2);
+console.log(restaurant2.order(1));

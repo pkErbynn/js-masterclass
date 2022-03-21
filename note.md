@@ -259,3 +259,8 @@ Events
     - can be used for if-else like the ternary
 - Null coalescing value
     - **always use to replace default value setup w/ ternary**
+- For-of loop
+    - get index with `.entries()`
+- Enhanced object literal
+    - object literal => you literary build an object without using any api, just using `{...}`
+    - **keys can be computed** not just the values 
