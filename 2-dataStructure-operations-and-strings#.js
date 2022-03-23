@@ -217,8 +217,92 @@ restaurant2 = {
   menu: ['pizza', 'ice-cream', 'burgar'],
   openingHours, // encapsulated kvp
   order(orderIndex = 0){  // just the function expression
-    return `You ordered ${this.menu[orderIndex]}`
+    return `You ordered ${this?.menu[orderIndex]}`
   }
 }
 console.log(restaurant2);
 console.log(restaurant2.order(1));
+
+///////// Optional chaining
+// on properties
+let availability = restaurant2.openingHours?.fri?.open ?? 'closed';
+console.log('status', availability);
+
+// on methods
+let order = restaurant2?.order?.(2);
+console.log('order', order);
+
+///////// Looping Object - keys, values, entries
+for(const day of Object.keys(openingHours)) {
+  console.log(day);
+}
+for(const openClose of Object.values(openingHours)) {
+  console.log(openClose);
+}
+
+for(const [key, value] of Object.entries(openingHours)) {
+  console.log(`On ${key} we open at ${value.open} and close at ${value.close}`);
+}
+
+///////////////////////////////////////
+// Coding Challenge #2
+/* 
+Let's continue with our football betting app!
+1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
+2. Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember)
+3. Print the 3 odds to the console, but in a nice formatted way, exaclty like this:
+      Odd of victory Bayern Munich: 1.33
+      Odd of draw: 3.25
+      Odd of victory Borrussia Dortmund: 6.5
+Get the team names directly from the game object, don't hardcode them (except for "draw"). HINT: Note how the odds and the game objects have the same property names 😉
+BONUS: Create an object called 'scorers' which contains the names of the players who scored as properties, and the number of goals as the value. In this game, it will look like this:
+      {
+        Gnarby: 1,
+        Hummels: 1,
+        Lewandowski: 2
+      }
+GOOD LUCK 😀
+*/
+
+// 1. Could traditionally used the normal for-loop with i++
+for(const [index, player] of game.scored.entries()){
+  console.log(`"Goal ${index}: ${player}"`);
+}
+
+// 2.
+let sum = 0.0;
+for(const [k, v] of Object.entries(game.odds)){
+  sum = sum + v;
+  console.log(k, v);
+}
+const avg = (sum/ Object.entries(game.odds).length)
+console.log(`Average: ${avg}`);
+
+// 3. 
+for(const [k, v] of Object.entries(game.odds)){
+  // console.log(k);
+  const result = k === 'x' ? `draw: ${v}` : `victory ${game[k]}: ${v}`;
+  console.log(`Odds of ${result}`);
+}
+
+// 4.
+let sc = ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels']
+// // Lewandowski
+// // {
+// //   Gnarby: 1,
+// //   Hummels: 1,
+// //   Lewandowski: 2
+// // }
+const ob = {};
+sc.forEach(element => {
+  ob[element] = (ob[element] ?? 0) + 1;
+});
+console.log(ob);
+
+
+/////////// Set
+const uniqueScoredPlayers = new Set(game.scored)
+const uniqueScoredPlayersNumber = uniqueScoredPlayers.size
+const uniqueScoredPlayersArr = [...uniqueScoredPlayers]
+console.log("uniqueScoredPlayersArr:", uniqueScoredPlayersArr);
+console.log("uniqueScoredPlayersNumber:", uniqueScoredPlayersNumber);

@@ -263,4 +263,13 @@ Events
     - get index with `.entries()`
 - Enhanced object literal
     - object literal => you literary build an object without using any api, just using `{...}`
-    - **keys can be computed** not just the values 
+    - **keys/property names can be computed** not just the values
+- **Optional chain**
+    - normally used w/ Nullish coalescing
+    - `a.b?.c ?? 'default'`
+- Set
+    - accept an iterable eg, array
+    - **specific item is not retrievable because order doesn't matter, ie no indexes**
+    - can check whether an element exists
+- Maps vs Object
+    - object **keys are always string** whilst map **keys can be any type**
