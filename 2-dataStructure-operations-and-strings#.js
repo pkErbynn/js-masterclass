@@ -280,29 +280,43 @@ console.log(`Average: ${avg}`);
 
 // 3. 
 for(const [k, v] of Object.entries(game.odds)){
-  // console.log(k);
   const result = k === 'x' ? `draw: ${v}` : `victory ${game[k]}: ${v}`;
   console.log(`Odds of ${result}`);
 }
 
 // 4.
-let sc = ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels']
-// // Lewandowski
-// // {
-// //   Gnarby: 1,
-// //   Hummels: 1,
-// //   Lewandowski: 2
-// // }
-const ob = {};
-sc.forEach(element => {
-  ob[element] = (ob[element] ?? 0) + 1;
-});
-console.log(ob);
+const scorers = {};
+let scored = ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels']
+for (const player of scored){
+  // if(!scorers[player]) {
+  //   scorers[player] = 1
+  // } else {
+  //   scorers[player] = scorers[player] + 1
+  // }
+  scorers[player] ? scorers[player] = scorers[player] + 1 : scorers[player] = 1;
+}
+console.log(scorers);
 
 
 /////////// Set
 const uniqueScoredPlayers = new Set(game.scored)
 const uniqueScoredPlayersNumber = uniqueScoredPlayers.size
 const uniqueScoredPlayersArr = [...uniqueScoredPlayers]
-console.log("uniqueScoredPlayersArr:", uniqueScoredPlayersArr);
-console.log("uniqueScoredPlayersNumber:", uniqueScoredPlayersNumber);
+// console.log("uniqueScoredPlayersArr:", uniqueScoredPlayersArr);
+// console.log("uniqueScoredPlayersNumber:", uniqueScoredPlayersNumber);
+
+
+/////////// Map
+// keys/values can be of any type
+const m1 = new Map();
+m1.set('food', 'fufu')
+m1.set('category', ['vege', 'nonvege'])
+console.log(m1);
+
+// chaining
+const m2 = new Map();
+m2.set('food', 'fufu')
+    .set('category', ['vege', 'nonvege'])
+    .set(true, 'we are open')
+    .set({'a': 1, 'b': 2}, 'object value')
+console.log(m2);
