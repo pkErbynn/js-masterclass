@@ -293,7 +293,8 @@ for (const player of scored){
   // } else {
   //   scorers[player] = scorers[player] + 1
   // }
-  scorers[player] ? scorers[player] = scorers[player] + 1 : scorers[player] = 1;
+  !scorers[player] ? scorers[player] = 1 : scorers[player] = scorers[player] + 1;
+  // scorers[player] ? scorers[player] = scorers[player] + 1 : scorers[player] = 1;
 }
 console.log(scorers);
 
@@ -306,7 +307,7 @@ const uniqueScoredPlayersArr = [...uniqueScoredPlayers]
 // console.log("uniqueScoredPlayersNumber:", uniqueScoredPlayersNumber);
 
 
-/////////// Map
+/////////// Map - an iterable just like array
 // keys/values can be of any type
 const m1 = new Map();
 m1.set('food', 'fufu')
@@ -320,3 +321,72 @@ m2.set('food', 'fufu')
     .set(true, 'we are open')
     .set({'a': 1, 'b': 2}, 'object value')
 console.log(m2);
+
+///// from scratch
+// invalid - than 2 items
+let fruits = new Map([
+  ["apples" ,"bananas","oranges", "rer"],
+  ["apples2" ,"bananas2","oranges2", "res2"]
+]);
+console.log(fruits);
+
+// invalid - same arrays
+fruits = new Map([
+  ["apples" ,"bananas","oranges", "ree"],
+  ["apples" ,"bananas","oranges", "ree"]
+]);
+console.log(fruits);
+
+// // invalid - wrong entry format + 2+ array items
+// fruits = new Map(
+//   ["apples" ,"bananas","oranges"]
+// );
+// console.log(fruits);
+
+// // invalid - wrong entry format + right array items (2 items)
+// fruits = new Map(
+//   ["apples", 500],
+//   ["bananas", 300],
+//   ["oranges", 200]
+// );
+// console.log(fruits);
+
+// // valid - object.entries() format...ie, array of arrays
+// fruits = new Map([
+//   ["apples", 500],
+//   ["bananas", 300],
+//   ["oranges", 200]
+// ]);
+// console.log(fruits);
+
+////// convert object to map
+// to loop to get keys/values from plain object, Obj.entries() is used
+// the result of that is an array-of-arrays and that's the input for map init too
+let result = Object.entries(openingHours);
+let hoursMap = new Map(result);
+console.log('hoursMap', hoursMap);
+
+// quiz app
+const question = new Map([
+  ['question', 'What is the best programming language in the world?'],
+  [1, 'C#'],
+  [2, 'Python'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct, yayyee!!'],
+  [false, 'Try again!'],
+])
+console.log(question.get('question'));
+for(const [key, value] of question){
+  if(typeof key === 'number'){
+    console.log(`${key}. ${value}`);
+  }
+}
+const userAnswer = 3; // dynamic input can come from anywhere
+const response = question.get('correct') === userAnswer
+console.log(question.get(response));
+
+//// convert maps to array
+console.log([...question]);
+console.log([...question.keys()]);
+console.log([...question.values()]);
