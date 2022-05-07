@@ -255,21 +255,48 @@ Events
         - ...as param to function
 - **Rest pattern**: packs element of array
     - lookup :)
-- Short circuiting with or and &&
-    - can be used for if-else like the ternary
-- Null coalescing value
-    - **always use to replace default value setup w/ ternary**
+- Ternary
+    - to set default value where 0 and null are invalid (replaceable with `||` Short-circuiting)
+    - replaces one-line if-else blocks
+- Short-circuiting with or and &&
+    - `&&` => to **replace one-line if-condition without the 'else' part**
+    - `||` => to set default value where 0 and null are invalid
+- Null colescing value
+    - **always use to replace default value setup w/ ternary (when 0 is considered valid)**
+    - for only `nullish` property
+- Optional chaining
+    - checks if property exist before access
+    - **used w/ null colescing to set default**
+    - `a.b?.c ?? 'default'`
 - For-of loop
     - get index with `.entries()`
 - Enhanced object literal
     - object literal => you literary build an object without using any api, just using `{...}`
     - **keys/property names can be computed** not just the values
-- **Optional chain**
-    - normally used w/ Nullish coalescing
-    - `a.b?.c ?? 'default'`
 - Set
     - accept an iterable eg, array
     - **specific item is not retrievable because order doesn't matter, ie no indexes**
     - can check whether an element exists
 - Maps vs Object
     - object **keys are always string** whilst map **keys can be any type**
+    - maps: 
+        - when need **any** type as keys
+        - easy to iterate and compute size
+        - when need map keys
+    - objects: 
+        - easy to access with . and []
+        - when working with json
+        - when need only string as keys and *need to include methods* as value
+- Arrays vs Sets
+    - arrays: 
+        - used when need **ordered** list of values
+        - when can contain **duplicates**
+        - when need to manipulate data
+    - sets: 
+        - used when need **unique** values
+        - when **high-performance** is important
+- Strings
+    - most useful methods: 
+        - expression: `.slice(), .trim(), .toLowerCase(), .toUpperCase(), .replaceAll()`
+        - conditional: `.includes(), .startWith(), .endsWith()`
+        - array: `.split(), .join()`
