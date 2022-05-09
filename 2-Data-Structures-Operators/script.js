@@ -718,8 +718,8 @@ document.querySelector('button').addEventListener('click', function () {
  Some_Variable 
    calculate_AGE
  delayed_departure`;
-  const text = document.querySelector('textarea').value;
-  const rows = text.toLowerCase().split('\n');
+  const text = document.querySelector('textarea').value; // gets value set
+  const rows = text.toLowerCase().split('\n');  // separate by new line
 
   for(const [index, row] of rows.entries()){  // .entries gets you the index and value same time
     let [first, last] = row.trim().split('_');

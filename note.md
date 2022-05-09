@@ -297,6 +297,39 @@ Events
         - when **high-performance** is important
 - Strings
     - most useful methods: 
-        - expression: `.slice(), .trim(), .toLowerCase(), .toUpperCase(), .replaceAll()`
+        - expression: `.slice(), .trim(), .toLowerCase(), .toUpperCase(), .replace[All]()`
         - conditional: `.includes(), .startWith(), .endsWith()`
         - array: `.split(), .join()`
+        - `.padEnd(), .repeat()`
+    
+## Functions: A closer look
+- **Pass arg by value vs reference**
+    - by value:
+        - for premitive types
+        - arg value is copied to into param value
+        - diff addresses thus independent of each other
+        - change on one doesn't affect the other
+    - by reference
+        - for non-premitive types
+        - arg address is coppied to param, ie pointing to same address
+        - change on one affect the other
+    - js does **NOT have pass by reference** even though it looks like 
+        - the reference is a value containing memory address 
+
+- **First class and Higher order functions**
+    - 1st-Class fnxs
+        - functions treated as 1st class
+        - means functions are simply **values**
+        - functions are just another **'type' of object**
+        - functions can be
+            - stored in a variable
+            - passed as argument to another fnx
+            - called on another fnxs
+    - Higher-order fnxs
+        - fnxs that recieves anther fnx as arg or returns another fnx or both
+        - `btn.addEventListener('click', greet)`
+            - `addEventListener` = higher order fnx
+            - `greet` = 1st class fnx
+- Function returning another function
+- the call() and apply() methods
+    
