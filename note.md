@@ -331,5 +331,5 @@ Events
             - `addEventListener` = higher order fnx
             - `greet` = 1st class fnx
 - Function returning another function
-- the call() and apply() methods
+- the call() and apply() and bind() methods
     
