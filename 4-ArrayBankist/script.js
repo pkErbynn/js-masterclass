@@ -71,6 +71,28 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450];
 
 /////////////////////////////////////////////////
+movements.forEach((m, index, arr) => {
+  console.log(m);
+  console.log(index);
+  console.log(arr);
+})
+
+const displayAccountMovement = function(movements) {
+  containerMovements.innerHTML = '';  // clear default elements
+
+  movements.forEach((movement, index) => {
+    const type = movement > 0 ? 'deposit' : 'withdrawal';
+    const html = `
+    <div class="movements__row">
+      <div class="movements__type movements__type--${type}">${index + 1} deposit</div>
+      <div class="movements__value">${movement}€</div>
+    </div>
+    `
+    containerMovements.insertAdjacentHTML('beforeend', html)
+  })
+}
+
+displayAccountMovement(account1.movements)
