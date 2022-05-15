@@ -61,6 +61,59 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+// displaying account movement for one account
+const displayAccountMovement = function(movements) {
+  containerMovements.innerHTML = '';  // clear default elements
+
+  movements.forEach((movement, index) => {
+    const type = movement > 0 ? 'deposit' : 'withdrawal';
+
+    const html = `
+    <div class="movements__row">
+      <div class="movements__type movements__type--${type}">${index + 1} deposit</div>
+      <div class="movements__value">${movement}€</div>
+    </div>
+    `
+    containerMovements.insertAdjacentHTML('beforeend', html)  // insert html element
+  })
+}
+displayAccountMovement(account1.movements)  // movement data will be from the account that logs into the app
+
+// create usernames for each/all accounts
+const createUserNames = function (accounts) {
+  accounts.forEach(acc => {   // foreach (not map) cus wanted to modify the original accounts array (used to produce 'side effect'), not return a new array of obj from the original
+    const nameArr = acc.owner.split(' ');
+    const username = nameArr.map(name => name[0]).join('').toLowerCase(); // map cus wanted to return a new array and then join
+    acc.username = username
+  })
+}
+createUserNames(accounts);
+
+// calculate balance for one account
+const calculateDisplayBalance = function (movements) {
+  const balance = movements.reduce((accumulator, current) => accumulator + current, 0);
+  labelBalance.textContent = `${balance} €`
+}
+calculateDisplayBalance(account1.movements)
+
+
+// calculate income/deposit sum
+const calculateDisplayInOutSummary = function (movements) {
+  const incomeSum = movements.filter(mov => mov > 0).reduce((acc, mov) => acc + mov, 0)
+  labelSumIn.textContent = `${incomeSum} €`
+
+  const outflowSum = movements.filter(mov => mov < 0)
+                              .reduce((acc, mov) => acc + mov, 0)
+  labelSumOut.textContent = `${Math.abs(outflowSum)} €`
+
+  const interestOnDeposit = movements.filter(mov => mov > 0)
+                                    .map(deposit => deposit * (1.2 / 100))
+                                    .filter((interest, index, arr) => interest >= 1) // apply only when interest is at least 1
+                                    .reduce((acc, mov) => acc + mov, 0)
+  labelSumInterest.textContent = `${Math.abs(interestOnDeposit)} €`
+}
+calculateDisplayInOutSummary(account1.movements)
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -71,28 +124,41 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450];
+// const movements = [200, 450];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300]
 
-/////////////////////////////////////////////////
-movements.forEach((m, index, arr) => {
-  console.log(m);
-  console.log(index);
-  console.log(arr);
-})
 
-const displayAccountMovement = function(movements) {
-  containerMovements.innerHTML = '';  // clear default elements
+//////// only withdrawals
+const withdrawals = movements.filter(mov => mov < 0)
+console.log('withdrawals:', withdrawals);
 
-  movements.forEach((movement, index) => {
-    const type = movement > 0 ? 'deposit' : 'withdrawal';
-    const html = `
-    <div class="movements__row">
-      <div class="movements__type movements__type--${type}">${index + 1} deposit</div>
-      <div class="movements__value">${movement}€</div>
-    </div>
-    `
-    containerMovements.insertAdjacentHTML('beforeend', html)
-  })
+/////// max number
+const max = movements.reduce((acc, cur) => {
+  if(acc > cur) return acc;
+  else return cur;
+}, movements[0])
+console.log('max', max);
+
+//////// average movement
+// [2, 3] => (2+3)/2 = 2.5
+const sum = movements.reduce((acc, curr) => acc + curr, 0)
+console.log('average:', sum/movements.length);
+
+// [2, 3] => (2+3)/2 === 2/2 + 3/2 = 2.5
+const average = movements.reduce((acc, curr, _, arr) => acc + curr/arr.length, 0)
+console.log('average2:', average);
+
+/////// calculate average of filtered values
+const calcAverage = function (movs) {
+  const mappedValues = movs.map(mov => mov < 0 ? mov - 1: mov + 1); // subtract 1 if negative else add 1
+  console.log(mappedValues);
+  const odds = mappedValues.filter(mov => mov % 2 !== 0);
+  console.log(odds);
+  const average = odds.reduce((acc, evenMov) => acc + evenMov) / movs.length;
+  return average;
 }
+console.log(calcAverage(movements));
 
-displayAccountMovement(account1.movements)
+////// find() on array of objects
+const account = accounts.find(account => account.owner === 'Jessica Davis')
+console.log('account match:', account);

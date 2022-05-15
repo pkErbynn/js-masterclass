@@ -330,23 +330,46 @@ Events
         - `btn.addEventListener('click', greet)`
             - `addEventListener` = higher order fnx
             - `greet` = 1st class fnx
-- Function returning another function
-- the call() and apply() and **bind()** methods
-- IIFE
-- Closures
-- Working w/ Arrays
-    - .splice() / .slice() / .reverse() / .join() / .pop()
-    - forEach loop 
-        - is a higher-order function that takes a callback fxn
-        - in Arrays
-            - **forEach comes with index & the entire array**. eg; `numbers.forEach((number, index, numbers) => log(number, index, numbers))`
-            - loop is not breakable
-                - always loop over the entire array
-                - **continue and break statement doesn't work in forEach loop**
-                - **to break out of the loop, use For-of loop**
-        - in Maps
-            - **forEach comes with the value, key & the entire map**. eg; `numbers.forEach((value, key, numbers) => log(value, key, numbers))`
-        - in Sets
-            - **forEach comes with the value, throw-away & the entire set**. eg; `numbers.forEach((value, _, set) => log(value, set))`
-                - **_** implies throwaway variable
-                    - means ***variable is unnecessary or unused*
+        - Function returning another function
+        - the call() and apply() and **bind()** methods
+        - IIFE
+        - Closures
+## Working w/ Arrays
+- .splice() / .slice() / .reverse() / .join() / .pop()
+- forEach loop 
+    - is a higher-order function that takes a callback fxn
+    - in Arrays
+        - **forEach comes with index & the entire array**. eg; `numbers.forEach((number, index, numbers) => log(number, index, numbers))`
+        - loop is not breakable
+            - always loop over the entire array
+            - **continue and break statement doesn't work in forEach loop**
+            - **to break out of the loop, use For-of loop**
+    - in Maps
+        - **forEach comes with the value, key & the entire map**. eg; `numbers.forEach((value, key, numbers) => log(value, key, numbers))`
+    - in Sets
+        - **forEach comes with the value, throw-away & the entire set**. eg; `numbers.forEach((value, _, set) => log(value, set))`
+            - **_** implies throwaway variable
+                - means ***variable is unnecessary or unused*
+- Data transformation
+    - Map, Filter, Reduce
+    - Map: 
+        -**Has index**
+        - .map((item, **index**, array) => ...)
+        - **used when wanna return a new array**
+            - unlike `forEach` that just does causes **side effect** on the orginal, ie does some sth/modifying without returning
+    - Filter:
+        - conditioned to return new array
+    - Reduce:
+        - .reduce((**accumular**, currentItem, index, array) => ..., **initialValue**)
+        - initialValue => value before the first iteration even starts
+            - just like initializing `int sum = 0` before for-loop
+        - usages;
+            - for sum
+            - finding max value
+            ```js
+            const max = movements.reduce((acc, cur) => {
+                if(acc > cur) return acc;
+                else return cur;
+            }, movements[0])
+            console.log('max', max);
+            ```
