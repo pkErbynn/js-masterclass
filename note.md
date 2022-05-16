@@ -362,10 +362,11 @@ Events
     - Reduce:
         - .reduce((**accumular**, currentItem, index, array) => ..., **initialValue**)
         - initialValue => value before the first iteration even starts
-            - just like initializing `int sum = 0` before for-loop
+            - just like initializing `int accumular(sum) = 0` before for-loop
         - usages;
-            - for sum
-            - finding max value
+            - any operation that returns only one value;
+                - for sum
+                - finding max value
             ```js
             const max = movements.reduce((acc, cur) => {
                 if(acc > cur) return acc;
@@ -373,3 +374,10 @@ Events
             }, movements[0])
             console.log('max', max);
             ```
+    - NB: It's a **bad practice to chain methods(like `splice()`) that mutate the underlying original array**
+
+- Find() method
+    - returns only the 1st element which satisfies the condition
+    - used to find only one matching element
+    - vs Filter
+        - **find doesn't return a new array but filter does**

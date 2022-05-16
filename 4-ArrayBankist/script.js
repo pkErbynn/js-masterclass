@@ -77,7 +77,7 @@ const displayAccountMovement = function(movements) {
     containerMovements.insertAdjacentHTML('beforeend', html)  // insert html element
   })
 }
-displayAccountMovement(account1.movements)  // movement data will be from the account that logs into the app
+// displayAccountMovement(account1.movements)  // movement data will be from the account that logs into the app
 
 // create usernames for each/all accounts
 const createUserNames = function (accounts) {
@@ -94,11 +94,12 @@ const calculateDisplayBalance = function (movements) {
   const balance = movements.reduce((accumulator, current) => accumulator + current, 0);
   labelBalance.textContent = `${balance} €`
 }
-calculateDisplayBalance(account1.movements)
+// calculateDisplayBalance(account1.movements)  // replaced by login user data
 
 
 // calculate income/deposit sum
-const calculateDisplayInOutSummary = function (movements) {
+const calculateDisplayInOutSummary = function (accounts) {
+  const movements = accounts.movements;
   const incomeSum = movements.filter(mov => mov > 0).reduce((acc, mov) => acc + mov, 0)
   labelSumIn.textContent = `${incomeSum} €`
 
@@ -107,12 +108,48 @@ const calculateDisplayInOutSummary = function (movements) {
   labelSumOut.textContent = `${Math.abs(outflowSum)} €`
 
   const interestOnDeposit = movements.filter(mov => mov > 0)
-                                    .map(deposit => deposit * (1.2 / 100))
+                                    .map(deposit => deposit * account.interestRate)
                                     .filter((interest, index, arr) => interest >= 1) // apply only when interest is at least 1
                                     .reduce((acc, mov) => acc + mov, 0)
   labelSumInterest.textContent = `${Math.abs(interestOnDeposit)} €`
 }
-calculateDisplayInOutSummary(account1.movements)
+// calculateDisplayInOutSummary(account1.movements) // replaced with user data after login 
+
+// login
+let currentLoggedInAccount; // current account global accessible
+
+btnLogin.addEventListener('click', event => {
+  event.preventDefault(); // prevents default form reload after submission
+
+  const currentUser = inputLoginUsername.value;
+  console.log(currentUser);
+  currentLoggedInAccount = accounts.find(acc => acc?.username == currentUser) // since username is computed (not part of the original account object), optional check is required
+  
+  // after account is found, chect it's pin
+  const pinNumber = Number(inputLoginPin.value);  // incoming string pin from form thus need casting
+  if(currentLoggedInAccount?.pin === pinNumber){  // '.?', since accessing pin property on a matched account and the account may not be matched
+    console.log(inputLoginPin.value, ' LOGIN');
+    // Display ui and message
+    labelWelcome.textContent = `Welcome back, ${currentLoggedInAccount.owner.split(' ')[0]}`
+
+    // enable account visibility
+    containerApp.style.opacity = 1;
+
+    // clear form
+    inputLoginUsername.value = '';
+    inputLoginPin.value = '';
+    inputLoginPin.blur(); 
+
+    // display movement
+    displayAccountMovement(currentLoggedInAccount.movements);
+
+    // display balance 
+    calculateDisplayBalance(currentLoggedInAccount.movements)
+
+    // display summary
+    calculateDisplayInOutSummary(currentLoggedInAccount)
+  }
+})
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -162,3 +199,7 @@ console.log(calcAverage(movements));
 ////// find() on array of objects
 const account = accounts.find(account => account.owner === 'Jessica Davis')
 console.log('account match:', account);
+
+
+// NB:
+// Do everything with one account then implement signed-in user to select its account
