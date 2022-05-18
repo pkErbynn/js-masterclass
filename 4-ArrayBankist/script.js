@@ -89,7 +89,7 @@ const createUserNames = function (accounts) {
 }
 createUserNames(accounts);
 
-// calculate balance for one account
+// calculate balance for one account - reduce()
 const calculateDisplayBalance = function (acc) {
   const movements = acc.movements;
   const balance = movements.reduce((accumulator, current) => accumulator + current, 0);
@@ -99,7 +99,7 @@ const calculateDisplayBalance = function (acc) {
 // calculateDisplayBalance(account1.movements)  // replaced by login user data
 
 
-// calculate income/deposit sum
+// calculate income/deposit sum - using filter(), reduce(), map()
 const calculateDisplayInOutSummary = function (accounts) {
   const movements = accounts.movements;
   const incomeSum = movements.filter(mov => mov > 0).reduce((acc, mov) => acc + mov, 0)
@@ -129,7 +129,7 @@ const updateUI = function (acc) {
   calculateDisplayInOutSummary(acc)
 }
 
-// login
+// login - using find()
 let currentLoggedInAccount; // current account global accessible
 
 btnLogin.addEventListener('click', event => {
@@ -163,12 +163,12 @@ btnLogin.addEventListener('click', event => {
     // // display summary
     // calculateDisplayInOutSummary(currentLoggedInAccount)
 
-    // update ui
+    // update ui - consolidated the methods
     updateUI(currentLoggedInAccount)
   }
 })
 
-// transfer
+// transfer money - using find()
 btnTransfer.addEventListener('click', e => {
   e.preventDefault();
 
@@ -189,6 +189,41 @@ btnTransfer.addEventListener('click', e => {
     }
 })
 
+// user can request loan if any of his deposite is greater than 10% of the load
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  const overTenPercent = mov => mov >= amount * 0.1;
+  if(amount > 0 && currentLoggedInAccount.movements.some(overTenPercent)){  // overTenPercent as callback, no '()'
+    console.log('eligible...');
+    currentLoggedInAccount.movements.push(amount);
+
+    updateUI(currentLoggedInAccount)
+  }
+
+  inputLoanAmount.value = '';
+})
+
+// deleting or closing account - findIndex(), splice()
+btnClose.addEventListener('click', function (event) {
+  event.preventDefault();
+
+  if(currentLoggedInAccount.username == inputCloseUsername.value &&
+    currentLoggedInAccount.pin == Number(inputClosePin.value) ) {
+      const currentAccountIndex = accounts.findIndex(acc => acc.username == currentLoggedInAccount.username);
+      // console.log('del', currentAccountIndex);
+
+      // delete account
+      accounts.splice(currentAccountIndex, 1);
+
+      // hide ui
+      containerApp.style.opacity = 0;
+    }
+
+  inputCloseUsername.value = inputClosePin.value = '';  // clearing both forms
+})
 
 
 
