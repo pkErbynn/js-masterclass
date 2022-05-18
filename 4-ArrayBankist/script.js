@@ -276,6 +276,24 @@ console.log(calcAverage(movements));
 const account = accounts.find(account => account.owner === 'Jessica Davis')
 console.log('account match:', account);
 
+//////////////// flat(), flatMap()
+const flatme = [1, 3, 4, [5, 3, 6], [7, 8, 0]]
+console.log(flatme.flat());
+
+const flatmeToo = [1, 3, 4, [5, [3, 6]], [[7, 8,], 0]]
+console.log(flatmeToo.flat());  // default: 1-level deep flat(1)
+console.log(flatmeToo.flat(2)); // 2-level deep
+
+const flatAndSumAllAccountsMovements = accounts.map(acc => acc.movements)
+                                              .flat()
+                                              .reduce((accumulator, curr) => accumulator + curr);
+console.log(flatAndSumAllAccountsMovements);
+
+// using flatmap()........yessssssssssssss, i baaaaaaarb!!!!!!!!!!!!
+const flatAndSumAllAccountsMovements2 = accounts.flatMap(acc => acc.movements)
+                                              .reduce((accumulator, curr) => accumulator + curr);
+console.log(flatAndSumAllAccountsMovements2);
+
 
 // NB:
 // Do everything with one account then implement signed-in user to select its account
