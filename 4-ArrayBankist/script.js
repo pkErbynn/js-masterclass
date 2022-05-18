@@ -74,7 +74,7 @@ const displayAccountMovement = function(movements) {
       <div class="movements__value">${movement}€</div>
     </div>
     `
-    containerMovements.insertAdjacentHTML('beforeend', html)  // insert html element
+    containerMovements.insertAdjacentHTML('afterbegin', html)  // insert html element
   })
 }
 // displayAccountMovement(account1.movements)  // movement data will be from the account that logs into the app
@@ -90,8 +90,10 @@ const createUserNames = function (accounts) {
 createUserNames(accounts);
 
 // calculate balance for one account
-const calculateDisplayBalance = function (movements) {
+const calculateDisplayBalance = function (acc) {
+  const movements = acc.movements;
   const balance = movements.reduce((accumulator, current) => accumulator + current, 0);
+  acc.balance = balance;  // create balance property
   labelBalance.textContent = `${balance} €`
 }
 // calculateDisplayBalance(account1.movements)  // replaced by login user data
@@ -114,6 +116,18 @@ const calculateDisplayInOutSummary = function (accounts) {
   labelSumInterest.textContent = `${Math.abs(interestOnDeposit)} €`
 }
 // calculateDisplayInOutSummary(account1.movements) // replaced with user data after login 
+
+// update UI
+const updateUI = function (acc) {
+  // display movement
+  displayAccountMovement(acc.movements);
+
+  // display balance 
+  calculateDisplayBalance(acc)
+
+  // display summary
+  calculateDisplayInOutSummary(acc)
+}
 
 // login
 let currentLoggedInAccount; // current account global accessible
@@ -140,16 +154,43 @@ btnLogin.addEventListener('click', event => {
     inputLoginPin.value = '';
     inputLoginPin.blur(); 
 
-    // display movement
-    displayAccountMovement(currentLoggedInAccount.movements);
+    // // display movement
+    // displayAccountMovement(currentLoggedInAccount.movements);
 
-    // display balance 
-    calculateDisplayBalance(currentLoggedInAccount.movements)
+    // // display balance 
+    // calculateDisplayBalance(currentLoggedInAccount)
 
-    // display summary
-    calculateDisplayInOutSummary(currentLoggedInAccount)
+    // // display summary
+    // calculateDisplayInOutSummary(currentLoggedInAccount)
+
+    // update ui
+    updateUI(currentLoggedInAccount)
   }
 })
+
+// transfer
+btnTransfer.addEventListener('click', e => {
+  e.preventDefault();
+
+  const amount = Number(inputTransferAmount.value);
+  const reciever = accounts.find(acc => acc?.username == inputTransferTo.value);
+
+  inputTransferAmount.value = inputTransferTo.value = '';  // clearing both forms
+  
+  if(amount > 0 &&
+    amount <= currentLoggedInAccount.balance &&
+    reciever &&
+    reciever.username !== currentLoggedInAccount.username){
+      console.log('Trasfering...');
+      currentLoggedInAccount.movements.push(-amount);
+      reciever.movements.push(amount);
+
+      updateUI(currentLoggedInAccount);
+    }
+})
+
+
+
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
