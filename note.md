@@ -387,4 +387,14 @@ Events
     - **similar to includes()** some(x => x == match)
 - Every()
     - returns truthy if every item matches given condition
-- Flat(), FlatMaps(); 
+- **Flat(), FlatMaps()**;
+    - Flat = flats nested (on n-deep level) arrays
+    - FlatMap = `.map(..).flat();`
+- **Programmatically creating and filling arrays**. using;
+    1. Array constructor + .fill()
+    2. Array.from({length: 5}, callbackFxn)
+        - fill the array by using callbackFxn like in .map(), but only the index is needed
+        - most preferred
+        - .querySelectorAll() yeilds a nodeList which is does not have array methods
+            - so Array.from() can be used to create a real array from that
+        - usage similar as the spread operator (...)

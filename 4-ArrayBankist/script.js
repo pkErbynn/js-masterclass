@@ -65,7 +65,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 const displayAccountMovements = function(moves, isSorted = false) {   // default false value otherwise need to be passed in every place it is called
   containerMovements.innerHTML = '';  // clear default elements
 
-  // need '.slice' because sort will change the underling array so a copy is needed
+  // need '.slice' because sort will change the underling array so a copy is needed...also, remember not to chain methods that changes the original array
   const movements = isSorted ? moves.slice().sort((a, b) => a - b) : moves;
 
   movements.forEach((movement, index) => {
@@ -237,6 +237,8 @@ btnClose.addEventListener('click', function (event) {
 })
 
 
+// NB:
+// Do everything first with one account then implement signed-in user to select its account
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -316,5 +318,24 @@ console.log(sortNumbers.sort());  // doesn't work just like that on numbers, doe
 console.log(sortNumbers.sort((a, b) => a - b)); // < 0 for ascending
 console.log(sortNumbers.sort((a, b) => b - a)); // > 0 for descending
 
-// NB:
-// Do everything with one account then implement signed-in user to select its account
+
+//// Array.from() use case
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),   // querySelectorAll() used the get elements from the ui directly
+    domEle => Number(domEle.textContent.replace('€', ''))
+  );
+  console.log(movementsUI);
+
+  // same as doing this
+  const movementsUI2 = Array.from(
+    document.querySelectorAll('.movements__value'));
+  console.log(movementsUI2);
+  const res2 = movementsUI2.map(domEle => Number(domEle.textContent.replace('€', '')));
+  console.log(res2);
+
+  // same as
+  const movementsUI3 = [...document.querySelectorAll('.movements__value')]
+  const res3 = movementsUI3.map(domEle => Number(domEle.textContent.replace('€', '')));
+  console.log(res3);
+})
