@@ -62,8 +62,11 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 // displaying account movement for one account
-const displayAccountMovement = function(movements) {
+const displayAccountMovements = function(moves, isSorted = false) {   // default false value otherwise need to be passed in every place it is called
   containerMovements.innerHTML = '';  // clear default elements
+
+  // need '.slice' because sort will change the underling array so a copy is needed
+  const movements = isSorted ? moves.slice().sort((a, b) => a - b) : moves;
 
   movements.forEach((movement, index) => {
     const type = movement > 0 ? 'deposit' : 'withdrawal';
@@ -77,7 +80,7 @@ const displayAccountMovement = function(movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html)  // insert html element
   })
 }
-// displayAccountMovement(account1.movements)  // movement data will be from the account that logs into the app
+// displayAccountMovements(account1.movements)  // movement data will be from the account that logs into the app
 
 // create usernames for each/all accounts
 const createUserNames = function (accounts) {
@@ -120,7 +123,7 @@ const calculateDisplayInOutSummary = function (accounts) {
 // update UI
 const updateUI = function (acc) {
   // display movement
-  displayAccountMovement(acc.movements);
+  displayAccountMovements(acc.movements);
 
   // display balance 
   calculateDisplayBalance(acc)
@@ -155,7 +158,7 @@ btnLogin.addEventListener('click', event => {
     inputLoginPin.blur(); 
 
     // // display movement
-    // displayAccountMovement(currentLoggedInAccount.movements);
+    // displayAccountMovements(currentLoggedInAccount.movements);
 
     // // display balance 
     // calculateDisplayBalance(currentLoggedInAccount)
@@ -204,6 +207,14 @@ btnLoan.addEventListener('click', function (e) {
   }
 
   inputLoanAmount.value = '';
+})
+
+// sorting movements
+let isSorted = false; // state variable
+btnSort.addEventListener('click', function (event) {
+  event.preventDefault();
+  displayAccountMovements(currentLoggedInAccount.movements, !isSorted);
+  isSorted = !isSorted;
 })
 
 // deleting or closing account - findIndex(), splice()
@@ -294,6 +305,16 @@ const flatAndSumAllAccountsMovements2 = accounts.flatMap(acc => acc.movements)
                                               .reduce((accumulator, curr) => accumulator + curr);
 console.log(flatAndSumAllAccountsMovements2);
 
+
+///// sort()
+const nameArr = ['Papa', 'Erb', 'Kwesi', 'John', 'Gastone' ]
+console.log(nameArr.sort());
+
+const sortNumbers = [332, 2443, 5555, 392, 93, 3334];
+console.log(sortNumbers.sort());  // doesn't work just like that on numbers, does it as strings
+
+console.log(sortNumbers.sort((a, b) => a - b)); // < 0 for ascending
+console.log(sortNumbers.sort((a, b) => b - a)); // > 0 for descending
 
 // NB:
 // Do everything with one account then implement signed-in user to select its account

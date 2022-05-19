@@ -381,3 +381,10 @@ Events
     - used to find only one matching element
     - vs Filter
         - **find doesn't return a new array but filter does**
+- FindIndex() into Splice()
+- Some()
+    - checks if matches **any** of the condition
+    - **similar to includes()** some(x => x == match)
+- Every()
+    - returns truthy if every item matches given condition
+- Flat(), FlatMaps(); 
