@@ -25,8 +25,8 @@ const account1 = {
     '2022-05-19T23:36:17.929Z',
     '2022-05-20T10:51:36.790Z',
   ],
-  currency: 'EUR',
-  locale: 'pt-PT', // de-DE
+  currency: 'USD',
+  locale: 'en-US',  
 };
 
 const account2 = {
@@ -45,8 +45,8 @@ const account2 = {
     '2022-06-25T18:49:59.371Z',
     '2022-07-26T12:01:20.894Z',
   ],
-  currency: 'USD',
-  locale: 'en-US',
+  currency: 'EUR', 
+  locale: 'pt-PT', // de-DE
 };
 
 const accounts = [account1, account2];
@@ -81,7 +81,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 ///////////////////////////////////////////
 // Functions
 
-const formatMovementDate = function (date) {
+const formatMovementDate = function (date, local) {
   const calcDaysPassed = (date1, date2) => Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
 
   const daysPassed = calcDaysPassed(new Date(), date);
@@ -90,11 +90,12 @@ const formatMovementDate = function (date) {
   if (daysPassed === 1) return 'Yesterday';
   if (daysPassed <= 7) return `${daysPassed} days ago`;
 
-  const day = `${date.getDate()}`.padStart(2, 0);
-  const month = `${date.getMonth() + 1}`.padStart(2, 0);
-  const year = date.getFullYear();
-  const displayDate = `${day}/${month}/${year}`;
-
+  // const day = `${date.getDate()}`.padStart(2, 0);
+  // const month = `${date.getMonth() + 1}`.padStart(2, 0);
+  // const year = date.getFullYear();
+  // const displayDate = `${day}/${month}/${year}`;
+  
+  const displayDate = Intl.DateTimeFormat(local).format(date);
   return displayDate;
 }
 
@@ -113,7 +114,7 @@ const displayAccountMovements = function(acc, isSorted = false) {   // default f
 
     const date = new Date(acc.movementsDates[index]);
     
-    const displayDate = formatMovementDate(date);
+    const displayDate = formatMovementDate(date, acc.local);
     console.log('DATEEEE', displayDate);
 
     const html = `
@@ -187,7 +188,11 @@ currentLoggedInAccount = account1
 updateUI(currentLoggedInAccount);
 containerApp.style.opacity = 100;
 
+// const now = new Date();
+// labelDate.textContent = new Intl.DateTimeFormat('en-UK').format(now)
 
+// const locale = navigator.language;
+// console.log('locale: ', locale);
 
 btnLogin.addEventListener('click', event => {
   event.preventDefault(); // prevents default form reload after submission
@@ -208,12 +213,24 @@ btnLogin.addEventListener('click', event => {
 
     // create date and time
     const now = new Date();
-    const day = `${now.getDate()}`.padStart(2, 0);
-    const month = `${now.getMonth() + 1}`.padStart(2, 0);
-    const year = now.getFullYear();
-    const hour = `${now.getHours()}`.padStart(2, 0);
-    const min =  `${now.getMinutes()}`.padStart(2, 0);
-    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
+    const options = {
+      hour: "numeric",
+      minute: "numeric",
+      day: "numeric",
+      month: "numeric", // numeric
+      year: "numeric",
+      weekday: 'long',
+    };
+
+    const myLocalDate = Intl.DateTimeFormat(currentLoggedInAccount.locale, options).format(now);
+    labelDate.textContent = myLocalDate;
+
+    // const day = `${now.getDate()}`.padStart(2, 0);
+    // const month = `${now.getMonth() + 1}`.padStart(2, 0);
+    // const year = now.getFullYear();
+    // const hour = `${now.getHours()}`.padStart(2, 0);
+    // const min =  `${now.getMinutes()}`.padStart(2, 0);
+    // labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
 
     // clear form
     inputLoginUsername.value = '';
