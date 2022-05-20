@@ -398,3 +398,39 @@ Events
         - .querySelectorAll() yeilds a nodeList which is does not have array methods
             - so Array.from() can be used to create a real array from that
         - usage similar as the spread operator (...)
+- array cheatsheet
+<img src="./Res-Ref/array-methods.jpg">
+
+## Numbers, Dates, Internationalization, Timers
+- Numbers
+    - Number.parseInt(), Number.**parseFloat('10px')**,
+    - Number.isFinite(), - **better to check if sth is a number not stringified number**
+- Math and Rounding
+    - **Math.min/max()**
+    - `trunc(), ciel(), floor()`
+- Remainder
+    - %
+- Big int
+    - Numbers
+        - max bit: 2^64
+        - max number: 2^(53-1) 
+        - **same as `Number.MAX_SAFE_INTEGER`**
+    - Big int help get number beyond the max int number
+        - using '**n**'
+        - eg: `23333333333333333333334444444444444444444n`
+
+## Asynchronous - Promises, Async_Await, and AJAX
+- Asynchronous
+    - Synchronous
+        - code runs and execute line by line (in the execution thread) in the order written
+        - example 
+        ```
+        const a = 'a';
+        alert('text');
+        const b = 'b';
+        ```
+        - each line of code waits for previous line to finish
+        - Problem: if a line of code takes a long time to run
+        - it blocks the rest of the execution
+        - long-running operations *block* code execution
+
