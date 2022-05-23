@@ -71,4 +71,6 @@ const getPostData = function () {
     
 };
   
-getPostData()
+getPostData();
+
+// Go here for more: https://github.com/pkErbynn/complete-javascript-course/blob/8201b01f2fcd274fb276c1c8e11e55847c6d451e/16-Asynchronous/final/script.js#L146
