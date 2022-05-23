@@ -416,9 +416,28 @@ Events
         - max number: 2^(53-1) 
         - **same as `Number.MAX_SAFE_INTEGER`**
     - Big int help get number beyond the max int number
-        - using '**n**'
+        - using '**n**' postfix
         - eg: `23333333333333333333334444444444444444444n`
+- Dates
+    - **Timestamp** is the **milliseconds**
+        - eg `getTime()`
+    - **.getFullYear()** over getYear()
+    - `.toISOString()`
+        - eg '2019-11-18T21:31:17.178Z'
+    - **.padStart(2, 0)** useful to get 2 digits for minute, hour, day, month
+    - date operations
+        - **timestamp (in ms) is useful**
+- **Internationalization**
+    - format dates based on location or country
+    - **search "iso language code" to format date**
+    - **can determine local from browser programmatically**
+        - `navigator.language`
 
+- **Timers**: 
+    - setTimeout
+    - setInterval
+
+## Continue here - on the 12th
 ## Asynchronous - Promises, Async_Await, and AJAX
 - Asynchronous
     - Synchronous
@@ -433,4 +452,41 @@ Events
         - Problem: if a line of code takes a long time to run
         - it blocks the rest of the execution
         - long-running operations *block* code execution
-
+    - Async
+        - means 'not occuring at same time'
+        - code is executed **after a task that runs in 'bg' finishes**
+            - code is non-blocking
+            - **callbacks alone doesn't make code asyncronous**
+- Promises
+    - an object that is used as a **placeholder for the future result of an async operation**
+        - simply **a container for a future value**, that will be delivered asynchronously
+        - eg: lottery and bet ticketing
+    - benefits:
+        - **replaces useage of events & callbacks** to handle async results
+        - easy **chain of promises** for sequence of async operations, instead of callback hell
+    - **life cycle**
+        - 1. Pending state: **before** future value is available
+        - 2. Settled states: async tasks **has finished**. either
+            - Fulfilled: Success! The result is now **available**
+            - Rejected: An **error** happened
+    - To consume a promise,
+        - you need to **have a promise already**
+        - or need to **create one**
+        - where a Promise is returned
+            - the **`.then()` can be called on it**
+            - `response.json()` **also returns a Promise**, thus `.then()` needs to be called on it
+    - Error handling
+        - `.catch(err => ...)`
+        - each callback error can be caught/handled 
+        - need to be **handled globally by being the last in the callback chain**
+        - `.finally()`
+            - runs whether promise is success / not
+            - use case: **handle loading spinner**
+                - hide spinner wherether success / not
+    - Throwing error manaully
+        - what if 404, means promise was not rejected(no error occurs), success just that no data is found
+            - this needs to be handled manually
+        - handle custom error with the `.ok` on response
+        - **manaually throw any error, that the Promise global catch() might not be able to catch automatically**
+## NB
+Enable strict mode in JS to write secure code
