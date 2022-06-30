@@ -437,7 +437,33 @@ Events
     - setTimeout
     - setInterval
 
-## Continue here - on the 12th
+## Advanced DOM
+- How DOM really works
+    - DOM is basically an interface b/n Js and Browser
+        - allows make Js interact with browser
+        - help us write js code to create, modify and delete html elements; set styles, classes and attributess; listen and respond to events;
+        - help us interact with the DOM tree from an HTML document
+        - DOM contains APIs (methods and properties) to interact with the DOM tree
+    - every element is represented as **Node** object, each node, eg ``<p> Paragraph text </p> <!-- Comment -->` consist of the following types of subNodes;
+        - element `<p> ... </p>` 
+            - has HTMLElement type, with downlevel types like HTMLButtonElement, HTMLDivElement. 
+            - One type of HTMLElement per HTML element, each has access to different properties/methods for each type
+        - text `... Paragraph text ...`
+        - comment `... Comment ...`
+        - document
+            - is another type of SubNode
+            - has access to `.querySelector(), .getElementById(), etc`
+    - The Node object also inherits from a super class object called **EventTarget**
+        - which has access to these methods - `.addEventListener(), .removeEventListener()`
+        - this makes it possible for child nodes to add and listen to event listeners
+- Selecting, Creating and Deleting ELEMENTS
+    - follow-up with the `.js` files for illustrations
+- Styles, Attributes and Classes
+    - .styles
+        - computed styles
+    - .attributes...getAtrributes()
+    - .ClassList
+
 ## Asynchronous - Promises, Async_Await, and AJAX
 - Asynchronous
     - Synchronous
@@ -457,6 +483,7 @@ Events
         - code is executed **after a task that runs in 'bg' finishes**
             - code is non-blocking
             - **callbacks alone doesn't make code asyncronous**
+            - **since called by another fxn (and not us), () brackets is not required**
 - Promises
     - an object that is used as a **placeholder for the future result of an async operation**
         - simply **a container for a future value**, that will be delivered asynchronously
@@ -473,7 +500,7 @@ Events
         - you need to **have a promise already**
         - or need to **create one**
         - where a Promise is returned
-            - the **`.then()` can be called on it**
+            - the **`.then()` is called on it for the value**
             - `response.json()` **also returns a Promise**, thus `.then()` needs to be called on it
     - Error handling
         - `.catch(err => ...)`
@@ -486,7 +513,80 @@ Events
     - Throwing error manaully
         - what if 404, means promise was not rejected(no error occurs), success just that no data is found
             - this needs to be handled manually
-        - handle custom error with the `.ok` on response
+        - **handle custom error with the `.ok` property on response**
+            - `if(!esponse.ok) throw new Error('sth went wrong')`
         - **manaually throw any error, that the Promise global catch() might not be able to catch automatically**
+- How async works behind the scenes in the runtime within the
+    - call stack
+    - web API
+    - callback queue
+    - micro-task queue
+- Creating promises
+    - Promises are consumed most often, but a use case for creating one is by wrapping callback fnx with a Promise
+        - this is called Promisifying
+    - **promising Function should return** a `new Promise((resolve, reject)...)` like this
+    ```
+    const downloadImage = function (imgPath) {
+        return new Promise((resolve, reject) => {   // returns a promise
+            // do some work
+            resolve(theImageResult)
+
+            // work leading to error
+            reject(new Error('Image not found'))
+            
+        })
+    }
+
+
+    downloadImage.('path/img').then(img => console.log(img))
+                              .catch(err => console.log(err))
+    ```
+    - note that `resolve` and `reject` are callback functions
+    - Creating promise and resolving immediately using static method.... ``Promise.resolve()....Promise.reject()``
+    - if **resolve has no parameter, means it returns nothing**
+    - **waiting for all promises:** `Promise.All()`
+- Async / await
+    - mark function as async
+    - **has at least one await operation**
+    - **await any funtion that returns a promise**
+    - it's is synthetic sugar for writing Promises/then
+    - makes code looks syncronous but it's async under the hood
+- Handling async / await error
+    - use **try-catch block**
+    - **never ignore handling error esp with async functions**
+- Returning values at top-level funtion
+    - `.then()` can be called on async methods but not a good practice
+        - mixes async with promises
+    - use **async with IIFE with await with try/catch**
+    - use **await to get the value from a Promise operation**
+    - if `Promise{<pending>}`, then **just `await` for the result**
+- Running promises in parallel
+    - when promise operations are independable, it's good to run them in parallel using
+    -   ```
+        await Promise.All([...promises])
+        ```
+    - it **short-circuit** when one fails
+- Promise **Combinators**
+    - **Promise.All**.......returns an array
+        - short-circuits if **there's a rejection**
+        - important
+    - **Promise.Race**......returns only one value, res[0]
+        - used with **timeout()** to cancel long request
+        - important
+    -  others:
+        - Promise.settleAll
+        - Promise.any
+    - map with asyn / await 
+        - **since `createImage()` is a promise, it needs to be awaited thus callback param should be asynced**
+        - *map() with Promise.all() is very handy*
+    ```
+    try {
+        const imgs = imgArr.map(async img => await createImage(img));   // returns array of Promises
+        const imgsEl = await Promise.all(imgs); // await them to get the fulfilled values from the promise array
+        console.log(imgsEl);
+    } catch {
+
+    }
+    ```
 ## NB
 Enable strict mode in JS to write secure code
