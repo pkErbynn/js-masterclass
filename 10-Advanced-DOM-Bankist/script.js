@@ -1,14 +1,15 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
-
+// Element selections
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
+
+///////////////////////////////////////
+// Modal window
 
 const openModal = function (e) {
   e.preventDefault();
@@ -56,6 +57,9 @@ btnScrollTo.addEventListener('click', function(e) {
 // });
 
 // using event delegation
+// 1. Add event listener to common parent element
+// 2. Determine what element triggers the event
+
 document.querySelector('.nav__links').addEventListener('click', e => {
   e.preventDefault();
 
@@ -65,6 +69,32 @@ document.querySelector('.nav__links').addEventListener('click', e => {
   }
 })
 
+
+///////////////////////////////////////
+// Tabbed component
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+tabsContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab'); // makes sure to get the operations button only event when event is triggered on sub children elements 
+
+  // Guard clause
+  if (!clicked) return; // best practice than putting bellow in if(clicked) block...ends the method when click element is null...ie. outside the operations__tab area
+  // if (clicked == null) return; // or this
+
+  // Remove active classes
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+  // Activate tab
+  clicked.classList.add('operations__tab--active');
+
+  // Activate content area
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)  // .operations__content--1/2/3
+    .classList.add('operations__content--active');  // activate the clicked tab
+});
 
 //////////////////////////////////////////////
 //////////// Lecture testing /////////////////
@@ -199,3 +229,32 @@ document.querySelector('.nav__links').addEventListener('click', e => {
 // );
 
 // // Bubbling phase is the default. Event travels from the target to the root..thus the child will print first on top of the event stack, before the parent handlers
+
+
+///////////////////////////////////////
+// DOM Traversing
+const h1 = document.querySelector('h1');
+
+// Going downwards: children
+console.log(h1.querySelectorAll('.highlight')); // select deep-level children of h1
+console.log(h1.childNodes);
+console.log(h1.children); // direct children
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'orangered';
+
+// Going upwards: parents
+console.log(h1.parentNode); // direct parents
+console.log(h1.parentElement);  // dirent parents element
+h1.closest('.header').style.background = 'var(--gradient-secondary)'; // .closest()...targets grandparent/top-level parents...opposite of querySelector (as this target inner child)
+h1.closest('h1').style.background = 'var(--gradient-primary)';
+
+// Going sideways: siblings
+console.log(h1.previousElementSibling); // elements...preffered to use element instead of the node
+console.log(h1.nextElementSibling);
+console.log(h1.previousSibling); // nodes
+console.log(h1.nextSibling);
+console.log(h1.parentElement.children); // getting all sibblings including itself...go top to the parent and the find the children below
+
+[...h1.parentElement.children].forEach(function (el) {
+  if (el !== h1) el.style.transform = 'scale(0.5)';
+});

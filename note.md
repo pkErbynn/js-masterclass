@@ -467,6 +467,22 @@ Events
 - Types of Events and Eventhandlers
     - adding events listeners
     - removing event listener
+- Event Propagations: Bubbling and Capturing
+    - Events travels from the root element down to the target element, and then handled. This is called **Capturing**. After handled, event then travels all the way up to the root again called **Bubbling**
+    - This means: when an event is also handled by any of the target element's parents, it will be handled twice - the parent and child target element.
+- DOM Traversing
+    - walking through the DOM
+        - selecting an element relative to another element
+        - sometimes direct child or parent
+        - when we don't know the structure of the DOM at runtime
+    - getting child element(s)
+        - `.querySelector()`
+    - getting parent element(s)
+        - `.closest()`
+    - getting sibbling element(s)
+        - `next[previous]Sibling()`
+    - follow-up to .js file
+
 
 ## Asynchronous - Promises, Async_Await, and AJAX
 - Asynchronous
