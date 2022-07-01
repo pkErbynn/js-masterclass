@@ -7,6 +7,8 @@ const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
+const nav = document.querySelector('.nav');
+
 
 ///////////////////////////////////////
 // Modal window
@@ -95,6 +97,35 @@ tabsContainer.addEventListener('click', function (e) {
     .querySelector(`.operations__content--${clicked.dataset.tab}`)  // .operations__content--1/2/3
     .classList.add('operations__content--active');  // activate the clicked tab
 });
+
+
+///////////////////////////////////////
+// Menu fade animation
+const handleHover = function (e, opacity) { // passing arg to event handler
+  console.log('mouse over');
+
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = opacity;
+    });
+    logo.style.opacity = opacity;
+  }
+};
+
+// Passing "argument" into handler
+nav.addEventListener('mouseover', e => {
+  handleHover(e, 0.5) // accessing handler with paramenter
+  console.log('mouse over');
+});
+nav.addEventListener('mouseout', e => {
+  handleHover(e, 1)
+  console.log('mouse out');
+});
+
 
 //////////////////////////////////////////////
 //////////// Lecture testing /////////////////
@@ -232,29 +263,29 @@ tabsContainer.addEventListener('click', function (e) {
 
 
 ///////////////////////////////////////
-// DOM Traversing
-const h1 = document.querySelector('h1');
+// // DOM Traversing
+// const h1 = document.querySelector('h1');
 
-// Going downwards: children
-console.log(h1.querySelectorAll('.highlight')); // select deep-level children of h1
-console.log(h1.childNodes);
-console.log(h1.children); // direct children
-h1.firstElementChild.style.color = 'white';
-h1.lastElementChild.style.color = 'orangered';
+// // Going downwards: children
+// console.log(h1.querySelectorAll('.highlight')); // select deep-level children of h1
+// console.log(h1.childNodes);
+// console.log(h1.children); // direct children
+// h1.firstElementChild.style.color = 'white';
+// h1.lastElementChild.style.color = 'orangered';
 
 // Going upwards: parents
-console.log(h1.parentNode); // direct parents
-console.log(h1.parentElement);  // dirent parents element
-h1.closest('.header').style.background = 'var(--gradient-secondary)'; // .closest()...targets grandparent/top-level parents...opposite of querySelector (as this target inner child)
-h1.closest('h1').style.background = 'var(--gradient-primary)';
+// console.log(h1.parentNode); // direct parents
+// console.log(h1.parentElement);  // dirent parents element
+// h1.closest('.header').style.background = 'var(--gradient-secondary)'; // .closest()...targets grandparent/top-level parents...opposite of querySelector (as this target inner child)
+// h1.closest('h1').style.background = 'var(--gradient-primary)';
 
-// Going sideways: siblings
-console.log(h1.previousElementSibling); // elements...preffered to use element instead of the node
-console.log(h1.nextElementSibling);
-console.log(h1.previousSibling); // nodes
-console.log(h1.nextSibling);
-console.log(h1.parentElement.children); // getting all sibblings including itself...go top to the parent and the find the children below
+// // Going sideways: siblings
+// console.log(h1.previousElementSibling); // elements...preffered to use element instead of the node
+// console.log(h1.nextElementSibling);
+// console.log(h1.previousSibling); // nodes
+// console.log(h1.nextSibling);
+// console.log(h1.parentElement.children); // getting all sibblings including itself...go top to the parent and the find the children below
 
-[...h1.parentElement.children].forEach(function (el) {
-  if (el !== h1) el.style.transform = 'scale(0.5)';
-});
+// [...h1.parentElement.children].forEach(function (el) {
+//   if (el !== h1) el.style.transform = 'scale(0.5)';
+// });
