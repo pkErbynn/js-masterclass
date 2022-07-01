@@ -463,6 +463,10 @@ Events
         - computed styles
     - .attributes...getAtrributes()
     - .ClassList
+    - follow-on source .js file
+- Types of Events and Eventhandlers
+    - adding events listeners
+    - removing event listener
 
 ## Asynchronous - Promises, Async_Await, and AJAX
 - Asynchronous

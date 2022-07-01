@@ -7,6 +7,8 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
 const openModal = function (e) {
   e.preventDefault();
@@ -32,9 +34,40 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+//////////////////////////////////////////////
+// Smooth Button scrolling
+btnScrollTo.addEventListener('click', function(e) {
+  console.log("scroooollinggggggg !!");
+  section1.scrollIntoView({behavior: 'smooth'})
+})
+
 
 //////////////////////////////////////////////
-////////////////// Lecture testing ///////////
+// Page navigation
+
+// using the regular
+// document.querySelectorAll('.nav__link').forEach(function (el) { // select all link and add event to each link element
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault(); // prevent default nav behaviour
+//     const id = this.getAttribute('href'); // gets the #section--1/2/3 
+//     console.log(id);
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });  // .querySelector(#section--1/2/3).then scroll to that section
+//   }); // downside: if there are 100 nav elements, 100 eventshandlers will be added to it, also won't work on dynamic elements, elements created at runtime........therefore, use event delegator....put one handler only on the parent element to handle events from children elements
+// });
+
+// using event delegation
+document.querySelector('.nav__links').addEventListener('click', e => {
+  e.preventDefault();
+
+  if(e.target.classList.contains('nav__link')){ // checking if it's a child element
+    const id = e.target.getAttribute('href'); // get href value from child target
+    document.querySelector(id).scrollIntoView({behavior: 'smooth'});  // scroll to that section on the document
+  }
+})
+
+
+//////////////////////////////////////////////
+//////////// Lecture testing /////////////////
 //////////////////////////////////////////////
 
 ///////////////////////////////////////
@@ -123,3 +156,46 @@ document.addEventListener('keydown', function (e) {
 // logo.classList.remove('c', 'j');
 // logo.classList.toggle('c');
 // logo.classList.contains('c'); // not includes
+
+///////////////////////////////////////
+// Types of Events and Event Handlers
+// const h1 = document.querySelector('h1');
+// const alertH1 = function (e) {
+//   alert('addEventListener: Great! You are reading the heading :D');
+// };
+// h1.addEventListener('mouseenter', alertH1); // outsourcing the method listener
+// setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);  // removing event after 3 secs
+
+// h1.onmouseenter = function (e) {   // old way of listening to event...doesn't support multiple events
+//   alert('onmouseenter: Great! You are reading the heading :D');
+// };
+
+
+// ///////////////////////////////////////
+// // Event Propagation in Practice
+
+// const randomInt = (min, max) =>
+//   Math.floor(Math.random() * (max - min + 1) + min);
+// const randomColor = () =>
+//   `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+
+// document.querySelector('.nav__link').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log('LINK', e.target, e.currentTarget); // .target is where the event originated. Where the click event happened, not the element that the event handler was attached...in this case: the .nav__link
+//   console.log(e.currentTarget === this);  // current target / this...is the element that the event handler was attached...this case: .nav__link
+  
+//   // e.stopPropagation(); // Stop propagation...preventing it handled by the parent element too
+// });
+// document.querySelector('.nav__links').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log('CONTAINER', e.target, e.currentTarget);  // target: .nav__link, currentTarget: .nav__links...nav__links is a parent element...handling event occuring at child
+// });
+
+// document.querySelector('.nav').addEventListener('click', function (e) { 
+//   this.style.backgroundColor = randomColor();
+//   console.log('NAV', e.target, e.currentTarget);
+// },
+// // false...Bubbling face, false, by default. Capturing set to true. 
+// );
+
+// // Bubbling phase is the default. Event travels from the target to the root..thus the child will print first on top of the event stack, before the parent handlers
