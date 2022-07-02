@@ -459,10 +459,10 @@ Events
 - Selecting, Creating and Deleting ELEMENTS
     - follow-up with the `.js` files for illustrations
 - Styles, Attributes and Classes
-    - .styles
+    - `.styles`
         - computed styles
-    - .attributes...getAtrributes()
-    - .ClassList
+    - .attributes...`getAtrributes()`
+    - `.ClassLis`t
     - follow-on source .js file
 - Types of Events and Eventhandlers
     - adding events listeners
@@ -499,7 +499,7 @@ Events
 - Efficient js Script loading
     - regular synthronous at end of html body
     - `async` in html head
-    - `defer` in html head
+    - **`defer`** in html head
         - best for developer custom script
         - script fetched async and executed after html is completely parsed
         - order in executed with html and script
@@ -518,7 +518,7 @@ Events
     - Class in Java === **Prototype** in JavaScript
     - Instantiation in Java === **Prototypal Inheritance/delegation in Js**
     - 3 Ways of creating Prototypal inheritance
-        - Constructor functions
+        - **Constructor functions**
         - ES6 Classes
         - Object.create()
 
