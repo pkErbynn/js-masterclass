@@ -482,6 +482,45 @@ Events
     - getting sibbling element(s)
         - `next[previous]Sibling()`
     - follow-up to .js file
+- Building Tapped component
+    - guard clause
+- Passing Arguments for Event Handlers
+    - followup to 'mennu fade animation'
+- Sticky Navigation
+    - not implemented in js file
+- Building Slider / Carousel
+    - not implemeted
+- Lazy Loading Image
+    - not implemented in js file
+- Life Cycle DOM Events
+    1. `DOMContentLoaded` event: triggered when HTML, and internal Js script loaded with the DOM tree built...but exeternal resources like images are not yet loaded
+    2. `load`: triggered are the page has fully loaded with images and resources done downloading
+    3. `beforeunload`: triggered just before the page is about to be closed...can be used when user is in the middle of filling a form and that can lose data when closing the page
+- Efficient js Script loading
+    - regular synthronous at end of html body
+    - `async` in html head
+    - `defer` in html head
+        - best for developer custom script
+        - script fetched async and executed after html is completely parsed
+        - order in executed with html and script
+
+## OOP
+- What it is.
+    - OOP principles
+        - Abstraction: **hiding** class members(properties/methods) / details that **don't matter**
+            - **Exposes** only required members that will be interracted with
+        - Encapsulation: keeping class members **private**
+            - Makes members **not accessible from outside** the class
+        - Inheritance: making members of certain class **available to child class**. 
+            - Ensures **common logic reuse** in class relationship 
+        - Polimorphism: child class can **overwrite** method inherited from parent
+- OOP in Js
+    - Class in Java === **Prototype** in JavaScript
+    - Instantiation in Java === **Prototypal Inheritance/delegation in Js**
+    - 3 Ways of creating Prototypal inheritance
+        - Constructor functions
+        - ES6 Classes
+        - Object.create()
 
 
 ## Asynchronous - Promises, Async_Await, and AJAX
