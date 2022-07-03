@@ -155,13 +155,17 @@ class PersonCl {    // PersonClass
     get fullName() {    // help support object.fullName property
         return this._fullName;
     }
+
+    static hey(){
+        console.log('Hey there!!');
+    }
 }
 
 const jessica = new PersonCl('Jessica Davis', 1996);
 console.log(jessica);
 
-const jessica2 = new PersonCl('Jessica', 1996); // doesn't allow both fullName and _fullName properties to be set due to the data validation
-console.log(jessica2);  // fullName = undefined
+// const jessica2 = new PersonCl('Jessica', 1996); // doesn't allow both fullName and _fullName properties to be set due to the data validation
+// console.log(jessica2);  // fullName = undefined
 
 jessica.calcAge();
 console.log(jessica.age);   // called as property not a method
@@ -173,5 +177,30 @@ PersonCl.prototype.greet = function () {    // adding another function even afte
 };
 
 jessica.greet();
+
+PersonCl.hey();
+// jessica.hey() // won't work!!
+
+
+
+///////////////////////////////////////
+// Setters and Getters - on Object literals
+
+const account = {
+    owner: 'Jonas',
+    movements: [200, 530, 120, 300],
+
+    get latest() {
+      return this.movements.slice(-1).pop();
+    },
+
+    set latest(mov) {
+      this.movements.push(mov);
+    },
+};
+
+console.log(account.latest);
+account.latest = 50;
+console.log(account.movements);
 
 
