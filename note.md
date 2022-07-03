@@ -521,7 +521,24 @@ Events
         - **Constructor functions**
         - ES6 Classes
         - Object.create()
-
+- Prototypes
+    - sort of like a class in Java
+    - `Class.prototype.somemethod()` on Class prototype
+    - `__proto__` property on objects
+        - linkes object to its class properties
+    - refer to implementation
+- Prototypal Inheritance on Built-In Objects 
+    -  Prototypal Inheritance is how js classes work
+    - `__proto__` to lookup parent chain...from child object to top-level parents
+    - refere to implementation
+- ES6 Classes
+    - Makes it easier for devs from OOP background to adopt to js classes
+        - syntactic sugar for function constructors
+    - Classes in js **doesn't really work like traditional classes** in languages like Java
+    - 2 types of implementation
+        - 1. Class expression
+        - 2. Class declaration
+            - most preferred by devs from oop background
 
 ## Asynchronous - Promises, Async_Await, and AJAX
 - Asynchronous
