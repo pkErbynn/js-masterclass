@@ -129,6 +129,7 @@ class PersonCl {    // PersonClass
       this.fullName = fullName;
       this.birthYear = birthYear;
     }
+
     // Instance methods - Methods will be added to .prototype property
     calcAge() {
       console.log(2037 - this.birthYear);
@@ -203,3 +204,246 @@ account.latest = 50;
 console.log(account.movements);
 
 
+///////////////////////////////////////
+// Object.create - uses object literal
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+  init(firstName, birthYear) {  // init, prevent passing parameter to constructor 
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto);  // creates an instance from the prototype class 
+console.log(steven);
+
+steven.name = 'Steven'; // property is different from prototype 
+steven.birthYear = 2002;
+steven.calcAge();
+console.log(steven.__proto__ === PersonProto);
+
+const sarah = Object.create(PersonProto);
+sarah.init('Sarah', 1979);
+sarah.calcAge();
+
+
+///////////////////////////////////////
+// Coding Challenge #2
+
+/* 
+1. Re-create challenge 1, but this time using an ES6 class;
+2. Add a getter called 'speedUS' which returns the current speed in mi/h (divide by 1.6);
+3. Add a setter called 'speedUS' which sets the current speed in mi/h (but converts it to km/h before storing the value, by multiplying the input by 1.6);
+4. Create a new car and experiment with the accelerate and brake methods, and with the getter and setter.
+DATA CAR 1: 'Ford' going at 120 km/h
+GOOD LUCK 😀
+*/
+
+
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+  }
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+  }
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+  set speedUS(speed) {  // diff property name
+    this.speed = speed * 1.6;
+  }
+}
+
+const ford = new CarCl('Ford', 120);
+console.log(ford.speedUS);
+
+ford.accelerate();
+ford.accelerate();
+ford.brake();
+
+ford.speedUS = 50;
+console.log(ford);
+
+
+///////////////////////////////////////
+// Inheritance Between "Classes": Constructor Functions
+// const Person = function (firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+// };
+
+// Person.prototype.calcAge = function () {
+//     console.log(2037 - this.birthYear);
+// };
+// const Student = function (firstName, birthYear, course) {
+//     Person.call(this, firstName, birthYear);    // setting parent properties
+//     this.course = course;
+// };
+
+// // Linking prototype classes to create inheritance
+// Student.prototype = Object.create(Person.prototype);    // create empty person prototype on Person
+
+// Student.prototype.introduce = function () {
+//     console.log(`My name is ${this.firstName} and I study ${this.course}`);
+// };
+
+// const mike = new Student('Mike', 2020, 'Computer Science');
+// mike.introduce();
+// mike.calcAge(); // posible because of prototypal inheritance
+
+// console.log(mike.__proto__);
+// console.log(mike.__proto__.__proto__);
+// console.log(mike instanceof Student);
+// console.log(mike instanceof Person);
+// console.log(mike instanceof Object);
+
+// Student.prototype.constructor = Student;    // its constructor was set to Person...now needs to reset to itself
+// console.dir(Student.prototype.constructor);
+
+
+///////////////////////////////////////
+// Inheritance Between "Classes": ES6 Classes - better way from OOP background
+// class StudentCl extends PersonCl {
+//     constructor(fullName, birthYear, course) {
+//       // Always needs to happen first!
+//       super(fullName, birthYear);
+//       this.course = course;
+//     }
+
+//     introduce() {
+//       console.log(`My name is ${this.fullName} and I study ${this.course}`);
+//     }
+
+//     calcAge() {
+//       console.log(
+//         `I'm ${
+//           2037 - this.birthYear
+//         } years old, but as a student I feel more like ${
+//           2037 - this.birthYear + 10
+//         }`
+//       );
+//     }
+// }
+
+// const martha = new StudentCl('Martha Jones', 2012, 'Computer Science');
+// martha.introduce();
+// martha.calcAge();
+
+
+///////////////////////////////////////
+// Inheritance Between "Classes": Object.create
+// const PersonProto = {
+//     calcAge() {
+//       console.log(2037 - this.birthYear);
+//     },
+//     init(firstName, birthYear) {
+//       this.firstName = firstName;
+//       this.birthYear = birthYear;
+//     },
+//   };
+//   const steven = Object.create(PersonProto);
+//   const StudentProto = Object.create(PersonProto);
+//   StudentProto.init = function (firstName, birthYear, course) {
+//     PersonProto.init.call(this, firstName, birthYear);
+//     this.course = course;
+//   };
+//   StudentProto.introduce = function () {
+//     // FIX:
+//     console.log(`My name is ${this.firstName} and I study ${this.course}`);
+//   };
+//   const jay = Object.create(StudentProto);
+//   jay.init('Jay', 2010, 'Computer Science');
+//   jay.introduce();
+//   jay.calcAge();
+
+
+
+///////////////////////////////////////
+// Encapsulation: Protected Properties and Methods
+// Encapsulation: Private Class Fields and Methods
+// 1) Public fields
+// 2) Private fields
+// 3) Public methods
+// 4) Private methods
+// (there is also the static version)
+class Account {
+    // 1) Public fields (instances)
+    locale = navigator.language;
+
+    // 2) Private fields (instances)
+    #movements = [];
+    #pin;
+
+    constructor(owner, currency, pin) {
+      this.owner = owner;
+      this.currency = currency;
+      this.#pin = pin;
+      console.log(`Thanks for opening an account, ${owner}`);
+    }
+
+    // 3) Public methods
+    // Public interface
+    getMovements() {
+      return this.#movements;   
+    }
+
+    deposit(val) {
+      this.#movements.push(val);
+      return this;  // setting property thus good to return the 'this' object for chaining
+    }
+
+    withdraw(val) {
+      this.deposit(-val);
+      return this;  // for chaining
+    }
+
+    requestLoan(val) {
+      if (this.#approveLoan(val)) {
+        this.deposit(val);
+        console.log(`Loan approved`);
+        return this;    
+      }
+    }
+
+    static helper() {
+      console.log('Helper');
+    }
+
+    // 4) Private methods
+    #approveLoan(val) {
+      return true;
+    }
+}
+
+const acc1 = new Account('Jonas', 'EUR', 1111);
+
+// should not be accessed directly due to data privacy...encapsulation
+// acc1._movements.push(250);
+// acc1._movements.push(-140);
+// acc1.approveLoan(1000);
+
+acc1.deposit(250);
+acc1.withdraw(140);
+acc1.requestLoan(1000);
+
+// console.log(acc1.getMovements());
+// console.log(acc1);
+Account.helper();
+
+// not accessible
+// console.log(acc1.#movements);
+// console.log(acc1.#pin);
+// console.log(acc1.#approveLoan(100));
+
+// Chaining
+// acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+// console.log(acc1.getMovements());

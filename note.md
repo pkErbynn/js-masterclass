@@ -519,7 +519,7 @@ Events
     - Instantiation in Java === **Prototypal Inheritance/delegation in Js**
     - 3 Ways of creating Prototypal inheritance
         - **Constructor functions**
-        - ES6 Classes
+        - **ES6 Classes**: most **prefered**
         - Object.create()
 - Prototypes
     - sort of like a class in Java
@@ -548,9 +548,35 @@ Events
     - help **access methods as properties instead of funtions**
         - `instance.age` instead of `instance.age()`
     - Getters
-        - Help access properties but still need to perform calculation before
+        - Help perform calculation before while getting
     - Setters
-        - Help perform data validation before setting data to class property
+        - Help perform **data validation** before setting data to class property
+    - Regular methods
+        - Good to **return the `this` object for method chaining** purposes
+        - Especially methods that changes object state(s)
+        - Chain of responsibility design principle
+    - Getter or setter property **already existing in the constructor should recreate** that property with diff name like - starting with '_' underscore
+- Static Methods
+    - not added to `.prototype` property
+        - **not inherited by instances**
+    - they are **helper methods**
+- Object.Create()
+    - create an instance from a prototype
+    - `const erb = Object.create(PrototypeClass)`
+- **Inheritance** Between "Classes"
+    - Using Constructor functions
+        - using `.bind()` and `Object.create(somePrototype)`
+        - refer to implementation
+    - Using **ES6 Classes**
+        - using `extends` and `super()`
+        - refer to implementation
+    - Using Object.create()
+        - linking objects to create inheritance
+        - refer to implementation
+- Encapsulation
+    - `#privateFields`
+    - `#privateMethods`
+    - **refer to implementation**
 
 ## Asynchronous - Promises, Async_Await, and AJAX
 - Asynchronous
