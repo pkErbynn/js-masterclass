@@ -132,31 +132,46 @@ class PersonCl {    // PersonClass
     // Instance methods - Methods will be added to .prototype property
     calcAge() {
       console.log(2037 - this.birthYear);
-    }
+    }   // no commas between methods
 
     greet() {
       console.log(`Hey ${this.fullName}`);
     }
 
-    // get age() {
-    //   return 2037 - this.birthYear;
-    // }
+    get age() { // makes methods as properties
+      return 2037 - this.birthYear;
+    }
+
+    // Setters and Getters
+    // setting property that already exists
+    set fullName(name) {    // setters are good for data validation before object creation
+        if(name.includes(' ')) {
+            this._fullName = name;  // while property already exist, add '_'
+        } else {
+            alert(`${name} is not a full name!`)
+        }
+    }
+
+    get fullName() {    // help support object.fullName property
+        return this._fullName;
+    }
 }
 
 const jessica = new PersonCl('Jessica Davis', 1996);
 console.log(jessica);
 
+const jessica2 = new PersonCl('Jessica', 1996); // doesn't allow both fullName and _fullName properties to be set due to the data validation
+console.log(jessica2);  // fullName = undefined
+
 jessica.calcAge();
-// console.log(jessica.age);
+console.log(jessica.age);   // called as property not a method
 
 console.log(jessica.__proto__ === PersonCl.prototype);
 
 PersonCl.prototype.greet = function () {    // adding another function even after class creation
   console.log(`Hey ${this.firstName}`);
 };
+
 jessica.greet();
 
-// NB
-// // 1. Classes are NOT hoisted
-// // 2. Classes are first-class citizens
-// // 3. Classes are executed in strict mode
+

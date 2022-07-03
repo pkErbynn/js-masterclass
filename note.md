@@ -539,6 +539,18 @@ Events
         - 1. Class expression
         - 2. Class declaration
             - most preferred by devs from oop background
+    - Key things about classes
+        1. Classes are **NOT hoisted**
+        2. Classes are first-class citizens: can be **passes into functions and return them from fnxs**
+        3. Classes are **executed in strict mode**
+    - refer to implementation
+- Getters and Setters
+    - help **access methods as properties instead of funtions**
+        - `instance.age` instead of `instance.age()`
+    - Getters
+        - Help access properties but still need to perform calculation before
+    - Setters
+        - Help perform data validation before setting data to class property
 
 ## Asynchronous - Promises, Async_Await, and AJAX
 - Asynchronous
