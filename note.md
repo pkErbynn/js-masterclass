@@ -497,12 +497,23 @@ Events
     2. `load`: triggered are the page has fully loaded with images and resources done downloading
     3. `beforeunload`: triggered just before the page is about to be closed...can be used when user is in the middle of filling a form and that can lose data when closing the page
 - Efficient js Script loading
-    - regular synthronous at end of html body
+    - regular synthronous script at end of html body
+        - **Order:** `Finish parsing html -> Fetch script -> Execute script`
+        - Quite Better
+    - regular synthronous script at head of html
+        - while parsing html, it will wait to fetch and execute js script before finishing html parsing
+        - meaning, html/dom will not finish parsing before js script execute
+        - **order:** - `Parsing html -> Fetch script (While paused html parsing) -> Execute script -> Finish html parsing`
+        - not good cus some html script execute against html dom
     - `async` in html head
+        - **Order:** `Parsing html (Along side fetching script) -> Execute script (while paused html parsing) -> Finish html parsing`
     - **`defer`** in html head
         - best for developer custom script
         - script fetched async and executed after html is completely parsed
-        - order in executed with html and script
+        - **order:** `Parsing html (along side fetching script) -> finisht html parsing -> Execute script`
+    - conclusion:
+        - Goal is to finish parsing the html dom and fetching script along side before executing script
+        - Therefore, the **`defer` in head is perfect** as it's most efficient
 
 ## OOP
 - What it is.
@@ -552,7 +563,8 @@ Events
     - Setters
         - Help perform **data validation** before setting data to class property
     - Regular methods
-        - Good to **return the `this` object for method chaining** purposes
+        - Good practice to **return the `this` object on `method setters` for method chaining** purposes
+        - **while getters return `properties`, setters return `this`**
         - Especially methods that changes object state(s)
         - Chain of responsibility design principle
     - Getter or setter property **already existing in the constructor should recreate** that property with diff name like - starting with '_' underscore
@@ -577,6 +589,38 @@ Events
     - `#privateFields`
     - `#privateMethods`
     - **refer to implementation**
+
+## Mapty - OOP, Geolocation, External Libraries and More
+- Planning a Web Project
+    1. User Stories: **Description of the application's functionality** from the user's perspective. 
+        - All user stories put together decribe the entire application
+        - As a [user], I want [an action] so that [a benefit]
+        - Answers **Who? What? Why?**
+    2. Features: exact features to make **user stories work as intended**
+    3. Flowchart: what it will be built
+    4. Architecture: how it will be built
+- Development steps (Mapty project)
+    1. User stories
+        1. As a user, I want to log my running workouts **with location, distance, time, pace and steps/minute**, so that I can keep a log of all my running
+        2. As a user, I want to log my cycling workouts **with location, distance, time, speed and elevation gain**, so that I can keep a log of all my cycling
+        3. As a user, I want to see all my workouts at a glance, so that I can easily track my progress over time
+        4. As a user, I want to also see my workouts on a map, so that I can easily check where I work out the most
+        5. As a user, I want to keep all my workouts when I leave the app and come back later, so that I can keep using the app over time
+    2. Features on user stories
+        1. Map for user to click and add new location (best way to get user coordinates) using
+            - Geolocation to display map at current location
+            - Form to input rest of data - distance, time, space, steps/minute
+        2. Form to input distance, time, speed, steps/minute
+        3. Form to input distance, time, speed, elevation gain
+        4. Display all workouts in a list
+        4. Display all workouts on the map
+        5. Store workout data in browser using local storage API
+            - On page reload, read the saved data from local storage and display data
+    3. Flowchart
+    4. Architecture: how code will be organized
+- Displaying using **Leaflet** library
+    - the **order** of js script in html head:
+        - **each script will have access to the global members (methods/properties) of the preceeding js scripts, but not vice versa**
 
 ## Asynchronous - Promises, Async_Await, and AJAX
 - Asynchronous
