@@ -11,6 +11,9 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
+let mapEvent;
+let map;
+
 if (navigator.geolocation){
     navigator.geolocation.getCurrentPosition(
         position => {
@@ -20,29 +23,17 @@ if (navigator.geolocation){
             const coordinates = [latitude, longitude];
             console.log(`my lat ${latitude}...log ${longitude}`);
 
-            var map = L.map('map').setView(coordinates, 13);    // since library is loaded, the L class can be accessed in the browser console
+            map = L.map('map').setView(coordinates, 13);    // since library is loaded, the L class can be accessed in the browser console
 
             L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
             // adding marker pin on map click
-            function onClick(mapEvent) { 
-                const {lat: clickedLongitude, lng: clickedLatitude} = mapEvent.latlng;  // destructure
-                const clickedCoordinate = [clickedLongitude, clickedLatitude]
-                console.log('coo', clickedCoordinate);
-                L.marker(clickedCoordinate).addTo(map)
-                .bindPopup(
-                    L.popup({
-                        maxWidth: 250,
-                        minWidth: 100,
-                        autoClose: false,
-                        closeOnClick: false,
-                        className: 'running-popup'
-                    })
-                )
-                .setPopupContent('Workout!')
-                .openPopup();
+            function onClick(mapE) { 
+                mapEvent = mapE;    // forward map event data to onSubmit event
+                form.classList.remove('hidden'); // make form available
+                inputDistance.focus();  // focus on the distance form input
             }
 
             map.on('click', onClick);
@@ -54,3 +45,34 @@ if (navigator.geolocation){
         }
     )
 }
+
+// show marker pin only when form is submitted
+form.addEventListener('submit', (e) => {
+    e.preventDefault(); // stops form from refreshing **
+
+    inputDistance.value = inputDuration.value = inputCadence.value = '';    // clear forms
+
+    const {lat: clickedLongitude, lng: clickedLatitude} = mapEvent.latlng;  // destructure
+    const clickedCoordinate = [clickedLongitude, clickedLatitude]
+    console.log('coo', clickedCoordinate);
+    L.marker(clickedCoordinate).addTo(map)
+    .bindPopup(
+        L.popup({
+            maxWidth: 250,
+            minWidth: 100,
+            autoClose: false,
+            closeOnClick: false,
+            className: 'running-popup'
+        })
+    )
+    .setPopupContent('Workout!')
+    .openPopup();
+});
+
+// when type is changed, on each input form, traverse to the row(with label + input) and toggle a hidden class on it
+// since the elevation-form is hidden at init state, it will toggle alternatively with the other
+// thus, show only one form row on change event
+inputType.addEventListener('change', () => {
+    inputCadence.closest('.form__row').classList.toggle('form__row--hidden');   
+    inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
+})
