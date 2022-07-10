@@ -1,1 +1,1 @@
-# javaScript-masterclass
+# vibranium-javaScript-masterclass
