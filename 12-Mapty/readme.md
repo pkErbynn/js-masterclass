@@ -1,5 +1,5 @@
 # Mapty
-An stand-alone application that allows you to log your workouts on map.
+An stand-alone application that gets your current geolocation and allows you to log your workouts on map.
 
 ## Technology used
 - Javascript (vanilla, ES6)
@@ -10,6 +10,6 @@ An stand-alone application that allows you to log your workouts on map.
 <img src="./assets/mapty.png">
 
 * Workflow <br>
-![Trillo animated](https://j.gifs.com/NO2g2p.gif)
+![Mapty animation](https://j.gifs.com/pZqpqN.gif)
 
 <sub>Inspired by &copy; Jonas</sub>
