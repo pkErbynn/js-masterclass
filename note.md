@@ -639,6 +639,8 @@ Events
         - process that target child element...
 - Working with local storage
     - storing works in browser local storage
+    -  **object loses its prototype chain when restored from local storage**
+
 
 ## Asynchronous - Promises, Async_Await, and AJAX
 - Asynchronous

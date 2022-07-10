@@ -1,8 +1,6 @@
 'use strict';
 
-// prettier-ignore
-
-//// Classes
+//////// Classes
 
 class Workout {
     id = this.#createGUID();
@@ -26,6 +24,7 @@ class Workout {
     }
 
     setDescription(){
+        // prettier-ignore
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         this.description = `${this.type[0].toLocaleUpperCase()}${this.type.slice(1)} on ${months[this.date.getMonth()]} ${this.date.getMonth()}`
     }
@@ -42,11 +41,11 @@ class Cycling extends Workout {
         super(coords, distance, duration);
         this.elevationGain = elevationGain;
         // this.type = 'cycling'
-        this.calculateSpeed();
+        this.#calculateSpeed();
         this.setDescription();  // called on children cus type is not available on parent class
     }
 
-    calculateSpeed() {
+    #calculateSpeed() {
         this.speed = this.distance / (this.duration / 60);  // in km/h
         return this.speed;
     }
@@ -59,11 +58,11 @@ class Running extends Workout {
         super(coords, distance, duration);
         this.cadence = cadence;
         // this.type = 'running'
-        this.calculatePace();
+        this.#calculatePace();
         this.setDescription();
     }
 
-    calculatePace(){
+    #calculatePace(){
         this.pace = this.duration / this.distance;  // in min/km
         return this.pace;
     }
@@ -85,34 +84,30 @@ class App {
     #workouts = [];
     
     constructor(){
-        this._getPosition();    // get location from the onset
+        this.#getPosition();    // get location from the onset
 
         this.#getLocalStorage();    // local storage
 
         // register events listeners in constructor
-        form.addEventListener('submit', this._addNewWorkout.bind(this));    // bind re-point 'this' from 'form' (#L85) to 'app' object
-        inputType.addEventListener('change', this._toggleElevationField);   // no bind cus handler doesn't use 'this' keyword in its block
-        containerWorkouts.addEventListener('click', this._moveMapToMarker.bind(this))  // event delegation to parent/common form element
+        form.addEventListener('submit', this.#addNewWorkout.bind(this));    // bind re-point 'this' from 'form' (#L85) to 'app' object
+        inputType.addEventListener('change', this.#toggleElevationField);   // no bind cus handler doesn't use 'this' keyword in its block
+        containerWorkouts.addEventListener('click', this.#moveMapToMarker.bind(this))  // event delegation to parent/common form element
     }
 
-    _getPosition(){
+    #getPosition(){
         if (navigator.geolocation){
             navigator.geolocation.getCurrentPosition(
-                this._loadMap.bind(this),   // re-point/bind 'this' from 'geolocation' (L# 41, since it's the method caller...pointed at L#58) to 'app' instance (in L#103)  
+                this.#loadMap.bind(this),   // re-point/bind 'this' from 'geolocation' (L# 41, since it's the method caller...pointed at L#58) to 'app' instance (in L#103)  
                 (err) => {
                     alert('Could not get your location', err)
-                    console.log(err.message);
                 }
             )
         }
     }
 
-    _loadMap(position){
-        console.log('works!');
-        console.log(position.coords);
+    #loadMap(position){
         const {latitude, longitude} = position.coords;
         const coordinates = [latitude, longitude];
-        console.log(`my lat ${latitude}...log ${longitude}`);
 
         this.#map = L.map('map').setView(coordinates, 13);    // since library is loaded, the L class can be accessed in the browser console
 
@@ -120,19 +115,19 @@ class App {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(this.#map);
         
-        this.#map.on('click', this._showForm.bind(this));   // change 'this' from map object (since it's object calling the on() method) to app object using bind()
+        this.#map.on('click', this.#showForm.bind(this));   // change 'this' from map object (since it's object calling the on() method) to app object using bind()
 
         // load map markers
-        this.#workouts.forEach(workout => this.renderWorkoutMarker(workout))
+        this.#workouts.forEach(workout => this.#renderWorkoutMarker(workout))
     }
 
-    _showForm(mapE){
+    #showForm(mapE){
         this.#mapEvent = mapE;    // forward map event data to onSubmit event
         form.classList.remove('hidden'); // make form available
         inputDistance.focus();  // focus on the distance form input
     }
 
-    _toggleElevationField(){
+    #toggleElevationField(){
         // when type is changed, on each input form, traverse to the row(with label + input) and toggle a hidden class on it
         // since the elevation-form is hidden at init state, it will toggle alternatively with the other
         // thus, show only one form row on change event
@@ -140,7 +135,7 @@ class App {
         inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
     }
     
-    _addNewWorkout(e){  // adding marker pin on map click
+    #addNewWorkout(e){  // adding marker pin on map click
         e.preventDefault(); // stops form from refreshing **
 
         // 1.get data from form
@@ -191,10 +186,10 @@ class App {
         this.#workouts.push(workout);
 
         // render new workout to map as marker
-        this.renderWorkoutMarker(workout);
+        this.#renderWorkoutMarker(workout);
 
         // render side workout on the side pane
-        this.renderSideWorkout(workout);
+        this.#renderSideWorkout(workout);
 
         // hide form + clear input fields
         this.#hideForm();
@@ -211,9 +206,7 @@ class App {
         setTimeout(() => form.style.display = 'grid', 1000) // set back to grid after hidden
     }
 
-    renderWorkoutMarker(workout){
-        console.log('workout:', workout);
-
+    #renderWorkoutMarker(workout){
         L.marker(workout.coords).addTo(this.#map)   // 'this' will point to the form in L#35, thus use bind() to bind to the app object
         .bindPopup(
             L.popup({
@@ -228,7 +221,7 @@ class App {
         .openPopup();
     }
 
-    renderSideWorkout(workout){
+    #renderSideWorkout(workout){
         let html = `
             <li class="workout workout--${workout.type}" data-id=${workout.id}>
                 <h2 class="workout__title">${workout.description}</h2>
@@ -279,7 +272,7 @@ class App {
         form.insertAdjacentHTML('afterend', html);
     }
 
-    _moveMapToMarker(event) {
+    #moveMapToMarker(event) {
         const workoutElement = event.target.closest('.workout');    // the unique parent form of which its chiled elements may be clicked...subchild of common delegator element
 
         if(!workoutElement) return; // guard close...opposite of what's dev is interested
@@ -293,7 +286,7 @@ class App {
             }
         });
         
-        selectedWorkout.click(); // using the public api
+        // selectedWorkout.click(); // using the public api
     }
 
     #setLocalStorage(){
@@ -307,9 +300,13 @@ class App {
 
         // render each stored workouts
         this.#workouts.forEach(workout => {
-            this.renderSideWorkout(workout);
-            console.log('restored', workout);
+            this.#renderSideWorkout(workout);
         });
+    }
+
+    reset(){
+        localStorage.removeItem('workout');
+        location.reload();  // reload programmatically
     }
 }
 
