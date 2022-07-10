@@ -115,7 +115,7 @@ class App {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(this.#map);
         
-        this.#map.on('click', this.#showForm.bind(this));   // change 'this' from map object (since it's object calling the on() method) to app object using bind()
+        this.#map.on('click', this.#showForm.bind(this));   // change 'this' from map object (since it's object calling the on() method) to app object using bind() 
 
         // load map markers
         this.#workouts.forEach(workout => this.#renderWorkoutMarker(workout))
