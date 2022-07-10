@@ -85,6 +85,7 @@ class App {
         // register events listeners in constructor
         form.addEventListener('submit', this._addNewWorkout.bind(this));    // bind re-point 'this' from 'form' (#L85) to 'app' object
         inputType.addEventListener('change', this._toggleElevationField);   // no bind cus handler doesn't use 'this' keyword in its block
+        containerWorkouts.addEventListener('click', this._moveMapToMarker.bind(this))  // event delegation to parent/common form element
     }
 
     _getPosition(){
@@ -263,6 +264,21 @@ class App {
         }
 
         form.insertAdjacentHTML('afterend', html);
+    }
+
+    _moveMapToMarker(event) {
+        const workoutElement = event.target.closest('.workout');    // the unique parent form of which its chiled elements may be clicked...subchild of common delegator element
+
+        if(!workoutElement) return;
+        
+        const selectedWorkout = this.#workouts.find(workout => workout.id === workoutElement.dataset.id);   // cus of 'this' need bind() in handler
+
+        this.#map.setView(selectedWorkout.coords, 13, {
+            animate: true,
+            pan: {
+                duration: 1
+            }
+        });
     }
 }
 
