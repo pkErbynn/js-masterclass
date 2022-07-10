@@ -625,6 +625,11 @@ Events
     - `submitEvent.preventDefault()` => very key that it prevents form reload
 - Refactoring for Project Architecture
     - Refactor spagetti code to OOP-based code
+    - To **re-point from method caller to app instance**, use:
+        - `.bind(this)` on event handlers
+- Managing workout data: creating classes
+    - creating Workout parent class, with Cycling and Running a children through inheritance
+    
 ## Asynchronous - Promises, Async_Await, and AJAX
 - Asynchronous
     - Synchronous
