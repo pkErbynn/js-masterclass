@@ -633,7 +633,13 @@ Events
         - `.bind(this)` on event handlers
 - Managing workout data: creating classes
     - desiging Workout parent class, with Cycling and Running a children through inheritance
-    - 
+    - event delegation
+        - add event to common / parent element
+        - select the scope of each child element using `closest()`
+        - process that target child element...
+- Working with local storage
+    - storing works in browser local storage
+
 ## Asynchronous - Promises, Async_Await, and AJAX
 - Asynchronous
     - Synchronous

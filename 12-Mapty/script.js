@@ -7,6 +7,7 @@
 class Workout {
     id = this.#createGUID();
     date = new Date();
+    numberOfclicks = 0;
 
     constructor(coords, distance, duration){
         this.coords = coords;   // in [lat,lng]
@@ -27,6 +28,10 @@ class Workout {
     setDescription(){
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         this.description = `${this.type[0].toLocaleUpperCase()}${this.type.slice(1)} on ${months[this.date.getMonth()]} ${this.date.getMonth()}`
+    }
+
+    click(){
+        this.numberOfclicks++;
     }
 }
 
@@ -82,6 +87,8 @@ class App {
     constructor(){
         this._getPosition();    // get location from the onset
 
+        this.#getLocalStorage();    // local storage
+
         // register events listeners in constructor
         form.addEventListener('submit', this._addNewWorkout.bind(this));    // bind re-point 'this' from 'form' (#L85) to 'app' object
         inputType.addEventListener('change', this._toggleElevationField);   // no bind cus handler doesn't use 'this' keyword in its block
@@ -114,6 +121,9 @@ class App {
         }).addTo(this.#map);
         
         this.#map.on('click', this._showForm.bind(this));   // change 'this' from map object (since it's object calling the on() method) to app object using bind()
+
+        // load map markers
+        this.#workouts.forEach(workout => this.renderWorkoutMarker(workout))
     }
 
     _showForm(mapE){
@@ -188,6 +198,9 @@ class App {
 
         // hide form + clear input fields
         this.#hideForm();
+
+        // store workout in local storage
+        this.#setLocalStorage();
     }
 
     #hideForm(){
@@ -269,7 +282,7 @@ class App {
     _moveMapToMarker(event) {
         const workoutElement = event.target.closest('.workout');    // the unique parent form of which its chiled elements may be clicked...subchild of common delegator element
 
-        if(!workoutElement) return;
+        if(!workoutElement) return; // guard close...opposite of what's dev is interested
         
         const selectedWorkout = this.#workouts.find(workout => workout.id === workoutElement.dataset.id);   // cus of 'this' need bind() in handler
 
@@ -279,10 +292,25 @@ class App {
                 duration: 1
             }
         });
+        
+        selectedWorkout.click(); // using the public api
+    }
+
+    #setLocalStorage(){
+        localStorage.setItem('workouts', JSON.stringify(this.#workouts));   // serialize
+    }
+
+    #getLocalStorage(){
+        const storedWorkouts = JSON.parse(localStorage.getItem('workouts'));  // deserialize
+        if(!storedWorkouts) return;  // guard clause
+        this.#workouts = storedWorkouts;    // object loses its prototype chain when restored
+
+        // render each stored workouts
+        this.#workouts.forEach(workout => {
+            this.renderSideWorkout(workout);
+            console.log('restored', workout);
+        });
     }
 }
 
 const app = new App();
-
-const workout = new Running([12,12], 2, 2, 2);
-console.log(workout);
