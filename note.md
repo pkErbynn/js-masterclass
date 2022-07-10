@@ -478,7 +478,7 @@ Events
     - getting child element(s)
         - `.querySelector()`
     - getting parent element(s)
-        - `.closest()`
+        - `.closest()`....**opposite** of `.querySelector()` since target child element whilst closest target parent element 
     - getting sibbling element(s)
         - `next[previous]Sibling()`
     - follow-up to .js file
@@ -618,10 +618,13 @@ Events
             - On page reload, read the saved data from local storage and display data
     3. Flowchart
     4. Architecture: how code will be organized
-- Displaying using **Leaflet** library
+- Displaying map using **Leaflet** library
     - the **order** of js script in html head:
         - **each script will have access to the global members (methods/properties) of the preceeding js scripts, but not vice versa**
-
+- Displaying map and form
+    - `submitEvent.preventDefault()` => very key that it prevents form reload
+- Refactoring for Project Architecture
+    - Refactor spagetti code to OOP-based code
 ## Asynchronous - Promises, Async_Await, and AJAX
 - Asynchronous
     - Synchronous
