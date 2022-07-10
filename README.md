@@ -1,4 +1,5 @@
 # vibranium-javaScript-masterclass
+Building projects with pure vanilla Javascript
 
 [bankist](https://github.com/pkErbynn/vibraniumJS/tree/main/4-ArrayBankist) - ![Bankist animation](https://j.gifs.com/Z8oxNJ.gif)
 
