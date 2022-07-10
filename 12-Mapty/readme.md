@@ -1,13 +1,15 @@
 # Mapty
-An stand-alone application that allows you to log your workouts on map
+An stand-alone application that allows you to log your workouts on map.
 
 ## Technology used
-- Javascript (vanilla)
+- Javascript (vanilla, ES6)
 - [Leaflet library](https://leafletjs.com/)
 
 ## Demo 
 * Screenshot <br>
 <img src="./assets/mapty.png">
 
-* Animated gif <br>
-![Trillo animated](https://j.gifs.com/36EBnn.gif)
+* Workflow <br>
+![Trillo animated](https://j.gifs.com/NO2g2p.gif)
+
+<sub>Inspired by &copy; Jonas</sub>

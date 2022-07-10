@@ -97,7 +97,7 @@ class App {
     #getPosition(){
         if (navigator.geolocation){
             navigator.geolocation.getCurrentPosition(
-                this.#loadMap.bind(this),   // re-point/bind 'this' from 'geolocation' (L# 41, since it's the method caller...pointed at L#58) to 'app' instance (in L#103)  
+                this.#loadMap.bind(this),   // re-point/bind 'this' from 'geolocation' (L# 41, since it's the method caller...pointed at L#58) to 'app' instance (in L#103)
                 (err) => {
                     alert('Could not get your location', err)
                 }
