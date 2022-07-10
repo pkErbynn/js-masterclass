@@ -483,7 +483,11 @@ Events
         - `next[previous]Sibling()`
     - follow-up to .js file
 - Building Tapped component
-    - guard clause
+    - **guard clause:** find the opposite of what we're interested in, and if the opposite is true, return the funtion immediately
+    ```
+        if(!handsome) return;
+        if(handsome){ interested flow }
+    ```
 - Passing Arguments for Event Handlers
     - followup to 'mennu fade animation'
 - Sticky Navigation
@@ -628,8 +632,8 @@ Events
     - To **re-point from method caller to app instance**, use:
         - `.bind(this)` on event handlers
 - Managing workout data: creating classes
-    - creating Workout parent class, with Cycling and Running a children through inheritance
-    
+    - desiging Workout parent class, with Cycling and Running a children through inheritance
+    - 
 ## Asynchronous - Promises, Async_Await, and AJAX
 - Asynchronous
     - Synchronous
