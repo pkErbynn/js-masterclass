@@ -18,6 +18,10 @@ pin: 1111
 <img src="./assets/banky.png">
 
 * Workflow <br>
-![Bankist animation](https://j.gifs.com/Z8oxNJ.gif);
+
+
+https://user-images.githubusercontent.com/29948157/178261888-6a49ea15-7558-4aea-b45c-9fd2bbd32e03.mp4
+
+
 
 <sub>Inspired by &copy; Jonas</sub>
