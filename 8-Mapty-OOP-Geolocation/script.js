@@ -294,13 +294,12 @@ class App {
     }
 
     #getLocalStorage(){
-        const storedWorkouts = JSON.parse(localStorage.getItem('workouts'));  // deserialize
-        if(!storedWorkouts) return;  // guard clause
-        this.#workouts = storedWorkouts;    // object loses its prototype chain when restored
+        const data = JSON.parse(localStorage.getItem('workouts'));
+        if(!data) return;
 
-        // render each stored workouts
-        this.#workouts.forEach(workout => {
-            this.#renderSideWorkout(workout);
+        this.#workouts = data;
+        this.#workouts.forEach(w => {
+            this.#renderWorkoutMarker(w);
         });
     }
 
