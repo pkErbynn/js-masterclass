@@ -12,4 +12,17 @@ An stand-alone application that gets your current geolocation and allows you to 
 * Workflow <br>
 ![Mapty animation](https://j.gifs.com/pZqpqN.gif)
 
+
+![Mapty animation](https://gifs.com/gif/Eq2Mqk)
+
+
+![Mapty animation](https://j.gifs.com/Eq2Mqk.gif)
+
+#### lq
+
+
+<br>
+<iframe src='//gifs.com/embed/Eq2Mqk' frameborder='0' scrolling='no' width='440' height='400' style='-webkit-backface-visibility: hidden;-webkit-transform: scale(1);' ></iframe>
+
 <sub>Inspired by &copy; Jonas</sub>
+
