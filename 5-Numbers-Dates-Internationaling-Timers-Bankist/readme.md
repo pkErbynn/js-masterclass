@@ -9,8 +9,8 @@ A minimalistic javascript-based banking application with features like;
 ### User pin
 Experiment with this credentials:
 ```js
-user: js
-pin: 1111
+user1: js        user2: jd
+pin1: 1111       pin2: 2222
 ``` 
 
 ## Demo 
