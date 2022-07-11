@@ -6,6 +6,7 @@ A minimalistic javascript-based banking application with features like;
 - sort statement
 - close account
 
+Link: https://ephemeral-frangollo-d097b7.netlify.app/5-numbers-dates-internationaling-timers-bankist/
 ### User pin
 Experiment with this credentials:
 ```js
