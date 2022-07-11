@@ -10,7 +10,7 @@ An stand-alone application that gets your current geolocation and allows you to 
 <img src="./assets/mapty.png">
 
 * Workflow <br>
-![Mapty](https://j.gifs.com/pZqpqN.gif)
+[Mapty](https://j.gifs.com/pZqpqN.gif)
 
 
 ![Mapty animation](https://gifs.com/gif/Eq2Mqk)
