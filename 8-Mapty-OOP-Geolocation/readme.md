@@ -15,6 +15,7 @@ An stand-alone application that gets your current geolocation and allows you to 
 
 ![Mapty animation](https://gifs.com/gif/Eq2Mqk)
 
+[![Watch the video](https://gifs.com/gif/Eq2Mqk)](https://gifs.com/gif/Eq2Mqk)
 
 ![Mapty animation](https://j.gifs.com/Eq2Mqk.gif)
 
