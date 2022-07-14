@@ -766,5 +766,138 @@ Events
 
     }
     ```
+
+## 10-Modern JavaScript Development_ Modules, Tooling, and Functional
+- Mordern Js Development Process
+    1. Developement: Modules, 3rd-party packages
+    2. Build process: Bundling -> Transpiling/Polyfilling (uing Babel) ...(automate build tools bundler tools like Webpack or Parcel)
+    3. Production: Js Bundle into prod
+    -  **Transpiling** simply means taking out ES6 code and converting it into ES5 so it can be read by all browsers 
+- Overview of modules
+    - **Modules: reusable piece of code that encapsulates implementation details**
+    - Usually **standalone file**
+    - main goal is to **encapsulate functionality, to have private data and to expose a public API**
+    - Importance
+        - small building blocks to build complex apps
+        - can be developed in isolation w/out thinkin' of the entire codebase
+        - organize codebase
+        - code reuse 
+- How module is diff from regular js script
+    - Module **supports imports and exports**
+    - Has html linking of **`<script type='module'>`** instead of `<script>`
+    - The Top-level **`this` value is `undefined`, but `window`** for script
+    - Top-level variables are only **scoped to that module, but global** variable for script
+    - Module's file dependency downloading is async. but sync for script
+- How ES6 Modules are imported to a project 'index.js' script file
+    - **Given index.js making with other external modules imported**, this is what happens:
+        1. Index.js is parsed (read w/out execution)
+        2. External imported modules are downloaded asynchronously
+        3. Link imports to external module's exports variables
+        4. Execute external module
+        5. Execute my index.js module
+- Importing and exporting modules
+    - **Named imports** & exports
+    - **Default imports** & exports
+        - Import can have any name and has no `{}`
+    - Aliasing imports and **even aliasing exports** with `as`
+    - Can import everything - **alias becomes an object**
+        ```js
+        import * as ShoppingCart from './shoppingCart.js'
+        ShoppingCart.totalCost();
+        ShoppingCart.carts;
+        ```
+    - NB: **imports are live connection to exports**
+        - Imports are not copies of exports
+        - **Imports are organized in objects - `{var1, var2, ...}`**
+        - Imports varibles are **passed by reference**
+        - **Top-level imports are executed first**
+- Other Types of module system
+    - AMD Modules
+    - CommonJS Modules
+        - used in node
+        - uses `export.someVariable = ...` for export and `const { someVariable } = require('./someModule.js')` for import
+- Intro to NPM
+    - Why the need for npm ?
+        - Back in the days, external libraries are included in the HTLM file using the `<script>` tag, which exposes global variables that could be used - similar done in the Mapty project
+        - This approach creates problems in huge apps as it's not manageable
+        - First, doesn't make sense for html file to load dependencies
+        - Also, normally the dependencies (like Boostrap files) will be added into the project offline. With this, when a new version of the dependencies are released, one has to manually go their site, download the updated version and manually reconfigure into the project. This is a huge pain and not ideal.
+        - **Solution**: NPM provided a single centralized place where dependencies are managed with ease.
+            - How? **NPM is initialized** in each project to create a `package.json` file
+            - `package.json` stores all dependencies in `dependencies: {}` block
+            - Any installed module dependency gets stored in the **node_modules** folder
+            - Each file there can be **inspected (for what variables are imported), imported and used**
+            ```js
+            import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+            // import cloneDeep from 'lodash-es'; // shorter
+
+            const myobject = { name: 'erb', age: 25 };
+
+            const result = cloneDeep(myobject); // imported member is used as function...as intended after checking the cloneDeep.js file
+            console.log(result);
+            ```
+        - NB: **Never include/share the `node_module` folder to Github or another matchine. It can always be restored with `npm install` command**
+
+- Building with **Parcel** and **NPM scripts**
+    - Parcel is a module **bundler** that works out of the box, without configuration
+    - Other similar one is **Webpack**.
+    - Parcel gets to the `"devDependency": {}` block once installed
+    - **`dependency` block vs `devDependency` block** (in `package.json`)
+        - Dependencies, when installed. are used in the code and needed to run...eg: Express
+        - DevDependencies, when installed, are used as build tools (by developers) to only develop...eg: unit tests, liveserver, js transpilation, minification, etc
+    - **NPM scripts**
+        - allows usage of installed devDependencies. eg;
+        - inside `package.json`
+        ```json
+        "scripts": {
+            "mystart": "command with here"
+        }
+        ```
+        - inside the CLI 
+        ```cmd
+        $ npm run mystart
+        ```
+        - It's recommended to install tools locally instead of globally
+    - Parcel **hot reload** script - makes it easier to update only small component, without reloading the whole app
+    - **Polifilling**
+- Clean and modern Js techniques and best practices
+    - Write **readable code**
+        - write code others **understand**
+        - code that your future self will still understand
+        - avoid too 'clever' and overcomplicated solutions
+        - use descriptive variable names: **what they contain**
+        - use descriptive function names: **what they do**
+    - General
+        - use **DRY** principle (refactor code)
+        - don't pollute global namespace, encapsulate instead
+        - don't use **var**
+        - use **strong type checks** (=== and !==)
+    - Functions
+        - functions should be **cohesive** - do **only one thing**
+        - don't use **more than 3** function parameters
+        - use default parameters when neccessary
+        - use arrow functions when makes code more readable. 
+            - Good use-case is **arrow functions as callbacks in array methods** like map, foreach, etc
+    - OOP
+        - ** **
+        - encapsulate data - **don't mutate directly** from outside the class. use public API to manipulate the data
+        - implement **method chaining**
+        - **don't** use arrow functions as regular class methods because you will not get access to the 'this' keyword on the object
+            - try avoid arrow function usage as methods to prevent errors regarding 'this'
+    - Avoid nested code
+        - use early return (**guard clauses**)
+        - use ternary / logical operators instead of 'if' 
+        - avoid for-loops, use array methods instead - like maps, filter, reduce
+        - avoid callback-based async APIs
+    - Asynchronouse code
+        - consume promises with async/await instead of 'then' for best readability
+        - run promises in parallel (`Promises.all`) whenever possible. it's faster
+        - handle errors and promise rejections
 ## NB
 Enable strict mode in JS to write secure code
+
+### Resources
+- Leaflet
+- Lodash
+
+<sub>Inspired by &copy; Jonas</sub>
