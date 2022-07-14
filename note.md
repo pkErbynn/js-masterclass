@@ -879,7 +879,7 @@ Events
         - use arrow functions when makes code more readable. 
             - Good use-case is **arrow functions as callbacks in array methods** like map, foreach, etc
     - OOP
-        - ** **
+        - use **ES6 classes**
         - encapsulate data - **don't mutate directly** from outside the class. use public API to manipulate the data
         - implement **method chaining**
         - **don't** use arrow functions as regular class methods because you will not get access to the 'this' keyword on the object
