@@ -22,7 +22,10 @@
 5. Object
     - ```x = {y: 2}``` <= means object _literal_
     - _dotNotation_ `x.y` or 
-    - _bracketNotation_ `x['y']`...this's _computable/dynamic_
+    - **_bracketNotation_** `x['y']`...this's _computable/dynamic_
+    - check **property existence**
+        - **`user.name` or `user[name]`**
+
     - can have function property...**function expression as key/value property**
         - access as `obj.function(arg)` / `obj["function"](arg)`
     - object is mutable...ie, can change their prop values
@@ -243,6 +246,19 @@ Events
     - switching vars
     - nexted distructuring
     - setting default values
+    ```js
+    const addExpense = function (value, description, user) {
+        if (!user) user = 'jonas';  // setting default user param
+        user = user.toLowerCase();
+        ...
+    }
+
+    // Improved...set in param
+    const addExpense = function (value, description, user = 'jonas') {
+        user = user.toLowerCase();
+        ...
+    }
+    ```
 - **Object destructuring**
     - always set default values
 - **Spread operator**: used whenever need to expand elements from array individually  
@@ -261,18 +277,63 @@ Events
 - Short-circuiting with or and &&
     - `&&` => to **replace one-line if-condition without the 'else' part**
     - `||` => to set default value where 0 and null are invalid
-- Null colescing value
+- **Null colescing** value
     - **always use to replace default value setup w/ ternary (when 0 is considered valid)**
     - for only `nullish` property
-- Optional chaining
+- **Optional chaining**
     - checks if property exist before access
     - **used w/ null colescing to set default**
     - `a.b?.c ?? 'default'`
+- **Use case**;    
+    ```js
+    const userSpendingLimit = {
+        'erb': 1200,
+        'anthony': 1000
+    }
+    
+    // if-else
+    let user; // input
+    if(userSpendingLimit[user]){
+        user = userSpendingLimit[user];
+    } 
+    else {
+        user = 'erb'; // default user
+    }
+
+    // improved using ternary
+    const spendingLimit = userSpendingLimit[user] ? userSpendingLimit[user] : 'erb';
+
+    // improved using null colescing
+    const spendingLimit = userSpendingLimit?.[user] ?? 'erb';
+
+
+    //// Different use-case with String concatination
+    
+    // Opt A...if with no else
+    let output = '';
+    if (entry.value <= -bigLimit) {
+       output += `${entry.description.slice(-2)} / `; // Emojis are 2 chars
+    }
+
+    // Improved A...ternary
+    output += entry.value <= -bigLimit ? `${entry.description.slice(-2)} / ` : '';
+    ```
+    - Refer to the [`clean.js`](./10-Modern-JavaScript-Modules-Tooling/clean.js) in Module `10-Modern...` for more details
+
 - **For-of loop**
     - get index with `.entries()`
-- Enhanced object literal
+- **Enhanced object literal**
     - object literal => you literary build an object without using any api, just using `{...}`
     - **keys/property names can be computed** not just the values
+    - **if property name equal value..don't repeat the variables**
+    - 
+    ```js
+    // given
+    someArray.push({name: name, age: age, address: location}) // where name, age, location are inputs
+
+    // then it can be refactored to
+    someArray.push({name, age, address: location})
+    ```
 - Set
     - accept an iterable eg, array
     - **specific item is not retrievable because order doesn't matter, ie no indexes**
@@ -301,7 +362,15 @@ Events
         - conditional: `.includes(), .startWith(), .endsWith()`
         - array: `.split(), .join()`
         - `.padEnd(), .repeat()`
-    
+- Arrow functions
+    - usecase 1: when creat straigtforward function
+    - takes user input an returns result
+    ```js
+    const getLimit = user => spendingLimits?.[user] ?? 0;
+
+    const user = 'erb';
+    const limit = getLimit(user)
+    ```
 ## Functions: A closer look
 - **Pass arg by value vs reference**
     - by value:
@@ -334,6 +403,7 @@ Events
         - the call() and apply() and **bind()** methods
         - IIFE
         - Closures
+
 ## Working w/ Arrays
 - .splice() / .slice() / .reverse() / .join() / .pop()
 - forEach loop 
@@ -767,7 +837,7 @@ Events
     }
     ```
 
-## 10-Modern JavaScript Development_ Modules, Tooling, and Functional
+## Modern JavaScript Development_ Modules, Tooling, and Functional
 - Mordern Js Development Process
     1. Developement: Modules, 3rd-party packages
     2. Build process: Bundling -> Transpiling/Polyfilling (uing Babel) ...(automate build tools bundler tools like Webpack or Parcel)
@@ -875,10 +945,10 @@ Events
     - Functions
         - functions should be **cohesive** - do **only one thing**
         - don't use **more than 3** function parameters
-        - use default parameters when neccessary
+        - use **default parameters** when neccessary
         - use arrow functions when makes code more readable. 
             - Good use-case is **arrow functions as callbacks in array methods** like map, foreach, etc
-    - OOP
+    - OOP{}
         - use **ES6 classes**
         - encapsulate data - **don't mutate directly** from outside the class. use public API to manipulate the data
         - implement **method chaining**
@@ -893,8 +963,51 @@ Events
         - consume promises with async/await instead of 'then' for best readability
         - run promises in parallel (`Promises.all`) whenever possible. it's faster
         - handle errors and promise rejections
+- Programming paradigms
+    1. Imperative programming
+        - Developer explains "**How to do things**"
+        - Developer explains every single step to follow to achieve result
+        - doubling
+        ```js
+        const arr = [2, 4, 6, 8]
+        const doubled = [];
+        for (let i = 0; i < arr.length; i++) {
+            doubled[i] = arr[i] * 2;
+        }
+        ```
+    2. Declarative programming
+        - Developer tells "**What to do**"
+        - Developer describes the way and the computer achieve the result
+        - The HOW is abstracted
+        ```js
+        const arr = [2, 4, 6, 8]
+        const doubled = arr.map(x => x * 2);
+        ```
+        - This has given rise to **Functional programming**, a declarative programming paradigm
+            - Based on the idea of writing software by combining many **pure functions**, avoiding **side effects** and avoiding **mutating** data
+            - Side effects: means, modification of any data **outside of function**
+            - **Pure functions**: functions **without side effects**. 
+                - does not modify/mutate any external variables, only local
+                - does not depend on any external variables
+                - **given same input, always returns same output**  
+            - **Immutability**: original data (state) is **never** modified. 
+                - Instead, the data is **copied** and **the copy is mutated and returned**. 
+                - makes it easier to track the flow/state of the data throughout the application...make code **less buggie**
+- **Functional** programming and **declarative Syntax** techniques
+    - Try avoid data mutations
+    - use built-in methods that doesn't produce side effects
+    - use data transformation methods like .map(), .filter() and .reduce()
+    - use array and object destructuring
+    - use the spread operator
+    - use ternary operator
+    - use template literals
+- Misc
+    - `Object.freeze()` to freeze object making its properties immutable
 ## NB
-Enable strict mode in JS to write secure code
+- Enable strict mode in JS to write secure code
+- Emojis are 2-character long not 1-character
+- array[i] means the value
+- object[i] means property / value
 
 ### Resources
 - Leaflet
