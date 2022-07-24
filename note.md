@@ -456,16 +456,48 @@ Events
         };
 
         // Pure: immutability + no side-effect
-        // improved with map + destructuring
+        const data = Object.freeze([
+            {value: 550, description: 'Sold old TV 📺'}
+            {value: 95, description: 'Groceries 🥑'}
+            {value: 15000, description: 'Monthly salary 👩‍💻'}
+            {value: 4500, description: 'New iPhone 📱'}
+        ])
+        
         const checkExpenses = function (data) {
-            data.map(entry => {
+            data.map(entry => { // improved with map + destructuring
                 return entry.value > 1000 ? 
                 {...entry, flag: 'limit'} : entry   // add property ***
             })
         };
         ```
     - Filter:
-        - conditioned to return new array
+        - conditioned to return new array with same or less number of elements
+        ```js
+         const data = Object.freeze([
+            {value: 550, description: 'Sold old TV 📺'}
+            {value: 95, description: 'Groceries 🥑'}
+            {value: 15000, description: 'Monthly salary 👩‍💻'}
+            {value: 4500, description: 'New iPhone 📱'}
+        ])
+
+        const logBigProducts = function () {
+            let bigExpense = '';
+            for (const entry of data) {
+              bigExpense += entry.value <= 1000 ? `${entry.description.slice(-2)} / ` : '';
+            }
+            bigExpense = bigExpense.slice(-2);
+
+            console.log(bigExpense);
+        }
+
+        // Improved with filter, map, join
+        const logBigProducts = function (data) {
+            const bigExpense = data.filter(entry => entry.value <= 1000)
+                                    .map(entry => entry.description.slice(-2))
+                                    .join(' / ');
+            console.log(bigExpense);
+        }
+        ```
     - Reduce:
         - .reduce((**accumular**, currentItem, index, array) => ..., **initialValue**)
         - initialValue => value before the first iteration even starts
@@ -967,6 +999,7 @@ Events
         - It's recommended to install tools locally instead of globally
     - Parcel **hot reload** script - makes it easier to update only small component, without reloading the whole app
     - **Polifilling**
+
 - Clean and modern Js techniques and best practices
     - Write **readable code**
         - write code others **understand**
@@ -1000,6 +1033,7 @@ Events
         - consume promises with async/await instead of 'then' for best readability
         - run promises in parallel (`Promises.all`) whenever possible. it's faster
         - handle errors and promise rejections
+
 - Programming paradigms
     1. Imperative programming
         - Developer explains "**How to do things**"
@@ -1024,27 +1058,37 @@ Events
             - Based on the idea of writing software by combining many **pure functions**, avoiding **side effects** and avoiding **mutating** data
             - Side effects: means, modification of any data **outside of function**
             - **Pure functions**: functions **without side effects**. 
-                - does not modify/mutate any external variables, only local
-                - does not depend on any external variables
+                - does not modify/mutate/manipulate any external variables, only locals
+                - does not depend on any external variables outside its scope, only locals
+                - all data dependancies (ie. initial data) should be passed as param, in order not to modify data outside its scope
+                - mostly **returns a new data**/instance/object
                 - **given same input, always returns same output**  
             - **Immutability**: original data (state) is **never** modified. 
                 - Instead, the data is **copied** and **the copy is mutated and returned**. 
                 - makes it easier to track the flow/state of the data throughout the application...make code **less buggie**
-- **Functional** programming and **declarative Syntax** techniques
-    - Try avoid data mutations
-    - use built-in methods that doesn't produce side effects
-    - use data transformation methods like .map(), .filter() and .reduce()
-    - use array and object destructuring
-    - use the spread operator
-    - use ternary operator
-    - use template literals
-- Misc
-    - `Object.freeze()` to freeze object making its properties immutable
+            - **Immutable object**
+                - `Object.freeze()` to freeze object making its immutable 
+                - ie, prevents adding new properties...but property values can be modified
+        - Functional programming
+            - uses **more of Pure functions**
+            - uses **less Impure funtions**
+                - **not only** modifying original data but also creating console logs
+                - impure functions are kept at the end of the chain for outputs
+
+    - **Functional** programming and **declarative Syntax** techniques
+        - Try avoid data mutations
+        - use built-in methods that doesn't produce side effects
+        - use data transformation methods like .map(), .filter() and .reduce()
+        - use array and object destructuring
+        - use the spread operator
+        - use ternary operator
+        - use template literals
+
 ## NB
 - Enable strict mode in JS to write secure code
 - Emojis are 2-character long not 1-character
 - array[i] means the value
-- object[i] means property / value
+- object[i] means property or value
 
 ### Resources
 - Leaflet

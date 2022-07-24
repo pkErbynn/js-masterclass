@@ -117,7 +117,7 @@ logBigExpenses(100);
 
 // Usage of Functional Programming to prevent side-effects and immutability
 
-const budget2 = Object.freeze([
+const budget2 = Object.freeze([ // freeze
   { value: 250, description: 'Sold old TV 📺', user: 'jonas' },
   { value: -45, description: 'Groceries 🥑', user: 'jonas' },
   { value: 3500, description: 'Monthly salary 👩‍💻', user: 'jonas' },
@@ -167,22 +167,18 @@ const finalBudget = checkExpenses2(newBudget3);
 console.log('finalBudget:', finalBudget);
 
 
-const logBigExpenses2 = function (bigLimit) {
-  let output = '';
-  for (const entry of budget2) {
-    output += entry.value <= -bigLimit ? `${entry.description.slice(-2)} / ` : '';
-  }
-    
-  output = output.slice(0, -2); // Remove last '/ '
-  console.log(output);
+const logBigExpenses2 = function (state, bigLimit) {
+
+  // let bigExpense = '';
+  // for (const entry of budget2) {
+  //   bigExpense += entry.value <= -bigLimit ? `${entry.description.slice(-2)} / ` : '';
+  // }
+  // bigExpense = bigExpense.slice(0, -2); // Remove last '/ '
+
+  const bigExpense = state.filter(entry => entry.value <= -bigLimit)
+                          .map(entry => entry.description.slice(-2))
+                          .join(' / ');
+  console.log(bigExpense);
 }
 
-
-
-logBigExpenses2(100);
-
-
-
-
-
-
+logBigExpenses2(finalBudget, 100);
