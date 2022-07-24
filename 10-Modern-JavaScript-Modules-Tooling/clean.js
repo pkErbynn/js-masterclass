@@ -115,6 +115,72 @@ logBigExpenses(100);
 ///////////////////////////////////////////////////////////////
 /////////////////////// USING PURE FUNTIONS ///////////////////
 
+// Usage of Functional Programming to prevent side-effects and immutability
+
+const budget2 = Object.freeze([
+  { value: 250, description: 'Sold old TV 📺', user: 'jonas' },
+  { value: -45, description: 'Groceries 🥑', user: 'jonas' },
+  { value: 3500, description: 'Monthly salary 👩‍💻', user: 'jonas' },
+  { value: 300, description: 'Freelancing 👩‍💻', user: 'jonas' },
+  { value: -1100, description: 'New iPhone 📱', user: 'jonas' },
+  { value: -20, description: 'Candy 🍭', user: 'matilda' },
+  { value: -125, description: 'Toys 🚂', user: 'matilda' },
+  { value: -1800, description: 'New Laptop 💻', user: 'jonas' },
+]);
+
+const spendingLimits2 = Object.freeze({
+  jonas: 1500,
+  matilda: 100,
+});
+
+// this function depends on external data, thus impure 
+// const getLimit2 = user => spendingLimits2?.[user] ?? 0;
+
+// improved to pure by passing dependent data obj as param, 'sLimit'
+const getLimit2 = (sLimit, user) => sLimit?.[user] ?? 0;
+
+// Pure function...doesn't modify any data outside its scope...creates n returns new data
+const addExpense2 = function (state, limits, value, description, user = 'jonas') {  // Pure, by passing dependent 'state' data object as param
+  const cleanUser = user.toLowerCase();
+  return value <= getLimit2(limits, cleanUser) ? 
+    [...state, { value: -value, description, user: cleanUser }] : 
+    state;  // returns previous state if cannot creat ne one
+  }
+
+const newBudget1 = addExpense2(budget2, spendingLimits2, 10, 'Pizza 🍕');
+console.log('newBudget1:', newBudget1);
+const newBudget2 = addExpense2(newBudget1, spendingLimits2, 100, 'Going to movies 🍿', 'Matilda');  // chaining result
+console.log('newBudget2:', newBudget2);
+const newBudget3 = addExpense2(newBudget2, spendingLimits2, 100, 'Stuff');
+console.log('newBudget3:', newBudget3);
+
+
+// Task: Return same number of elements in array, but modify element with property if satisfies condition
+// ForEach causes side-effect and doesn't return a new instance
+const checkExpenses2 = (stateData, limit) =>
+  stateData.map(entry => {
+    return entry.value < -getLimit2(limit, entry.user) ? 
+      {...entry, flag: 'limit'} : entry
+  })
+
+const finalBudget = checkExpenses2(newBudget3);
+console.log('finalBudget:', finalBudget);
+
+
+const logBigExpenses2 = function (bigLimit) {
+  let output = '';
+  for (const entry of budget2) {
+    output += entry.value <= -bigLimit ? `${entry.description.slice(-2)} / ` : '';
+  }
+    
+  output = output.slice(0, -2); // Remove last '/ '
+  console.log(output);
+}
+
+
+
+logBigExpenses2(100);
+
 
 
 

@@ -246,21 +246,16 @@ Events
     - switching vars
     - nexted distructuring
     - setting default values
-    ```js
-    const addExpense = function (value, description, user) {
-        if (!user) user = 'jonas';  // setting default user param
-        user = user.toLowerCase();
-        ...
-    }
-
-    // Improved...set in param
-    const addExpense = function (value, description, user = 'jonas') {
-        user = user.toLowerCase();
-        ...
-    }
-    ```
 - **Object destructuring**
+    - destructuring unpacks key-value pair elements in object
+    - basically removes the ending bracket
     - always set default values
+    ```js
+    // Given data = {a: 1, b: 2}
+    // Task: add a 'c' property
+    const data = {a: 1, b: 2}
+    const result = {...data, c: 3}
+    ```
 - **Spread operator**: used whenever need to expand elements from array individually  
     - `...x`...`n, n1, n2`
     - mostly used on _iterables_: array, set, map
@@ -362,6 +357,20 @@ Events
         - conditional: `.includes(), .startWith(), .endsWith()`
         - array: `.split(), .join()`
         - `.padEnd(), .repeat()`
+- Functions with default param
+    ```js
+    const addExpense = function (value, description, user) {
+        if (!user) user = 'jonas';  // setting default user param
+        user = user.toLowerCase();
+        ...
+    }
+
+    // Improved...set in param
+    const addExpense = function (value, description, user = 'jonas') {
+        user = user.toLowerCase();
+        ...
+    }
+    ```
 - Arrow functions
     - usecase 1: when creat straigtforward function
     - takes user input an returns result
@@ -403,11 +412,12 @@ Events
         - the call() and apply() and **bind()** methods
         - IIFE
         - Closures
-
+    
 ## Working w/ Arrays
 - .splice() / .slice() / .reverse() / .join() / .pop()
 - forEach loop 
     - is a higher-order function that takes a callback fxn
+    - only causes **side-effect**, **doesn't return** a new instance
     - in Arrays
         - **forEach comes with index & the entire array**. eg; `numbers.forEach((number, index, numbers) => log(number, index, numbers))`
         - loop is not breakable
@@ -426,7 +436,34 @@ Events
         -**Has index**
         - .map((item, **index**, array) => ...)
         - **used when wanna return a new array**
-            - unlike `forEach` that just does causes **side effect** on the orginal, ie does some sth/modifying without returning
+            - unlike `forEach` that just does causes **side effect** (modifies the original data) **without returning** a new object/array
+        - Given 
+        ```js
+        const data = [
+            {value: 550, description: 'Sold old TV 📺'}
+            {value: 95, description: 'Groceries 🥑'}
+            {value: 15000, description: 'Monthly salary 👩‍💻'}
+            {value: 4500, description: 'New iPhone 📱'}
+        ]
+
+        // Impure: causes side-effect + mutability
+        const checkExpenses = function (data) {
+            for (const entry of data) { // or forEach
+                if (entry.value > 1000) {
+                    entry.flag = 'limit';   // add property
+                }
+            }
+        };
+
+        // Pure: immutability + no side-effect
+        // improved with map + destructuring
+        const checkExpenses = function (data) {
+            data.map(entry => {
+                return entry.value > 1000 ? 
+                {...entry, flag: 'limit'} : entry   // add property ***
+            })
+        };
+        ```
     - Filter:
         - conditioned to return new array
     - Reduce:
