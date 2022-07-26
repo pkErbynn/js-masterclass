@@ -18,3 +18,5 @@ https://user-images.githubusercontent.com/29948157/178262231-bcde6442-38eb-4788-
 
 
 
+
+More [Javascript concepts here.](./note.md)

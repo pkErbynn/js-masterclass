@@ -759,8 +759,10 @@ Events
         4. Display all workouts on the map
         5. Store workout data in browser using local storage API
             - On page reload, read the saved data from local storage and display data
-    3. Flowchart
+    3. [Flowchart](./8-Mapty-OOP-Geolocation/Mapty-flowchart.png)
     4. Architecture: how code will be organized
+        - [Basic architecture - part 1](./8-Mapty-OOP-Geolocation/Mapty-architecture-part-1.png)
+        - [Improved architecture - final](./8-Mapty-OOP-Geolocation/Mapty-architecture-final.png)
 - Displaying map using **Leaflet** library
     - the **order** of js script in html head:
         - **each script will have access to the global members (methods/properties) of the preceeding js scripts, but not vice versa**
@@ -1084,6 +1086,39 @@ Events
         - use ternary operator
         - use template literals
 
+## Forkify App - Applying modern development
+- Project Overview and Planning
+    - Overview
+        - The application basically allows users to search for recipes and display them on the UI.
+        - Users can post and update recipes.
+    - Planning (User Stories -> Features -> Flowcharts -> Architecture)
+        1. User Stories
+            1. As a user, I want to *search for recipes*, so that I can find new ideas for meals
+            2. As a user, I want to be able to *update the number of servings* so that I can cook meal for different number of people
+            3. As a user, I want to *bookmark recipes*, so that I can review them later
+            4. As a user, I want to be able to *create my own recipes*, so that I have them all organized in the same app
+            5. As a user, I want to be able to *see my bookmarks and own recipes when I leave the app and come back later*, so that I can close the app safely after cooking
+        2. Features (for user stories)
+            - For Story 1;
+                - Search functionality: input field to send request to API with searched keywords
+                - Display results with pagination
+                - Display recipe with cooking time, servings and ingredients
+            - For Story 2;
+                - Change servings functionality: update all ingredients according to current number of servings
+            - For Story 3;
+                - Bookmarking functionality: display list of all bookmarked recipes
+            - For Story 4;
+                - User can upload own recipes
+                - User recipes will automatically be bookmarked
+                - User can only see their own recipes, not recipes from other users
+            - For Story 5;
+                - Store bookmark data in the browser using local storage
+                - On page load, read saved bookmaks from local storage and display
+        3. Flowchart
+            - The **start (pill-shape) of the chart is always an event**
+            - [Flowchart Part 1](./11-ForkifyApp_Building-a-Modern-Application/forkify-flowchart-part-1.png)
+        4. Architecture
+
 ## NB
 - Enable strict mode in JS to write secure code
 - Emojis are 2-character long not 1-character
@@ -1093,5 +1128,6 @@ Events
 ### Resources
 - Leaflet
 - Lodash
+- Parcel
 
 <sub>Inspired by &copy; Jonas</sub>
