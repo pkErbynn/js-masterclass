@@ -1,4 +1,6 @@
 import icons from 'url:../img/icons.svg';
+import 'regenerator-runtime/runtime'; // for polifilling async/await
+import 'core-js/stable'; // polifilling everything else
 
 const recipeContainer = document.querySelector('.recipe');
 
@@ -168,5 +170,4 @@ const showRecipe = async function () {
   }
 }
 
-renderLoadingSpinner(recipeContainer);
 showRecipe();
