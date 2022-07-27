@@ -19,12 +19,12 @@ const renderLoadingSpinner = function (parentElment) {
   const markup = `
     <div class="spinner">
       <svg>
-        <use href="${icons}icon-loader"></use>
+        <use href="${icons}#icon-loader"></use>
       </svg>
     </div>
   `;
   parentElment.innerHTML = ''; // empty container element before inserting
-  parentElment.insertAdjacentHTML('afterbegin');  // insert element as first child element
+  parentElment.insertAdjacentHTML('afterbegin', markup);  // insert element as first child element
 }
 
 // get recipe
@@ -34,8 +34,8 @@ const showRecipe = async function () {
   try {
 
     // 1. Loading recipe 
-    renderLoadingSpinner(recipeContainer);
-    
+    // renderLoadingSpinner(recipeContainer);
+
     const response = await fetch(url);
     const data = await response.json();
 
@@ -168,4 +168,5 @@ const showRecipe = async function () {
   }
 }
 
+renderLoadingSpinner(recipeContainer);
 showRecipe();
