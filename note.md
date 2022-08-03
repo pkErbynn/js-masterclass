@@ -255,6 +255,9 @@ Events
     // Task: add a 'c' property
     const data = {a: 1, b: 2}
     const result = {...data, c: 3}
+
+    const recipe = model.state.recipe;
+    const {recipe} = model.state;   // improved
     ```
 - **Spread operator**: used whenever need to expand elements from array individually  
     - `...x`...`n, n1, n2`
@@ -741,7 +744,8 @@ Events
         - Answers **Who? What? Why?**
     2. Features: exact features to make **user stories work as intended**
     3. Flowchart: what it will be built
-    4. Architecture: how it will be built
+    4. Architecture: how it will be built. It gives structure. 
+        - How code is organized into different modules, classes, and functions
 - Development steps (Mapty project)
     1. User stories
         1. As a user, I want to log my running workouts **with location, distance, time, pace and steps/minute**, so that I can keep a log of all my running
@@ -939,9 +943,10 @@ Events
 - Importing and exporting modules
     - **Named imports** & exports
     - **Default imports** & exports
-        - Import can have any name and has no `{}`
+        - Import can have any name and not wrapped in `{}` because...
+        - can have only one default export per module file, but you can have as many named exports
     - Aliasing imports and **even aliasing exports** with `as`
-    - Can import everything - **alias becomes an object**
+    - Can import everything - **the alias becomes an object**
         ```js
         import * as ShoppingCart from './shoppingCart.js'
         ShoppingCart.totalCost();
@@ -1118,6 +1123,43 @@ Events
             - The **start (pill-shape) of the chart is always an event**
             - [Flowchart Part 1](./11-ForkifyApp_Building-a-Modern-Application/forkify-flowchart-part-1.png)
         4. Architecture
+- Architecture (deep-dive)
+    - What 
+        - structure on how software is will be built. 
+    - Why
+        - Gives structure. **Organizes code** into different modules, classes, and functions, holding the software together
+        - Code maintainability. Easy for **future changes**. Project is never done!
+        - Expandability. Ability to **add new features**
+    - Selection: MVC architecture
+    - Components of any architecture
+        - Business logic
+            - The actual business problem
+            - What business does and need
+            - Very high-level. In no specific prog lang
+            - Business requirement
+            - Mostly about the service layer
+        - State
+            - stores the data about the application
+            - known as the "single source of truth"
+            - kept in sync with UI and vice-versa
+            - state libraries exist. Redux, etc.
+        - HTTP library
+            - making and receiving requests over the internet
+        - Application logic (router)
+            - implementation of the business logic and the app itself
+            - handles UI navigation and UI events
+            - the entire app itself composing of the core business logic
+        - Presentation logic (UI layer)
+            - code concerned about the visible part of the application
+            - essentially displayes the application state
+            - interation about the user
+    - MVC
+        - Model: Business Logic, State, HTTP Library
+        - Controller: Application Logic
+        - View: Presentation Logic
+    - 4. Architecture
+        - [Project architecture: Recipe Loading](./11-ForkifyApp_Building-a-Modern-Application/forkify-architecture-recipe-loading.png)
+
 
 ## NB
 - Enable strict mode in JS to write secure code
