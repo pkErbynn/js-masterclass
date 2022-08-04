@@ -29,8 +29,10 @@ const recipeController = async function () { // get recipe
   } catch (error) {
     alert(error)
   }
+};
+
+const init = function() {
+  recipeView.addEventHandler(recipeController)
 }
 
-recipeController();
-
-['load', 'hashchange'].forEach(ev => window.addEventListener(ev, recipeController))
+init();
