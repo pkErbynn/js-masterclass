@@ -26,7 +26,7 @@ export const loadRecipe = async function(id) {
     
         console.log("recipes", state.recipe);
     } catch (error) {
-        alert(error)
+        console.error(`${error} (something went wrong)`)
     }
 
 }
