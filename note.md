@@ -1123,6 +1123,8 @@ Events
             - The **start (pill-shape) of the chart is always an event**
             - [Flowchart Part 1](./11-ForkifyApp_Building-a-Modern-Application/forkify-flowchart-part-1.png)
         4. Architecture
+- [API Documentation:](https://forkify-api.herokuapp.com/v2)
+
 - Architecture (deep-dive)
     - What 
         - structure on how software is will be built. 
@@ -1159,7 +1161,8 @@ Events
         - View: Presentation Logic
     - 4. Architecture
         - [Project architecture: Recipe Loading](./11-ForkifyApp_Building-a-Modern-Application/forkify-architecture-recipe-loading.png)
-
+- Config file
+    - stores important data about the app which are constant
 
 ## NB
 - Enable strict mode in JS to write secure code
