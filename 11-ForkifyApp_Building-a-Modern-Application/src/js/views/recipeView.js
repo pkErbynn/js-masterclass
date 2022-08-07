@@ -60,7 +60,7 @@ class RecipeView {
         <p>${message}</p>
       </div>
       `;
-      this.#clear();
+      // this.#clear();
       this.#parentElement.insertAdjacentHTML('afterbegin', markup);  // insert element as first child element
     }
 
