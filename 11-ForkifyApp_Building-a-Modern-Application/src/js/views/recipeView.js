@@ -4,6 +4,8 @@ import {Fraction} from 'fractional';
 class RecipeView {
     #parentElement = document.querySelector('.recipe');
     #data;
+    #errorMessage = "We couldn't find the matching recipe";
+    #sucessMessage = "success";
 
     render(data) {
         this.#data = data;
@@ -30,6 +32,36 @@ class RecipeView {
         `;
         this.#clear();
         this.#parentElement.insertAdjacentHTML('afterbegin', markup);  // insert element as first child element
+    }
+
+    renderError(message = this.#errorMessage) { // nice trick on default param
+      const markup = `
+      <div class="error">
+        <div>
+          <svg>
+            <use href="${icons}#icon-alert-triangle"></use>
+          </svg>
+        </div>
+        <p>${message}</p>
+      </div>
+      `;
+      this.#clear();
+      this.#parentElement.insertAdjacentHTML('afterbegin', markup);  // insert element as first child element
+    }
+
+    renderSuccessMessage(message = this.#sucessMessage) { // nice trick on default param
+      const markup = `
+      <div class="message">
+        <div>
+          <svg>
+            <use href="${icons}#icon-smile"></use>
+          </svg>
+        </div>
+        <p>${message}</p>
+      </div>
+      `;
+      this.#clear();
+      this.#parentElement.insertAdjacentHTML('afterbegin', markup);  // insert element as first child element
     }
 
     #generateMarkup() {

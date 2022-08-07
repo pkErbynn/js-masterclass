@@ -1163,6 +1163,8 @@ Events
         - [Project architecture: Recipe Loading](./11-ForkifyApp_Building-a-Modern-Application/forkify-architecture-recipe-loading.png)
 - Config file
     - stores important data about the app which are constant
+- Error handling
+    - error messages should be intrinsic property of the view layer
 
 ## NB
 - Enable strict mode in JS to write secure code

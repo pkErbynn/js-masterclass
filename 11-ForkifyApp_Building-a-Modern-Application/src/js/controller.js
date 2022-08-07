@@ -7,8 +7,6 @@ import 'core-js/stable'; // polifilling everything else
 const recipeContainer = document.querySelector('.recipe');
 
 
-
-
 //API Documentation: https://forkify-api.herokuapp.com/v2
 
 ///////////////////////////////////////
@@ -21,13 +19,12 @@ const recipeController = async function () { // get recipe
     recipeView.renderLoadingSpinner();
     
     // 1. Loading recipe 
-    await model.loadRecipe("5ed6604591c37cdc054bc886");
-    const {recipe} = model.state;
+    await model.loadRecipe("5ed6604591c37cdc054bc886zzz");
 
     // 2. Rendering recipe
     recipeView.render(model.state.recipe);
   } catch (error) {
-    alert(error)
+    recipeView.renderError()
   }
 };
 
