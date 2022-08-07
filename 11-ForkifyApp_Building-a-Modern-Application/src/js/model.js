@@ -5,12 +5,16 @@ import { APP_URL } from "./config";
 import { getJSON } from "./helper";
 
 export const state = {
-    recipe: {}
+    recipe: {},
+    search: {
+        query: '',
+        results: []
+    }
 }
 
 export const loadRecipe = async function(id) {
     try {
-        const data = await getJSON(`${APP_URL}/${id}`);
+        const data = await getJSON(`${APP_URL}${id}`);
 
         let { recipe } = data.data;
         state.recipe = {
@@ -29,5 +33,21 @@ export const loadRecipe = async function(id) {
         console.error(`${error} (something went wrong)`)
         throw error;
     }
+}
 
+export const loadSearchResults = async function(query) {
+    try {
+        const data = await getJSON(`${APP_URL}?search=${query}`);
+        state.search.query = query;
+        state.search.results = data.data.recipes.map(recipe => {
+            return {
+                id: recipe.id,
+                title: recipe.title,
+                publisher: recipe.publisher,
+                image: recipe.image_url,
+            };
+        });
+    } catch (error) {
+        throw error;
+    }
 }

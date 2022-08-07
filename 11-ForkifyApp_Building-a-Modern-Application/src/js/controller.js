@@ -3,6 +3,8 @@ import recipeView from './views/recipeView.js';
 
 import 'regenerator-runtime/runtime'; // for polifilling async/await
 import 'core-js/stable'; // polifilling everything else
+import { async } from 'regenerator-runtime';
+import searchView from './views/searchView.js';
 
 const recipeContainer = document.querySelector('.recipe');
 
@@ -30,8 +32,23 @@ const recipeController = async function () { // get recipe
   }
 };
 
+const searchResultsController = async function() {
+  try {
+    const query = searchView.getQuery();
+    if(!query) return;
+
+    await model.loadSearchResults(query);
+    console.log(model.state.search.results);
+  } catch (error) {
+    console.log('search error');
+    console.log(error);
+  }
+}
+searchResultsController();
+
 const init = function() {
-  recipeView.addEventHandler(recipeController)
+  recipeView.addRenderHandler(recipeController);
+  searchView.addSearchHandler(searchResultsController);
 }
 
 init();
