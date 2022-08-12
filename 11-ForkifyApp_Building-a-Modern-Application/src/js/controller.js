@@ -21,7 +21,7 @@ const recipeController = async function () { // get recipe
     recipeView.renderLoadingSpinner();
     
     // 1. Loading recipe 
-    await model.loadRecipe("5ed6604591c37cdc054bc886");
+    await model.loadRecipe(id);
 
     // 2. Rendering recipe
     recipeView.render(model.state.recipe);
