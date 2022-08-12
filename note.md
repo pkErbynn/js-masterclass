@@ -373,6 +373,8 @@ Events
         user = user.toLowerCase();
         ...
     }
+
+    renderError(message = this._errorMessage) {...}
     ```
 - Arrow functions
     - usecase 1: when creat straigtforward function
@@ -626,9 +628,13 @@ Events
     - follow-up to .js file
 - Building Tapped component
     - **guard clause:** find the opposite of what we're interested in, and if the opposite is true, return the funtion immediately
-    ```
+    ```js
         if(!handsome) return;
         if(handsome){ interested flow }
+
+        // on array
+        const data = [];
+        if(!data || data.length === 0) return 'error'; // show when the data is empty
     ```
 - Passing Arguments for Event Handlers
     - followup to 'mennu fade animation'

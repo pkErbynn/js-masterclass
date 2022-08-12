@@ -4,6 +4,8 @@ export class View {
     _data;
 
     render(data) {
+      if(!data || Array.isArray(data) && data.length === 0 ) return this.renderError();
+      
       this._data = data;
       const markup = this._generateMarkup();  // access from child class
       this._clear();

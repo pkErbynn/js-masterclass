@@ -41,7 +41,6 @@ const searchResultsController = async function() {
 
     // 2. load search results
     await model.loadSearchResults(query);
-    console.log(model.state.search.results);
 
     // 3. render search results
     resultsView.render(model.state.search.results);
@@ -50,7 +49,6 @@ const searchResultsController = async function() {
     console.log(error);
   }
 }
-searchResultsController();
 
 const init = function() {
   recipeView.addRenderHandler(recipeController);
