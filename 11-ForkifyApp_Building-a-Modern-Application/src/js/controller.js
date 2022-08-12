@@ -1,5 +1,6 @@
 import * as model from './model.js';
 import recipeView from './views/recipeView.js';
+import resultsView from './views/resultsView.js'; // default import..not curly brase {}
 
 import 'regenerator-runtime/runtime'; // for polifilling async/await
 import 'core-js/stable'; // polifilling everything else
@@ -14,6 +15,7 @@ const recipeContainer = document.querySelector('.recipe');
 ///////////////////////////////////////
 
 const recipeController = async function () { // get recipe
+  resultsView.renderLoadingSpinner();
     
   try {
     const id = window.location.hash.slice(1);
