@@ -14,9 +14,7 @@ const recipeContainer = document.querySelector('.recipe');
 
 ///////////////////////////////////////
 
-const recipeController = async function () { // get recipe
-  resultsView.renderLoadingSpinner();
-    
+const recipeController = async function () { // get recipe    
   try {
     const id = window.location.hash.slice(1);
     if(!id) return;
@@ -27,7 +25,6 @@ const recipeController = async function () { // get recipe
 
     // 2. Rendering recipe
     recipeView.render(model.state.recipe);
-
     recipeView.renderSuccessMessage();
   } catch (error) {
     recipeView.renderError()
@@ -36,11 +33,18 @@ const recipeController = async function () { // get recipe
 
 const searchResultsController = async function() {
   try {
+    resultsView.renderLoadingSpinner();
+
+    // 1. get search query
     const query = searchView.getQuery();
     if(!query) return;
 
+    // 2. load search results
     await model.loadSearchResults(query);
     console.log(model.state.search.results);
+
+    // 3. render search results
+    resultsView.render(model.state.recipe);
   } catch (error) {
     console.log('search error');
     console.log(error);

@@ -1165,6 +1165,8 @@ Events
     - stores important data about the app which are constant
 - Error handling
     - error messages should be intrinsic property of the view layer
+- Realizations
+    - Parent class can access members of child class
 
 ## NB
 - Enable strict mode in JS to write secure code
