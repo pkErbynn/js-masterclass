@@ -11,7 +11,7 @@ export const state = {
         query: '',
         results: [],
         resultsPerPage: RESULT_PER_PAGE,
-        pageDefaultNumber: 1
+        pageNumber: 1   // 1 as default
     }
 }
 
@@ -56,7 +56,9 @@ export const loadSearchResults = async function(query) {
 }
 
 // for pagination
-export const getSearchResultPage = function(pageNumber = state.search.pageDefaultNumber){
+export const getSearchResultPage = function(pageNumber = state.search.pageNumber){
+    state.search.pageNumber = pageNumber;
+    
     const start = (pageNumber - 1) * state.search.resultsPerPage;
     const end = pageNumber * state.search.resultsPerPage;
 

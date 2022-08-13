@@ -151,6 +151,31 @@ Code run in an env called execution context. A box/container/wrapper that stores
             - In **arrow function**, 'this' is the **'this' of the surrounding/parent function** (ie, lexical 'this'). Arrow fxns **does not get their own 'this' keyword**...
                 - nb: **don't use** 'this' ins arrow fxns
             - In **event listener**: 'this' is the **DOM element that the handler is attached to**, ie. the dom element owning the handler
+                - Event handlers can have return value to their caller. eg;
+                ```js
+
+                // PaginationButtonView file
+                class PaginationButtonView{
+                    _parentElement = document.querySelector('.pagination');
+
+                    addPaginationHandler(handler) {
+                        this._parentElement.addEventListener('click', e => {
+                            const sourceBtn = e.target.closest('.btn--inline');
+                            if(!sourceBtn) return; // guard clause
+                            const goToPageBtnNumber = +sourceBtn.dataset.goto;
+                            handler(goToPageBtnNumber); // passing data to handler for further process
+                        })
+                    }
+                }
+
+                // controller file
+                const paginationButtonController = function(responseFromHandler) {
+                    console.log('page controller:', responseFromHandler); // return response 
+                }
+
+                paginationButtonView.addPaginationHandler(paginationButtonController); // pub-sub, event-driven
+
+                ```
             - The 'this' will **NOT** point to the function itself or the variable environment
                 - use a **regular function declaration/expresion** over **arrow function** to avoid the 
     2. Execution phase
@@ -1172,9 +1197,10 @@ Events
 - Error handling
     - error messages should be intrinsic property of the view layer
 - Pagination
-    - 
+    - data attribute on `<btn>` element to store data
 - Realizations
     - Parent class can access members of child class
+    - Purple numbers in console are Numbers, while White are String type
 
 
 ## NB
