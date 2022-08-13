@@ -54,16 +54,16 @@ const searchResultsController = async function() {
   }
 }
 
-const paginationButtonController = function(goToPageResponseFromHandler) {
+const paginationButtonController = function(goToPageNumberResponseFromHandler) {
   // 1. render NEW search results
-  resultsView.render(model.getSearchResultPage(goToPageResponseFromHandler));  // pagination result
+  resultsView.render(model.getSearchResultPage(goToPageNumberResponseFromHandler));  // pagination result
 
   // 2. render NEW pagination buttons
   paginationButtonView.render(model.state.search); 
 }
 
 const init = function() {
-  recipeView.addRenderHandler(recipeController);  // pub-sub, event-driven
+  recipeView.addRenderHandler(recipeController);  // pub-sub, event-driven way
   searchView.addSearchHandler(searchResultsController); // pub-sub, event-driven
   paginationButtonView.addPaginationHandler(paginationButtonController); // pub-sub, event-driven
 }
