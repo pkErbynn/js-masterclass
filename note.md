@@ -809,7 +809,7 @@ Events
         - `.bind(this)` on event handlers
 - Managing workout data: creating classes
     - desiging Workout parent class, with Cycling and Running a children through inheritance
-    - event delegation
+    - **event delegation**
         - add event to common / parent element
         - select the scope of each child element using `closest()`
         - process that target child element...
@@ -1153,6 +1153,7 @@ Events
         3. Flowchart
             - The **start (pill-shape) of the chart is always an event**
             - [Flowchart Part 1](./11-ForkifyApp_Building-a-Modern-Application/forkify-flowchart-part-1.png)
+            - [Flowchart Part 2](./11-ForkifyApp_Building-a-Modern-Application/forkify-flowchart-part-2.png)
         4. Architecture
 - [API Documentation:](https://forkify-api.herokuapp.com/v2)
 
@@ -1197,7 +1198,10 @@ Events
 - Error handling
     - error messages should be intrinsic property of the view layer
 - Pagination
+    - logic behind
     - data attribute on `<btn>` element to store data
+    - data attribute eg. `data-some-data=3` help to pass data from ui to handler
+        - turns to `dataset.someData` in non-template mode
 - Realizations
     - Parent class can access members of child class
     - Purple numbers in console are Numbers, while White are String type

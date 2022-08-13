@@ -12,6 +12,19 @@ class RecipeView extends View {
       ['load', 'hashchange'].forEach(ev => window.addEventListener(ev, handler))
     }
 
+    addUpdateServingsHandler(handler){
+      this._parentElement.addEventListener('click', e => {    // event delegation....adding event to common parent element, tracing child source and handling it
+        const sourceBtn = e.target.closest('.btn--update-servings');
+        if(!sourceBtn) return; // guard clause
+
+        const currentServings = sourceBtn.dataset.updateservingsto;     // binds data from view to back-end code
+        
+        if(+currentServings > 0){ // avoid negative servings
+          handler(+currentServings); // pass data from ui to the handler 
+        }
+      })
+    }
+
     _generateMarkup() {
         return `
         <figure class="recipe__fig">
@@ -33,16 +46,16 @@ class RecipeView extends View {
             <svg class="recipe__info-icon">
               <use href="${icons}#icon-users"></use>
             </svg>
-            <span class="recipe__info-data recipe__info-data--people">${this._data.servings }</span>
+            <span class="recipe__info-data recipe__info-data--people">${this._data.servings}</span>
             <span class="recipe__info-text">servings</span>
   
             <div class="recipe__info-buttons">
-              <button class="btn--tiny btn--increase-servings">
+              <button class="btn--tiny btn--decrease-servings btn--update-servings" data-updateservingsto="${this._data.servings - 1}">
                 <svg>
                   <use href="${icons}#icon-minus-circle"></use>
                 </svg>
               </button>
-              <button class="btn--tiny btn--increase-servings">
+              <button class="btn--tiny btn--increase-servings btn--update-servings" data-updateservingsto="${this._data.servings + 1}">
                 <svg>
                   <use href="${icons}#icon-plus-circle"></use>
                 </svg>

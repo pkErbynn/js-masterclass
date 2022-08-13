@@ -6,11 +6,11 @@ class PaginationButtonView extends View{
     _parentElement = document.querySelector('.pagination');
 
     addPaginationHandler(handler) {
-        this._parentElement.addEventListener('click', e => {
+        this._parentElement.addEventListener('click', e => {    // event delegation....adding event to common parent element, tracing child source and handling it
             const sourceBtn = e.target.closest('.btn--inline');
             if(!sourceBtn) return; // guard clause
 
-            const goToPageBtnNumber = +sourceBtn.dataset.goto;  // accessing data attribute
+            const goToPageBtnNumber = +sourceBtn.dataset.goto;  // accessing data attribute to pass data from ui to code
             handler(goToPageBtnNumber); // passing data to handler for further process
         })
     }

@@ -30,6 +30,8 @@ const recipeController = async function () { // get recipe
   } catch (error) {
     recipeView.renderError()
   }
+
+
 };
 
 const searchResultsController = async function() {
@@ -62,10 +64,19 @@ const paginationButtonController = function(goToPageNumberResponseFromHandler) {
   paginationButtonView.render(model.state.search); 
 }
 
+const updateServingsController = function (newServings) {
+  // update recipe servings in model service
+  model.updateServings(newServings);
+
+  // re-render view
+  recipeView.render(model.state.recipe);
+}
+
 const init = function() {
   recipeView.addRenderHandler(recipeController);  // pub-sub, event-driven way
   searchView.addSearchHandler(searchResultsController); // pub-sub, event-driven
   paginationButtonView.addPaginationHandler(paginationButtonController); // pub-sub, event-driven
+  recipeView.addUpdateServingsHandler(updateServingsController); // pub-sub, event-driven
 }
 
 init();
