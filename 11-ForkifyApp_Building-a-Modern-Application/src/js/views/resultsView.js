@@ -1,19 +1,19 @@
 import { View } from './view';
 import icons from 'url:../../img/icons.svg';
 
-class ResultsView extends View {    // search result view
+class ResultsView extends View {    // search result view on left pane
     _parentElement = document.querySelector('.results');
     _errorMessage = "No recipes found for this query! Please try again ;)";
 
     _generateMarkup(){
-        console.log('results view', this._data);
         return this._data.map(this._generateSingleSearchMarkup).join('');
     }
 
     _generateSingleSearchMarkup(result) {
+        const urlId = window.location.hash.slice(1);
         return `
         <li class="preview">
-            <a class="preview__link" href="#${result.id}">
+            <a class="preview__link ${result.id === urlId ? 'preview__link--active' : ''}" href="#${result.id}">
             <figure class="preview__fig">
                 <img src="${result.image}" alt="${result.title}" />
             </figure>
@@ -29,4 +29,4 @@ class ResultsView extends View {    // search result view
 
 export default new ResultsView();   // only single instance to caller
 
-{/* <a class="preview__link preview__link--active" href="#${result.id}"> - help get recipe id via the url address*/}
+/* <a class="preview__link preview__link--active" href="#${result.id}"> - help get recipe id via the url address*/

@@ -1199,9 +1199,11 @@ Events
     - error messages should be intrinsic property of the view layer
 - Pagination
     - logic behind
-    - data attribute on `<btn>` element to store data
-    - data attribute eg. `data-some-data=3` help to pass data from ui to handler
-        - turns to `dataset.someData` in non-template mode
+    - data **attribute** on `<btn>` element to store data
+    - **data attribute** eg. `data-someData=3` help to pass data from ui to handler
+        - turns to `dataset.somedata` in non-template mode
+- Generating updating algorithm
+    - **only redering dom elements whose text values changed**
 - Realizations
     - Parent class can access members of child class
     - Purple numbers in console are Numbers, while White are String type

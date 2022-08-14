@@ -15,12 +15,16 @@ const recipeContainer = document.querySelector('.recipe');
 
 ///////////////////////////////////////
 
-const recipeController = async function () { // get recipe    
+const recipesController = async function () { // get recipe    
   try {
     const id = window.location.hash.slice(1);
     if(!id) return;
     recipeView.renderLoadingSpinner();
     
+    // 0. update results view (on left pane) whenever clicked
+    resultsView.update(model.getSearchResultPage()); // pagination result
+    // resultsView.render(model.getSearchResultPage()); // causes page to flicker
+
     // 1. Loading recipe 
     await model.loadRecipe(id);
 
@@ -30,8 +34,6 @@ const recipeController = async function () { // get recipe
   } catch (error) {
     recipeView.renderError()
   }
-
-
 };
 
 const searchResultsController = async function() {
@@ -56,7 +58,7 @@ const searchResultsController = async function() {
   }
 }
 
-const paginationButtonController = function(goToPageNumberResponseFromHandler) {
+const paginationButtonsController = function(goToPageNumberResponseFromHandler) {
   // 1. render NEW search results
   resultsView.render(model.getSearchResultPage(goToPageNumberResponseFromHandler));  // pagination result
 
@@ -69,13 +71,14 @@ const updateServingsController = function (newServings) {
   model.updateServings(newServings);
 
   // re-render view
-  recipeView.render(model.state.recipe);
+  recipeView.update(model.state.recipe);  // instead of re-rendering the whole page, only the changed sections will be re-rendered for efficient loading
+  // recipeView.render(model.state.recipe);
 }
 
 const init = function() {
-  recipeView.addRenderHandler(recipeController);  // pub-sub, event-driven way
+  recipeView.addRenderHandler(recipesController);  // pub-sub, event-driven way
   searchView.addSearchHandler(searchResultsController); // pub-sub, event-driven
-  paginationButtonView.addPaginationHandler(paginationButtonController); // pub-sub, event-driven
+  paginationButtonView.addPaginationHandler(paginationButtonsController); // pub-sub, event-driven
   recipeView.addUpdateServingsHandler(updateServingsController); // pub-sub, event-driven
 }
 
