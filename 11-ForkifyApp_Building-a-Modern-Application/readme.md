@@ -26,7 +26,7 @@ This allows users to;
 - Parcel
 - [External API](https://forkify-api.herokuapp.com/v2)
 
-## Architecture
+## Architecture - MVC
 <img src="./forkify-architecture-recipe-loading.png">
 
 ## Flowchart
