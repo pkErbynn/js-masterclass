@@ -25,7 +25,7 @@ export class View {
         const currentEl = currentElements[i];
 
         // update changed texts
-        if(!newEl.isEqualNode(currentEl) && newEl.firstChild.nodeValue.trim() !== ''){
+        if(!newEl.isEqualNode(currentEl) && newEl.firstChild?.nodeValue.trim() !== ''){
           currentEl.textContent = newEl.textContent;
         }
 

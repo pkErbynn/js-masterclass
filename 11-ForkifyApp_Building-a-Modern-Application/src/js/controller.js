@@ -75,11 +75,35 @@ const updateServingsController = function (newServings) {
   // recipeView.render(model.state.recipe);
 }
 
+const bookmarksController = function() {
+  console.log('before bk', model.state.bookmarks);
+  if(!model.state.recipe.isBookmarked) {
+    model.bookmarkRecipe(model.state.recipe);
+  } else {
+    model.deleteBookmarkedRecipe(model.state.recipe.id)
+  }
+  console.log('after bk', model.state.bookmarks);
+
+  console.log(model.state.recipe);
+
+  recipeView.update(model.state.recipe);
+}
+
 const init = function() {
   recipeView.addRenderHandler(recipesController);  // pub-sub, event-driven way
   searchView.addSearchHandler(searchResultsController); // pub-sub, event-driven
   paginationButtonView.addPaginationHandler(paginationButtonsController); // pub-sub, event-driven
   recipeView.addUpdateServingsHandler(updateServingsController); // pub-sub, event-driven
+  recipeView.addBookmarkHandler(bookmarksController);
 }
 
 init();
+
+
+
+//==== MVC Pattern in short
+// UI render successfully (in Views)
+// UI has event handlers (in Views for async executions)
+// Controller (in Controller) is registered as listener/handler to event handlers (in Views)
+    // Some controllers are even registered when the ui is rendered/loaded first
+// Controller later is called and then inturn, calls services in the model data layer (in Model file)

@@ -550,7 +550,8 @@ Events
     - used to find only one matching element
     - vs Filter
         - **find doesn't return a new array but filter does**
-- FindIndex() into Splice()
+- **FindIndex() into Splice()**
+    - really useful to delete item
 - Some()
     - checks if matches **any** of the condition
     - **similar to includes()** some(x => x == match)
@@ -813,6 +814,7 @@ Events
         - add event to common / parent element
         - select the scope of each child element using `closest()`
         - process that target child element...
+        - help to listen for event on child element that's not rendered yet (generated dynamically), by targeting the parent element which there already and then traversing down to the child element by the time it's present  
 - Working with local storage
     - storing works in browser local storage
     -  **object loses its prototype chain when restored from local storage**
@@ -1204,6 +1206,7 @@ Events
         - turns to `dataset.somedata` in non-template mode
 - Generating updating algorithm
     - **only redering dom elements whose text values changed**
+- Bookmarking    
 - Realizations
     - Parent class can access members of child class
     - Purple numbers in console are Numbers, while White are String type

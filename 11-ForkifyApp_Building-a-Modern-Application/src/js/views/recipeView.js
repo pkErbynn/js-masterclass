@@ -12,6 +12,15 @@ class RecipeView extends View {
       ['load', 'hashchange'].forEach(ev => window.addEventListener(ev, handler))
     }
 
+    addBookmarkHandler(handler) {
+      this._parentElement.addEventListener('click', e => {
+        const btnSource = e.target.closest('.btn--bookmark');
+        if(!btnSource) return;
+        console.log('tbsource', btnSource);
+        handler();
+      })
+    }
+
     addUpdateServingsHandler(handler){
       this._parentElement.addEventListener('click', e => {    // event delegation....adding event to common parent element, tracing child source and handling it
         const sourceBtn = e.target.closest('.btn--update-servings');
@@ -68,9 +77,9 @@ class RecipeView extends View {
               <use href="${icons}#icon-user"></use>
             </svg>
           </div>
-          <button class="btn--round">
+          <button class="btn--round btn--bookmark">
             <svg class="">
-              <use href="${icons}#icon-bookmark-fill"></use>
+              <use href="${icons}#icon-bookmark${this._data.isBookmarked ? '-fill' : ''}"></use>
             </svg>
           </button>
         </div>
