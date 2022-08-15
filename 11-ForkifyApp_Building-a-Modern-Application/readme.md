@@ -21,6 +21,10 @@ This allows users to;
     - On page load, read saved bookmaks from local storage and display
     
 ## Technologies Used
+- HMTL/CSS
+- Javascript (ES6)
+- Parcel
+- [External API](https://forkify-api.herokuapp.com/v2)
 
 ## Architecture
 <img src="./forkify-architecture-recipe-loading.png">
