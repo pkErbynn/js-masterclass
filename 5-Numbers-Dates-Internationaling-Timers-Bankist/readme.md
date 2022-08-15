@@ -1,5 +1,5 @@
 ## Bankist
-A minimalistic javascript-based banking application with features like;
+A minimalistic javascript-based banking application with the following features;
 - transfere funds (attaches date)
 - request loan (attaches requested date)
 - display statements
@@ -7,18 +7,26 @@ A minimalistic javascript-based banking application with features like;
 - close account
 
 Link: https://ephemeral-frangollo-d097b7.netlify.app/5-numbers-dates-internationaling-timers-bankist/
-### User pin
-Experiment with this credentials:
+
+### Tools
+- HTML/CSS
+- Pure Javascript (ES6+)
+
+## App Testing
+Experiment with these User pins:
 ```js
 user1: js        user2: jd
 pin1: 1111       pin2: 2222
 ``` 
 
+## Flowchart
+<img src="./Bankist-flowchart.png">
+
 ## Demo 
 * Screenshot <br>
 <img src="./assets/banky.png">
 
-* Workflow <br>
+* Live demo <br>
 
 
 https://user-images.githubusercontent.com/29948157/178261888-6a49ea15-7558-4aea-b45c-9fd2bbd32e03.mp4

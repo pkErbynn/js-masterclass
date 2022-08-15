@@ -1217,6 +1217,7 @@ Events
 - Emojis are 2-character long not 1-character
 - array[i] means the value
 - object[i] means property or value
+- **Documented code on dev branch**
 
 ### Resources
 - Leaflet
