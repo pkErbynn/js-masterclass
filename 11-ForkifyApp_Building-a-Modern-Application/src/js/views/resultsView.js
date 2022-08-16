@@ -6,10 +6,10 @@ class ResultsView extends View {    // search result view on left pane
     _errorMessage = "No recipes found for this query! Please try again ;)";
 
     _generateMarkup(){
-        return this._data.map(this._generateSingleSearchMarkup).join('');
+        return this._data.map(this._generateSingleMarkup).join('');
     }
 
-    _generateSingleSearchMarkup(result) {
+    _generateSingleMarkup(result) {
         const urlId = window.location.hash.slice(1);
         return `
         <li class="preview">

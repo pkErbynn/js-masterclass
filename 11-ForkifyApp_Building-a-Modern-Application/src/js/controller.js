@@ -7,6 +7,7 @@ import 'core-js/stable'; // polifilling everything else
 import { async } from 'regenerator-runtime';
 import searchView from './views/searchView.js';
 import paginationButtonView from './views/paginationButtonView.js';
+import bookmarkView from './views/bookmarkView.js';
 
 const recipeContainer = document.querySelector('.recipe');
 
@@ -22,9 +23,9 @@ const recipesController = async function () { // get recipe
     recipeView.renderLoadingSpinner();
     
     // 0. update results view (on left pane) whenever clicked
-    resultsView.update(model.getSearchResultPage()); // pagination result
-    // resultsView.render(model.getSearchResultPage()); // causes page to flicker
-
+    resultsView.update(model.getSearchResultPage()); // pagination result....render(model.getSearchResultPage()); // causes page to flicker
+    bookmarkView.update(model.state.bookmarks);
+    
     // 1. Loading recipe 
     await model.loadRecipe(id);
 
@@ -76,17 +77,18 @@ const updateServingsController = function (newServings) {
 }
 
 const bookmarksController = function() {
-  console.log('before bk', model.state.bookmarks);
+  // 1. add/remove bookmark
   if(!model.state.recipe.isBookmarked) {
     model.bookmarkRecipe(model.state.recipe);
   } else {
     model.deleteBookmarkedRecipe(model.state.recipe.id)
   }
-  console.log('after bk', model.state.bookmarks);
 
-  console.log(model.state.recipe);
-
+  // 2. update recipe view
   recipeView.update(model.state.recipe);
+
+  // 3. Render bookmarks
+  bookmarkView.render(model.state.bookmarks); // .update() instead
 }
 
 const init = function() {
