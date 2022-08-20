@@ -82,3 +82,5 @@ export class View {
       this._parentElement.insertAdjacentHTML('afterbegin', markup);  // insert element as first child element
     }
 }
+
+// nb: the class is imported, not an instance

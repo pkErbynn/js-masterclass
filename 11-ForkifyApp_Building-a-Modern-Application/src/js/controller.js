@@ -9,8 +9,6 @@ import searchView from './views/searchView.js';
 import paginationButtonView from './views/paginationButtonView.js';
 import bookmarkView from './views/bookmarkView.js';
 
-const recipeContainer = document.querySelector('.recipe');
-
 
 //API Documentation: https://forkify-api.herokuapp.com/v2
 
@@ -91,8 +89,13 @@ const bookmarksController = function() {
   bookmarkView.render(model.state.bookmarks); // .update() instead
 }
 
+const onInitBookmarksController = function(){ // loading recipe data populated from localstorage if available
+  bookmarkView.render(model.state.bookmarks);
+}
+
 const init = function() {
-  recipeView.addRenderHandler(recipesController);  // pub-sub, event-driven way
+  bookmarkView.addRenderHandler(onInitBookmarksController);
+  recipeView.addRenderHandler(recipesController);  // pub-sub pattern, event-driven way
   searchView.addSearchHandler(searchResultsController); // pub-sub, event-driven
   paginationButtonView.addPaginationHandler(paginationButtonsController); // pub-sub, event-driven
   recipeView.addUpdateServingsHandler(updateServingsController); // pub-sub, event-driven

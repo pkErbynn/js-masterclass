@@ -1,14 +1,13 @@
 import { View } from './view';
 import icons from 'url:../../img/icons.svg';
 
-class BookmarkView extends View {    // search result view on left pane
-    _parentElement = document.querySelector('.bookmarks__list');
-    _errorMessage = "No recipes bookmarked yet ;)";
+// unused class 
 
-    addRenderHandler(handler) { // load available bookmarks on init
-        window.addEventListener('load', handler);
-    }
-    
+export class PreviewView extends View {    // search result view on left pane
+
+    _parentElement = '';
+    _errorMessage = '';
+
     _generateMarkup(){
         return this._data.map(this._generateSingleMarkup).join('');
     }
@@ -31,6 +30,5 @@ class BookmarkView extends View {    // search result view on left pane
     }
 }
 
-export default new BookmarkView();   // only single instance to caller
 
 /* <a class="preview__link preview__link--active" href="#${result.id}"> - help get recipe id via the url address*/

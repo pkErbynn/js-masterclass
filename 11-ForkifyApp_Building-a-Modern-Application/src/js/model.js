@@ -87,6 +87,11 @@ export const updateServings = function(newServings){
     state.recipe.servings = newServings;
 }
 
+// no need to export cus it's a private method
+const persistBookmarks = function(){
+    localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks))
+}
+
 export const bookmarkRecipe = function(recipe) {
     state.bookmarks.push(recipe);
 
@@ -94,6 +99,8 @@ export const bookmarkRecipe = function(recipe) {
     if(recipe.id == state.recipe.id){
         state.recipe.isBookmarked = true;
     }
+
+    persistBookmarks();
 }
 
 export const deleteBookmarkedRecipe = function(id) {  // unbookmark
@@ -106,4 +113,14 @@ export const deleteBookmarkedRecipe = function(id) {  // unbookmark
     if(state.recipe.id == id){
         state.recipe.isBookmarked = false;
     }
+
+    persistBookmarks();
 }
+
+const init = function() {
+    const storage = localStorage.getItem('bookmarks');
+    if(storage) {
+        state.bookmarks = JSON.parse(storage);
+    }
+}
+init();
