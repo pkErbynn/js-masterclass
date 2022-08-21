@@ -94,6 +94,10 @@ const onInitBookmarksController = function(){ // loading recipe data populated f
   bookmarkView.render(model.state.bookmarks);
 }
 
+const postRecipeHandler = function(response) {
+  console.log('postRes:', response);
+}
+
 const init = function() {
   bookmarkView.addRenderHandler(onInitBookmarksController);
   recipeView.addRenderHandler(recipesController);  // pub-sub pattern, event-driven way
@@ -101,6 +105,7 @@ const init = function() {
   paginationButtonView.addPaginationHandler(paginationButtonsController); // pub-sub, event-driven
   recipeView.addUpdateServingsHandler(updateServingsController); // pub-sub, event-driven
   recipeView.addBookmarkHandler(bookmarksController);
+  addRecipeView._addPostRecipeHandler(postRecipeHandler);
 }
 
 init();

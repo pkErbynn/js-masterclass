@@ -371,6 +371,8 @@ Events
         - easy to access with . and []
         - when working with json
         - when need only string as keys and *need to include methods* as value
+    - **entries:** `[['1', one], ['2', two], ...]`
+        -  convert entries to object with `Object.fromEntries(entries)`
 - Arrays vs Sets
     - arrays: 
         - used when need **ordered** list of values
@@ -623,7 +625,7 @@ Events
         - document
             - is another type of SubNode
             - has access to `.querySelector(), .getElementById(), etc`
-    - The Node object also inherits from a super class object called **EventTarget**
+- The Node object also inherits from a super class object called **EventTarget**
         - which has access to these methods - `.addEventListener(), .removeEventListener()`
         - this makes it possible for child nodes to add and listen to event listeners
 - Selecting, Creating and Deleting ELEMENTS
