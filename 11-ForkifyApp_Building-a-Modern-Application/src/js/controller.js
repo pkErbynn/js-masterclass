@@ -98,7 +98,7 @@ const onInitBookmarksController = function(){ // loading recipe data populated f
 const postRecipeController = async function(recipeResponse) {
   try {
     // // loading spinner
-    // addRecipeView.renderLoadingSpinner();
+    addRecipeView.renderLoadingSpinner();
 
     // post recipe
     await model.postRecipe(recipeResponse);

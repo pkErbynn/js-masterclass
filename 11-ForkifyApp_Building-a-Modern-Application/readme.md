@@ -1,7 +1,5 @@
 # Forkify
-This is a modern and advanced application that makes use of concepts like classes, modules, promises, async/await, Parcel and more.
-
-This project dives deep into flow-chart and project architecture
+The recipe hub modern application that basically allows users to search for recipes and display them on the UI. 
 
 ## Features
 This allows users to;
@@ -19,10 +17,11 @@ This allows users to;
 5. see my bookmarks and own recipes when I leave the app and come back later, so that they can close the app safely after
     - Store bookmark data in the browser using local storage
     - On page load, read saved bookmaks from local storage and display
-    
+
+[Link available here.](https://tantalizing-recipo.netlify.app/)
 ## Technologies Used
 - HMTL/CSS
-- Javascript (ES6)
+- Javascript (ES6 - classes, modules, promises, async/await and more)
 - Parcel
 - [External API](https://forkify-api.herokuapp.com/v2)
 - Js Docs
@@ -34,9 +33,10 @@ This allows users to;
 <img src="./forkify-flowchart-part-3.png">
 
 ## Screenshots
-
+<img src="./forkify-app-screenshot.png">
 
 ## Live Demo
+
 
 NB:
 
