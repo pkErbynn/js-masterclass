@@ -1,5 +1,5 @@
 # Vibranium JavaScript Masterclass
-Building real-world projects with pure vanilla Javascript.
+Building real-world projects using pure vanilla Javascript (with ES6+).
 
 ## Forkify
 [Forkify](https://github.com/pkErbynn/vibraniumJS/tree/main/11-ForkifyApp_Building-a-Modern-Application) - A modern recipe hub application that basically allows users to search for recipes and display them on the UI.
@@ -10,14 +10,11 @@ Forkify allows users to;
 - create my own recipes, so that they have them all organized in the same app
 - see my bookmarks and own recipes when I leave the app and come back later, so that they can close the app safely after
 
-
 [<u>_Repo link here_</u>.](https://github.com/pkErbynn/vibraniumJS/tree/main/11-ForkifyApp_Building-a-Modern-Application)
+
 ### Live Demo:
 
-
-
 https://user-images.githubusercontent.com/29948157/185798381-c123e76b-d125-4535-84a2-a4b2ce270e01.mp4
-
 
 
 ## Mapty

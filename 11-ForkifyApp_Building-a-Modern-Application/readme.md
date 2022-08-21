@@ -19,6 +19,7 @@ This allows users to;
     - On page load, read saved bookmaks from local storage and display
 
 [Link available here.](https://tantalizing-recipo.netlify.app/)
+
 ## Technologies Used
 - HMTL/CSS
 - Javascript (ES6 - classes, modules, promises, async/await and more)
