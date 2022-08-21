@@ -38,9 +38,5 @@ This allows users to;
 
 ## Live Demo
 
+https://user-images.githubusercontent.com/29948157/185798736-b083bba1-1cfd-47c3-8f90-8a3a326cd996.mp4
 
-NB:
-
-- Page is served with Parcel 
-- Parcel need a way to access static files like images, therefore need to import images from images folder to js file
-    - For images in dynamic html markup in js, need to import images the html with Parcel
