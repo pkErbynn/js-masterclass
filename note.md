@@ -1221,6 +1221,10 @@ Events
     - Files structure
         - helpers | config => models/services | config => controllers | config => views  
 - Misc impl
+    - Parcel
+        - Page is served with Parcel 
+        - Parcel need a way to access static files like images, therefore need to import images from images folder to js file
+    - For images in dynamic html markup in js, need to import images the html with Parcel
     - Config file
         - stores important data about the app which are constant
     - Error handling
