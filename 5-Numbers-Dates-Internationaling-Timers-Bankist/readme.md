@@ -6,18 +6,18 @@ A minimalistic javascript-based banking application with the following features;
 - sort statement
 - close account
 
-Link: https://ephemeral-frangollo-d097b7.netlify.app/5-numbers-dates-internationaling-timers-bankist/
-
-### Tools
+## Tools
 - HTML/CSS
 - Pure Javascript (ES6+)
 
 ## App Testing
-Experiment with these User pins:
+Experiment with these user pins:
 ```js
 user1: js        user2: jd
 pin1: 1111       pin2: 2222
 ``` 
+Link: https://ephemeral-frangollo-d097b7.netlify.app/5-numbers-dates-internationaling-timers-bankist/
+
 
 ## Flowchart
 <img src="./Bankist-flowchart.png">

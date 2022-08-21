@@ -5,7 +5,7 @@ Building real-world projects with pure vanilla Javascript.
 [Bankist](https://github.com/pkErbynn/vibraniumJS/tree/main/5-Numbers-Dates-Internationaling-Timers-Bankist) - A minimalistic javascript-based banking application which allows users to transfer funds, request loan (attaches requested date), display statements
 sort statements and close account.
 
-[<u>_Repo link here._</u>](https://github.com/pkErbynn/vibraniumJS/tree/main/5-Numbers-Dates-Internationaling-Timers-Bankist)
+[<u>_Repo link here_</u>.](https://github.com/pkErbynn/vibraniumJS/tree/main/5-Numbers-Dates-Internationaling-Timers-Bankist)
 ### Live Demo:
 https://user-images.githubusercontent.com/29948157/178262054-d533057c-bd50-4524-a63f-5887ae7f2bcd.mp4
 
