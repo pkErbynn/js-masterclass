@@ -3,6 +3,12 @@ import icons from 'url:../../img/icons.svg';
 export class View {
     _data;
 
+    /** Documentation for this method - For more - go to Js Docs
+     * Render recieved data to the DOM
+     * @param { Object | Object[]} data The data to be rendered
+     * @returns {undefined}
+     * @todo fininished implementation
+     */
     render(data) {
       if(!data || Array.isArray(data) && data.length === 0 ) return this.renderError();
       

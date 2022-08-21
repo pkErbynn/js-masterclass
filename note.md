@@ -1238,6 +1238,7 @@ Events
         - Parent class can access members of child class
         - Purple numbers in console are Numbers, while White are String type
         - **The `this` keyword in event handler points to the caller by default. To change the reference point to the current object, outsource the handler block to a function and use the `.bind(this)` on the function**
+    - Js docs
 
 
 ## NB

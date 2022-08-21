@@ -25,6 +25,7 @@ This allows users to;
 - Javascript (ES6)
 - Parcel
 - [External API](https://forkify-api.herokuapp.com/v2)
+- Js Docs
 
 ## Architecture - MVC
 <img src="./forkify-architecture-recipe-loading.png">
