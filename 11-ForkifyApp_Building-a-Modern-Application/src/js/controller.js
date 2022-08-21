@@ -8,6 +8,7 @@ import { async } from 'regenerator-runtime';
 import searchView from './views/searchView.js';
 import paginationButtonView from './views/paginationButtonView.js';
 import bookmarkView from './views/bookmarkView.js';
+import addRecipeView from './views/addRecipeView.js';
 
 
 //API Documentation: https://forkify-api.herokuapp.com/v2

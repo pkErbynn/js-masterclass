@@ -124,3 +124,9 @@ const init = function() {
     }
 }
 init();
+
+// used under dev mode
+// const clearBookmarksFromLocalStorage = function () {
+//     localStorage.clear('bookmarks');
+// };
+// clearBookmarksFromLocalStorage();
