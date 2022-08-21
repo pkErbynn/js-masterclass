@@ -1,14 +1,14 @@
 # vibranium-javaScript-masterclass
 Building projects with pure vanilla Javascript
 
-[bankist](https://github.com/pkErbynn/vibraniumJS/tree/main/5-Numbers-Dates-Internationaling-Timers-Bankist) 
+[Bankist](https://github.com/pkErbynn/vibraniumJS/tree/main/5-Numbers-Dates-Internationaling-Timers-Bankist) 
 
 
 https://user-images.githubusercontent.com/29948157/178262054-d533057c-bd50-4524-a63f-5887ae7f2bcd.mp4
 
 
 
-[mapty](https://github.com/pkErbynn/vibraniumJS/tree/main/8-Mapty-OOP-Geolocation) - ![Mapty animation](https://j.gifs.com/pZqpqN.gif)
+[Mapty](https://github.com/pkErbynn/vibraniumJS/tree/main/8-Mapty-OOP-Geolocation)  ![Mapty animation](https://j.gifs.com/pZqpqN.gif)
 
 
 
