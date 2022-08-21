@@ -1,5 +1,5 @@
 # Mapty
-An stand-alone application that gets your current geolocation and allows you to log your workouts on map.
+A stand-alone application that gets your current geolocation and allows you to log your workouts on map.
 It allows users to:
 - get their location coordinates to render map on current location
 - pin their running workouts on map with location, distance, time, pace and steps/minute, to keep a log of all their running
