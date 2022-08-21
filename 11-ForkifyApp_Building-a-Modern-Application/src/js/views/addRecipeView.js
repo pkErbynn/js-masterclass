@@ -3,6 +3,7 @@ import icons from 'url:../../img/icons.svg';
 
 class AddRecipeView extends View {
     _parentElement = document.querySelector('.upload');
+    _successMessage = 'Recipe was uploaded successfully :)'
 
     _window = document.querySelector('.add-recipe-window');
     _overlay = document.querySelector('.overlay');
@@ -15,18 +16,18 @@ class AddRecipeView extends View {
         this._addHideWindowHandler();
     }
 
-    _toggleWindowDisplay() {
+    toggleWindowDisplay() {
         this._overlay.classList.toggle('hidden'); // add/remove hidden class
         this._window.classList.toggle('hidden'); // add/remove hidden class
     }
 
     _addShowWindowHandler(){ // no controller as handler cus it has nothing to deal with api/feteching data in first place
-        this._addRecipeFormBtn.addEventListener('click', this._toggleWindowDisplay.bind(this)); // .bind(this) ***
+        this._addRecipeFormBtn.addEventListener('click', this.toggleWindowDisplay.bind(this)); // .bind(this) ***
     }
 
     _addHideWindowHandler(){ // no controoler + has two ways of closing form
-        this._closeFormBtn.addEventListener('click', this._toggleWindowDisplay.bind(this)); // .bind(this) ***
-        this._overlay.addEventListener('click', this._toggleWindowDisplay.bind(this)); // .bind(this) ***
+        this._closeFormBtn.addEventListener('click', this.toggleWindowDisplay.bind(this)); // .bind(this) ***
+        this._overlay.addEventListener('click', this.toggleWindowDisplay.bind(this)); // .bind(this) ***
     }
 
     _addPostRecipeHandler(handler){ // post recipe...related to api to calls so need a handler parameter

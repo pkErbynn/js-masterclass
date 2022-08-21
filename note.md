@@ -300,6 +300,17 @@ Events
 - Short-circuiting with or and &&
     - `&&` => to **replace one-line if-condition without the 'else' part**
     - `||` => to set default value where 0 and null are invalid
+    - eg; Adding a key-value pair to object if key exist on incomming `data`
+    ```js
+    let recipe = data;
+    return {
+        id: recipe.id,
+        cookingTime: recipe.cooking_time,
+        ingredients: recipe.ingredients,
+        ...(recipe?.key && {key: recipe?.key})  // add object if exists **
+    }
+    ```
+
 - **Null colescing** value
     - **always use to replace default value setup w/ ternary (when 0 is considered valid)**
     - for only `nullish` property
@@ -371,8 +382,18 @@ Events
         - easy to access with . and []
         - when working with json
         - when need only string as keys and *need to include methods* as value
-    - **entries:** `[['1', one], ['2', two], ...]`
-        -  convert entries to object with `Object.fromEntries(entries)`
+- Object to/from Entries
+    - Can convert entries to object 
+    - Convert object to entries in order to perform data transfromation with map, filters, etc on it
+    - **entries eg:** 
+        ```js
+        [
+            ['1', one], 
+            ['2', two], ...
+        ]
+        ```
+        - convert entries to object with `Object.fromEntries(entries)`
+        - vice-versa (from object to enteries): `Object.entries(someobject)`
 - Arrays vs Sets
     - arrays: 
         - used when need **ordered** list of values

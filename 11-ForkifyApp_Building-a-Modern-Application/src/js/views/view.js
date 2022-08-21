@@ -67,7 +67,7 @@ export class View {
       this._parentElement.insertAdjacentHTML('afterbegin', markup);  // insert element as first child element
     }
   
-    renderSuccessMessage(message = this._sucessMessage) { // nice trick on default param
+    renderSuccessMessage(message = this._successMessage) { // nice trick on default param
       const markup = `
       <div class="message">
         <div>

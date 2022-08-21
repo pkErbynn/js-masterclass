@@ -9,6 +9,7 @@ import searchView from './views/searchView.js';
 import paginationButtonView from './views/paginationButtonView.js';
 import bookmarkView from './views/bookmarkView.js';
 import addRecipeView from './views/addRecipeView.js';
+import { MODAL_CLOSE_SEC } from './config.js';
 
 
 //API Documentation: https://forkify-api.herokuapp.com/v2
@@ -94,8 +95,27 @@ const onInitBookmarksController = function(){ // loading recipe data populated f
   bookmarkView.render(model.state.bookmarks);
 }
 
-const postRecipeHandler = function(response) {
-  console.log('postRes:', response);
+const postRecipeController = async function(recipeResponse) {
+  try {
+    // // loading spinner
+    // addRecipeView.renderLoadingSpinner();
+
+    // post recipe
+    await model.postRecipe(recipeResponse);
+
+    // render posted recipe
+    recipeView.render(model.state.recipe);
+
+    // sucess message
+    // addRecipeView.renderSuccessMessage();
+
+    // close form
+    setTimeout(() => {
+      addRecipeView.toggleWindowDisplay();
+    }, MODAL_CLOSE_SEC * 1000);
+  } catch (error) {
+    addRecipeView.renderError(error.message)    
+  }
 }
 
 const init = function() {
@@ -105,7 +125,7 @@ const init = function() {
   paginationButtonView.addPaginationHandler(paginationButtonsController); // pub-sub, event-driven
   recipeView.addUpdateServingsHandler(updateServingsController); // pub-sub, event-driven
   recipeView.addBookmarkHandler(bookmarksController);
-  addRecipeView._addPostRecipeHandler(postRecipeHandler);
+  addRecipeView._addPostRecipeHandler(postRecipeController);
 }
 
 init();
@@ -118,3 +138,6 @@ init();
 // Controller (in Controller) is registered as listener/handler to event handlers (in Views)
     // Some controllers are even registered when the ui is rendered/loaded first
 // Controller later is called and then inturn, calls services in the model data layer (in Model file)
+
+// === Error handling
+// All errors in service/model layer is thrown and then handled in controller layer, redering it in view
