@@ -17,13 +17,18 @@ export class PreviewView extends View {    // search result view on left pane
         return `
             <li class="preview">
                 <a class="preview__link ${result.id === urlId ? 'preview__link--active' : ''}" href="#${result.id}">
-                <figure class="preview__fig">
-                    <img src="${result.image}" alt="${result.title}" />
-                </figure>
-                <div class="preview__data">
-                    <h4 class="preview__title">${result.title}</h4>
-                    <p class="preview__publisher">${result.publisher}</p>
-                </div>
+                    <figure class="preview__fig">
+                        <img src="${result.image}" alt="${result.title}" />
+                    </figure>
+                    <div class="preview__data">
+                        <h4 class="preview__title">${result.title}</h4>
+                        <p class="preview__publisher">${result.publisher}</p>
+                        <button class="btn--round btn--bookmark">
+                            <svg class="">
+                            <use href="${icons}#icon-bookmark${this._data.isBookmarked ? '-fill' : ''}"></use>
+                            </svg> 
+                        </button>
+                    </div>
                 </a>
             </li>
         `;

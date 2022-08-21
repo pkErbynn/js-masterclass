@@ -107,7 +107,13 @@ const postRecipeController = async function(recipeResponse) {
     recipeView.render(model.state.recipe);
 
     // sucess message
-    // addRecipeView.renderSuccessMessage();
+    addRecipeView.renderSuccessMessage();
+
+    // render bookmark
+    bookmarkView.render(model.state.bookmarks);
+
+    // change id in url 
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
 
     // close form
     setTimeout(() => {

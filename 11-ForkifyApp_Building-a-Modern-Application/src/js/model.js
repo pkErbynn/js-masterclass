@@ -3,7 +3,9 @@
 import { async } from "regenerator-runtime"
 import { API_KEY, APP_URL } from "./config";
 import { RESULT_PER_PAGE } from "./config";
-import { getJSON, postJSON } from "./helper";
+import { callAJAXApi } from "./helper";
+// import { getJSON, postJSON } from "./helper";
+
 
 //////// model //////////////
 export const state = {
@@ -36,7 +38,7 @@ const createRecipeObject = function (data) {
 
 export const loadRecipe = async function(id) {
     try {
-        const data = await getJSON(`${APP_URL}${id}`);
+        const data = await callAJAXApi(`${APP_URL}${id}?key=${API_KEY}`);
 
         state.recipe = createRecipeObject(data);
         console.log("loaded recipes", state.recipe);
@@ -56,7 +58,7 @@ export const loadRecipe = async function(id) {
 
 export const loadSearchResults = async function(query) {
     try {
-        const data = await getJSON(`${APP_URL}?search=${query}`);
+        const data = await callAJAXApi(`${APP_URL}?search=${query}?key=${API_KEY}`);
         state.search.query = query;
         state.search.results = data.data.recipes.map(recipe => {
             return {
@@ -64,6 +66,7 @@ export const loadSearchResults = async function(query) {
                 title: recipe.title,
                 publisher: recipe.publisher,
                 image: recipe.image_url,
+                ...(recipe?.key && {key: recipe?.key}) 
             };
         });
 
@@ -80,8 +83,7 @@ export const getSearchResultPage = function(pageNumber = state.search.pageNumber
     const start = (pageNumber - 1) * state.search.resultsPerPage;
     const end = pageNumber * state.search.resultsPerPage;
 
-    console.log('per page', state.search.results.slice(start, end));    // diff b/n start and end is 10
-    return state.search.results.slice(start, end);
+    return state.search.results.slice(start, end); // diff b/n start and end is 10
 }
 
 export const updateServings = function(newServings){
@@ -144,7 +146,7 @@ export const postRecipe = async function (newRecipe) {
             cooking_time: +newRecipe.cookingTime,
             ingredients: ingredients
         }
-        const data = await postJSON(`${APP_URL}?key=${API_KEY}`, recipe);
+        const data = await callAJAXApi(`${APP_URL}?key=${API_KEY}`, recipe);
         console.log('data:', data);
         state.recipe = createRecipeObject(data);
         bookmarkRecipe(state.recipe);

@@ -318,7 +318,7 @@ Events
     - checks if property exist before access
     - **used w/ null colescing to set default**
     - `a.b?.c ?? 'default'`
-- **Use case**;    
+- **Refactoring - Use case**;    
     ```js
     const userSpendingLimit = {
         'erb': 1200,
@@ -352,7 +352,7 @@ Events
     // Improved A...ternary
     output += entry.value <= -bigLimit ? `${entry.description.slice(-2)} / ` : '';
     ```
-    - Refer to the [`clean.js`](./10-Modern-JavaScript-Modules-Tooling/clean.js) in Module `10-Modern...` for more details
+    - Refer to the [`clean.js`](./10-Modern-JavaScript-Modules-Tooling/clean.js) in Module `10-Modern...` for more **refactoring** details
 
 - **For-of loop**
     - get index with `.entries()`
@@ -1218,22 +1218,26 @@ Events
         - View: Presentation Logic
     - 4. Architecture
         - [Project architecture: Recipe Loading](./11-ForkifyApp_Building-a-Modern-Application/forkify-architecture-recipe-loading.png)
-- Config file
-    - stores important data about the app which are constant
-- Error handling
-    - error messages should be intrinsic property of the view layer
-- Pagination
-    - logic behind
-    - data **attribute** on `<btn>` element to store data
-    - **data attribute** eg. `data-someData=3` help to pass data from ui to handler
-        - turns to `dataset.somedata` in non-template mode
-- Generating updating algorithm
-    - **only redering dom elements whose text values changed**
-- Bookmarking    
-- Realizations
-    - Parent class can access members of child class
-    - Purple numbers in console are Numbers, while White are String type
-    - **The `this` keyword in event handler points to the caller by default. To change the reference point to the current object, outsource the handler block to a function and use the `.bind(this)` on the function**
+    - Files structure
+        - helpers | config => models/services | config => controllers | config => views  
+- Misc impl
+    - Config file
+        - stores important data about the app which are constant
+    - Error handling
+        - error messages should be intrinsic property of the view layer
+    - Pagination
+        - logic behind
+        - data **attribute** on `<btn>` element to store data
+        - **data attribute** eg. `data-someData=3` help to pass data from ui to handler
+            - turns to `dataset.somedata` in non-template mode
+    - Generating updating algorithm
+        - **only redering dom elements whose text values changed**
+    - Bookmarking
+    - **API request timeout**
+    - Realizations
+        - Parent class can access members of child class
+        - Purple numbers in console are Numbers, while White are String type
+        - **The `this` keyword in event handler points to the caller by default. To change the reference point to the current object, outsource the handler block to a function and use the `.bind(this)` on the function**
 
 
 ## NB
