@@ -7,7 +7,7 @@ Building real-world projects using pure vanilla Javascript. Convering technical 
 - Code architecture using flowcharts and common patterns
 - Modern tools: NPM, Parcel, Babel and ES6 modules
 
-Bellow encapsulate pure javascript projects I developed. 
+Bellow encapsulate some pure javascript projects I developed. 
 
 ## Forkify
 [Forkify](https://github.com/pkErbynn/vibraniumJS/tree/main/11-ForkifyApp_Building-a-Modern-Application) - A modern recipe hub application that basically allows users to search for recipes and display them on the UI.
