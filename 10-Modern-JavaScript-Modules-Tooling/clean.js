@@ -1,6 +1,7 @@
 // This file demonstrate refactoring of old way js to modern 
 // Runs from Option A, B, ... mapping to Basic/Good, Pro/Better, Legend/Best
 
+
 const budget = [
   { value: 250, description: 'Sold old TV 📺', user: 'jonas' },
   { value: -45, description: 'Groceries 🥑', user: 'jonas' },
@@ -182,3 +183,65 @@ const logBigExpenses2 = function (state, bigLimit) {
 }
 
 logBigExpenses2(finalBudget, 100);
+
+
+
+/////// another refactoring case
+// the code below have lots of duplicate lines excluding the fetch method. 
+// Refactor to make them reusable and more manageable 
+export const getData = async function (url) {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+    
+        if(!response.ok) throw new Error(`${data.message} (${data.status})`);
+    
+        return data;
+    } catch (error) {
+        throw error;        
+    }
+}
+
+export const postData = async function (url, newRecipe) {
+  try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newRecipe)
+      });
+      const data = await response.json();
+  
+      if(!response.ok) throw new Error(`${data.message} (${data.status})`);
+  
+      return data;
+  } catch (error) {
+      throw error;        
+  }
+}
+
+
+// refactored generic api call method ***
+export const callGenericApi = async function (url, newRecipe = undefined) {
+  try {
+    const fetchRequest = newRecipe ? 
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newRecipe)
+      }) : 
+      fetch(url)
+
+    const response = await fetchRequest;
+    const data = await response.json();
+
+    if(!response.ok) throw new Error(`${data.message} (${data.status})`);
+
+    return data;
+  } catch (error) {
+      throw error;        
+  }
+}
