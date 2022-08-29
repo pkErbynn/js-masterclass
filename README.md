@@ -1,5 +1,13 @@
 # Vibranium JavaScript Masterclass
-Building real-world projects using pure vanilla Javascript (with ES6+).
+Building real-world projects using pure vanilla Javascript. Convering technical concepts including:
+- Modern ES6+: arrow functions, destructuring, spread operator, optional chaining (ES2020), etc.
+- Modern OOP: Classes, constructors, prototypal inheritance, encapsulation, etc.
+- Complex concepts like the 'this' keyword, higher-order functions, closures, etc.
+- Asynchronous JavaScript: Event loop, promises, async/await, AJAX calls and APIs
+- Code architecture using flowcharts and common patterns
+- Modern tools: NPM, Parcel, Babel and ES6 modules
+
+Bellow encapsulate pure javascript projects I developed. 
 
 ## Forkify
 [Forkify](https://github.com/pkErbynn/vibraniumJS/tree/main/11-ForkifyApp_Building-a-Modern-Application) - A modern recipe hub application that basically allows users to search for recipes and display them on the UI.
