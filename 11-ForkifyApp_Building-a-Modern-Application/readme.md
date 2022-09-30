@@ -18,7 +18,7 @@ This allows users to;
     - Store bookmark data in the browser using local storage
     - On page load, read saved bookmaks from local storage and display
 
-[Link available here.](https://tantalizing-recipo.netlify.app/)
+Link: [https://dulcet-recipo.netlify.app/](https://dulcet-recipo.netlify.app/)
 
 ## Technologies Used
 - HMTL/CSS
